@@ -1,281 +1,166 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LaunchPad Media</title>
-
-<style>
-/* ===== GLOBAL STYLES ===== */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif;
-}
-
-body {
-    background: #0e0f13;
-    color: #ffffff;
-    line-height: 1.6;
-}
-
-.container {
-    width: 90%;
-    max-width: 1100px;
-    margin: auto;
-}
-
-section {
-    padding: 80px 0;
-}
-
-h1, h2, h3 {
-    font-weight: 600;
-}
-
-p {
-    color: #c7c7c7;
-}
-
-/* ===== NAVBAR ===== */
-nav {
-    position: fixed;
-    width: 100%;
-    background: rgba(14,15,19,0.9);
-    backdrop-filter: blur(8px);
-    border-bottom: 1px solid #1f222a;
-    z-index: 1000;
-}
-
-nav .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 18px 0;
-}
-
-.logo {
-    font-size: 1.3rem;
-    font-weight: bold;
-    color: #ffffff;
-}
-
-nav ul {
-    list-style: none;
-    display: flex;
-    gap: 25px;
-}
-
-nav a {
-    text-decoration: none;
-    color: #c7c7c7;
-    transition: 0.3s;
-}
-
-nav a:hover {
-    color: #ffffff;
-}
-
-/* ===== HERO ===== */
-.hero {
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    background: radial-gradient(circle at top, #1b1e26, #0e0f13);
-    text-align: center;
-}
-
-.hero h1 {
-    font-size: 3rem;
-    margin-bottom: 20px;
-}
-
-.hero p {
-    max-width: 600px;
-    margin: auto;
-    margin-bottom: 30px;
-}
-
-.btn {
-    display: inline-block;
-    padding: 14px 28px;
-    background: #4f8cff;
-    color: white;
-    text-decoration: none;
-    border-radius: 6px;
-    transition: 0.3s;
-}
-
-.btn:hover {
-    background: #3b6fd6;
-}
-
-/* ===== SERVICES ===== */
-.services {
-    background: #12141a;
-}
-
-.service-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 25px;
-    margin-top: 40px;
-}
-
-.service-card {
-    background: #181b22;
-    padding: 30px;
-    border-radius: 10px;
-    border: 1px solid #242833;
-    transition: 0.3s;
-}
-
-.service-card:hover {
-    transform: translateY(-5px);
-    border-color: #4f8cff;
-}
-
-/* ===== ABOUT ===== */
-.about {
-    text-align: center;
-}
-
-.about p {
-    max-width: 700px;
-    margin: 20px auto 0;
-}
-
-/* ===== CONTACT ===== */
-.contact {
-    background: #12141a;
-    text-align: center;
-}
-
-form {
-    max-width: 500px;
-    margin: 30px auto 0;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-input, textarea {
-    padding: 14px;
-    border-radius: 6px;
-    border: 1px solid #242833;
-    background: #181b22;
-    color: white;
-}
-
-textarea {
-    resize: none;
-    height: 120px;
-}
-
-button {
-    border: none;
-    cursor: pointer;
-}
-
-/* ===== FOOTER ===== */
-footer {
-    text-align: center;
-    padding: 25px 0;
-    border-top: 1px solid #1f222a;
-    color: #888;
-}
-
-/* ===== MOBILE ===== */
-@media(max-width: 768px) {
-    .hero h1 {
-        font-size: 2.2rem;
-    }
-
-    nav ul {
-        gap: 15px;
-        font-size: 0.9rem;
-    }
-}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LaunchPad Media | Home</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
-
 <body>
 
-<!-- NAVBAR -->
-<nav>
-    <div class="container">
-        <div class="logo">LaunchPad Media</div>
-        <ul>
-            <li><a href="#services">Services</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-    </div>
-</nav>
+<header class="nav">
+  <div class="container nav-inner">
+    <a class="brand" href="index.html">
+      <span class="brand-badge" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none">
+          <path d="M12 2l3 7 7 3-7 3-3 7-3-7-7-3 7-3 3-7Z" stroke="white" stroke-width="1.6"/>
+        </svg>
+      </span>
+      LaunchPad Media
+    </a>
 
-<!-- HERO -->
-<section class="hero">
-    <div class="container">
-        <h1>Launch Your Brand Into Orbit</h1>
-        <p>LaunchPad Media helps businesses grow through modern marketing, creative media, and strategic digital campaigns designed to scale.</p>
-        <a href="#contact" class="btn">Get Started</a>
-    </div>
-</section>
+    <nav class="nav-links" aria-label="Primary">
+      <a class="active" href="index.html">Home</a>
+      <a href="services.html">Services</a>
+      <a href="pricing.html">Prices</a>
+      <a href="about.html">About</a>
+      <a href="contact.html" class="btn secondary">Contact</a>
+    </nav>
+  </div>
+</header>
 
-<!-- SERVICES -->
-<section id="services" class="services">
-    <div class="container">
-        <h2>Our Services</h2>
-        <div class="service-grid">
-            <div class="service-card">
-                <h3>Social Media Marketing</h3>
-                <p>Grow your audience and increase engagement with strategic content and targeted campaigns.</p>
-            </div>
-            <div class="service-card">
-                <h3>Content Creation</h3>
-                <p>Professional video, photo, and branding content designed to stand out in crowded markets.</p>
-            </div>
-            <div class="service-card">
-                <h3>Paid Advertising</h3>
-                <p>Data-driven ad campaigns that maximize ROI across Google, Meta, and emerging platforms.</p>
-            </div>
-            <div class="service-card">
-                <h3>Website Development</h3>
-                <p>Modern, fast, and responsive websites built to convert visitors into customers.</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ABOUT -->
-<section id="about" class="about">
-    <div class="container">
-        <h2>About LaunchPad Media</h2>
-        <p>
-            LaunchPad Media is a modern media and marketing company focused on helping brands grow faster through creative storytelling and performance-driven strategies. We combine design, analytics, and marketing expertise to help businesses reach new heights.
+<main>
+  <section class="hero">
+    <div class="container hero-wrap">
+      <div>
+        <div class="kicker">Media • Marketing • Growth</div>
+        <h1 class="h1">Launch your brand with content that converts.</h1>
+        <p class="lead">
+          LaunchPad Media helps local businesses and creators grow with social media strategy, content production,
+          and ads designed for measurable results.
         </p>
-    </div>
-</section>
 
-<!-- CONTACT -->
-<section id="contact" class="contact">
+        <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:18px;">
+          <a class="btn" href="services.html">Explore Services</a>
+          <a class="btn secondary" href="pricing.html">View Pricing</a>
+        </div>
+
+        <div class="pills" aria-label="Highlights">
+          <span class="pill">Short-form video</span>
+          <span class="pill">Brand identity</span>
+          <span class="pill">Paid ads</span>
+          <span class="pill">Web + landing pages</span>
+        </div>
+      </div>
+
+      <div class="hero-art" aria-label="LaunchPad Media hero image">
+        <!-- Inline SVG art (no external images needed) -->
+        <svg viewBox="0 0 900 600" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="g1" x1="0" x2="1">
+              <stop offset="0" stop-color="#4f8cff" stop-opacity="0.95"/>
+              <stop offset="1" stop-color="#7c5cff" stop-opacity="0.9"/>
+            </linearGradient>
+            <radialGradient id="rg" cx="35%" cy="25%" r="70%">
+              <stop offset="0" stop-color="#4f8cff" stop-opacity="0.35"/>
+              <stop offset="1" stop-color="#000000" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+
+          <rect width="900" height="600" fill="rgba(255,255,255,0.00)"/>
+          <circle cx="260" cy="180" r="250" fill="url(#rg)"/>
+          <circle cx="680" cy="380" r="240" fill="rgba(124,92,255,0.12)"/>
+
+          <!-- “Rocket” -->
+          <g transform="translate(520 140) rotate(15)">
+            <path d="M90 40c60 40 90 110 84 184-74 10-144-22-184-84 26-56 56-84 100-100Z"
+                  fill="url(#g1)" opacity="0.9"/>
+            <path d="M58 160c-18 40-8 86 26 120 34 34 80 44 120 26-26-18-60-46-74-88-14-42-8-70-72-58Z"
+                  fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.12)"/>
+            <circle cx="130" cy="130" r="24" fill="rgba(11,13,18,0.75)" stroke="rgba(255,255,255,0.22)" stroke-width="4"/>
+            <path d="M40 230c-45 70-48 110-48 110s40-3 110-48" stroke="rgba(79,140,255,0.45)" stroke-width="10" stroke-linecap="round"/>
+          </g>
+
+          <!-- UI-ish cards -->
+          <g>
+            <rect x="70" y="360" width="310" height="160" rx="18" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.10)"/>
+            <rect x="95" y="390" width="170" height="16" rx="8" fill="rgba(255,255,255,0.12)"/>
+            <rect x="95" y="420" width="260" height="12" rx="6" fill="rgba(255,255,255,0.09)"/>
+            <rect x="95" y="445" width="240" height="12" rx="6" fill="rgba(255,255,255,0.07)"/>
+            <rect x="95" y="470" width="200" height="12" rx="6" fill="rgba(255,255,255,0.06)"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
     <div class="container">
-        <h2>Contact Us</h2>
-        <p>Ready to launch your next project? Let’s talk.</p>
+      <div class="split">
+        <div class="card soft">
+          <div class="kicker">What we do</div>
+          <h2 class="h2">Modern marketing built for attention.</h2>
+          <p class="lead">
+            People scroll fast. We help you stop the scroll with strong visuals, clear messaging, and campaigns
+            that turn views into customers.
+          </p>
+          <div class="hr"></div>
+          <div class="grid two">
+            <div class="small"><span class="badge blue">Strategy</span><br/>Content plan + brand voice</div>
+            <div class="small"><span class="badge purple">Creative</span><br/>Video, photo, design</div>
+            <div class="small"><span class="badge">Performance</span><br/>Ads + tracking + optimization</div>
+            <div class="small"><span class="badge blue">Conversion</span><br/>Landing pages + funnels</div>
+          </div>
+        </div>
 
-        <form>
-            <input type="text" placeholder="Your Name" required>
-            <input type="email" placeholder="Your Email" required>
-            <textarea placeholder="Your Message"></textarea>
-            <button class="btn">Send Message</button>
-        </form>
+        <div class="grid">
+          <div class="card">
+            <div class="icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M4 7h16M7 4v16" stroke="white" stroke-width="1.6" opacity="0.9"/>
+              </svg>
+            </div>
+            <h3>Clear deliverables</h3>
+            <p>Simple packages, consistent posting, clean reporting, and real timelines.</p>
+          </div>
+
+          <div class="card">
+            <div class="icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M6 12h12M12 6v12" stroke="white" stroke-width="1.6" opacity="0.9"/>
+              </svg>
+            </div>
+            <h3>Fast content cycles</h3>
+            <p>Weekly production options so your brand stays active and relevant.</p>
+          </div>
+        </div>
+      </div>
     </div>
-</section>
+  </section>
 
-<!-- FOOTER -->
-<footer>
-    <p>© 2026 LaunchPad Media. All rights reserved.</p>
+  <section class="section small">
+    <div class="container">
+      <div class="card">
+        <div class="split">
+          <div>
+            <h2 class="h2">Want a quick audit?</h2>
+            <p class="lead">We’ll review your socials and recommend 3 improvements you can do immediately.</p>
+          </div>
+          <div style="display:flex; gap:12px; justify-content:flex-end; align-items:center; flex-wrap:wrap">
+            <a class="btn" href="contact.html">Request Audit</a>
+            <a class="btn secondary" href="about.html">Our Mission</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="container footer-inner">
+    <div>© 2026 LaunchPad Media</div>
+    <div class="small">Media • Marketing • Growth</div>
+  </div>
 </footer>
 
 </body>
