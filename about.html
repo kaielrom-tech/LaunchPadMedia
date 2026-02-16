@@ -1,4 +1,4 @@
-<!-- about.html (LaunchPad Media) -->
+<!-- about.html (LaunchPad Media) - with reveal classes + script before </body> -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -128,6 +128,24 @@
       color: #8f97ad;
     }
     .footer-inner{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+    /* ===== Scroll reveal animation (added) ===== */
+    .reveal{
+      opacity:0;
+      transform: translateY(18px);
+      transition: opacity .75s ease, transform .75s ease;
+      will-change: opacity, transform;
+    }
+    .reveal.is-visible{
+      opacity:1;
+      transform: translateY(0);
+    }
+    .reveal.delay-1{transition-delay:.08s}
+    .reveal.delay-2{transition-delay:.16s}
+    .reveal.delay-3{transition-delay:.24s}
+    @media (prefers-reduced-motion: reduce){
+      .reveal{opacity:1;transform:none;transition:none}
+    }
   </style>
 </head>
 
@@ -155,17 +173,18 @@
   </header>
 
   <main>
-    <section class="section">
+    <!-- Main About section reveal -->
+    <section class="section reveal">
       <div class="container">
-        <div class="kicker">About LaunchPad Media</div>
-        <h1 class="h1">A modern media + marketing team built for growth.</h1>
-        <p class="lead">
+        <div class="kicker reveal delay-1">About LaunchPad Media</div>
+        <h1 class="h1 reveal delay-2">A modern media + marketing team built for growth.</h1>
+        <p class="lead reveal delay-3">
           We help businesses look premium and get more customers using strategy, content, and ads that are clean, consistent, and measurable.
         </p>
 
         <!-- TOP HERO AREA -->
         <div class="hero">
-          <div class="card">
+          <div class="card reveal">
             <h2 class="h2">Our Mission</h2>
             <p class="lead">
               Make marketing simple and effective: create content people actually want to watch, pair it with smart targeting,
@@ -174,19 +193,19 @@
             <div class="hr"></div>
 
             <div class="checklist">
-              <div class="check"><span class="dot"></span><div><strong>Clarity</strong><br/>Clear messaging that people understand fast.</div></div>
-              <div class="check"><span class="dot"></span><div><strong>Consistency</strong><br/>A steady content system so your brand stays visible.</div></div>
-              <div class="check"><span class="dot"></span><div><strong>Conversion</strong><br/>Posts, pages, and ads designed to get leads and sales.</div></div>
+              <div class="check reveal delay-1"><span class="dot"></span><div><strong>Clarity</strong><br/>Clear messaging that people understand fast.</div></div>
+              <div class="check reveal delay-2"><span class="dot"></span><div><strong>Consistency</strong><br/>A steady content system so your brand stays visible.</div></div>
+              <div class="check reveal delay-3"><span class="dot"></span><div><strong>Conversion</strong><br/>Posts, pages, and ads designed to get leads and sales.</div></div>
             </div>
 
             <div class="hr"></div>
-            <div style="display:flex; gap:12px; flex-wrap:wrap;">
+            <div style="display:flex; gap:12px; flex-wrap:wrap;" class="reveal delay-2">
               <a class="btn" href="services.html">See Our Services</a>
               <a class="btn secondary" href="pricing.html">View Prices</a>
             </div>
           </div>
 
-          <div class="photo" aria-label="Team/brand image">
+          <div class="photo reveal delay-1" aria-label="Team/brand image">
             <!-- Inline SVG “image” (placeholder artwork) -->
             <svg viewBox="0 0 900 650" xmlns="http://www.w3.org/2000/svg">
               <defs>
@@ -200,7 +219,6 @@
               <circle cx="240" cy="190" r="170" fill="rgba(79,140,255,0.18)"/>
               <circle cx="680" cy="430" r="220" fill="rgba(124,92,255,0.14)"/>
 
-              <!-- faux “portrait cards” -->
               <g>
                 <rect x="120" y="300" width="280" height="250" rx="22" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.12)"/>
                 <circle cx="260" cy="390" r="54" fill="rgba(255,255,255,0.08)"/>
@@ -217,7 +235,6 @@
                 <rect x="505" y="280" width="240" height="12" rx="6" fill="rgba(255,255,255,0.09)"/>
               </g>
 
-              <!-- little “spark” -->
               <g transform="translate(740 130)">
                 <path d="M40 0l12 28 28 12-28 12-12 28-12-28-28-12 28-12 12-28Z" fill="url(#g)" opacity="0.9"/>
               </g>
@@ -226,22 +243,22 @@
         </div>
 
         <!-- VALUES -->
-        <div class="section" style="padding-bottom:0;">
-          <h2 class="h2">What we believe</h2>
-          <p class="lead">We’re not here to “post random content.” We build a system that grows your business.</p>
+        <div class="section reveal" style="padding-bottom:0;">
+          <h2 class="h2 reveal delay-1">What we believe</h2>
+          <p class="lead reveal delay-2">We’re not here to “post random content.” We build a system that grows your business.</p>
 
           <div class="grid three" style="margin-top:18px;">
-            <div class="card">
+            <div class="card reveal delay-1">
               <span class="badge">Strategy first</span>
               <div class="hr"></div>
               <p class="small">We start with your goal (leads, sales, bookings) and build content around that.</p>
             </div>
-            <div class="card">
+            <div class="card reveal delay-2">
               <span class="badge purple">Premium creative</span>
               <div class="hr"></div>
               <p class="small">Clean edits, strong hooks, and a consistent look that matches your brand.</p>
             </div>
-            <div class="card">
+            <div class="card reveal delay-3">
               <span class="badge green">Real results</span>
               <div class="hr"></div>
               <p class="small">We track performance, improve what works, and stop what doesn’t.</p>
@@ -250,8 +267,8 @@
         </div>
 
         <!-- ABOUT ME / FOUNDER -->
-        <div class="section" style="padding-bottom:0;">
-          <div class="card">
+        <div class="section reveal" style="padding-bottom:0;">
+          <div class="card reveal">
             <h2 class="h2">About Me (Founder)</h2>
             <p class="lead">
               Replace this section with your name + your story.
@@ -261,13 +278,13 @@
             <div class="hr"></div>
 
             <div class="grid two">
-              <div class="card soft">
+              <div class="card soft reveal delay-1">
                 <h3>Who we work best with</h3>
                 <p class="small">• Local businesses (restaurants, gyms, services)</p>
                 <p class="small">• Creators & personal brands</p>
                 <p class="small">• Small online stores</p>
               </div>
-              <div class="card soft">
+              <div class="card soft reveal delay-2">
                 <h3>How we work</h3>
                 <p class="small">1) Quick audit + goals</p>
                 <p class="small">2) Content plan + shoot/edit</p>
@@ -276,7 +293,7 @@
             </div>
 
             <div class="hr"></div>
-            <div style="display:flex; gap:12px; flex-wrap:wrap;">
+            <div style="display:flex; gap:12px; flex-wrap:wrap;" class="reveal delay-3">
               <a class="btn" href="contact.html">Work With Us</a>
               <a class="btn secondary" href="services.html">Browse Services</a>
             </div>
@@ -287,11 +304,14 @@
     </section>
   </main>
 
-  <footer class="footer">
+  <footer class="footer reveal">
     <div class="container footer-inner">
       <div>© 2026 LaunchPad Media</div>
       <div class="small">Mission • Values • Growth</div>
     </div>
   </footer>
+
+  <!-- ✅ Add this BEFORE the closing body tag -->
+  <script src="app.js"></script>
 </body>
 </html>
