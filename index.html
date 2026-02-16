@@ -30,22 +30,23 @@
 </header>
 
 <main>
+  <!-- ✅ HERO: add reveal to key elements -->
   <section class="hero">
     <div class="container hero-wrap">
       <div>
-        <div class="kicker">Media • Marketing • Growth</div>
-        <h1 class="h1">Launch your brand with content that converts.</h1>
-        <p class="lead">
+        <div class="kicker reveal delay-1">Media • Marketing • Growth</div>
+        <h1 class="h1 reveal delay-2">Launch your brand with content that converts.</h1>
+        <p class="lead reveal delay-3">
           LaunchPad Media helps local businesses and creators grow with social media strategy, content production,
           and ads designed for measurable results.
         </p>
 
-        <div style="display:flex; gap:12px; flex-wrap:wrap; margin-top:18px;">
+        <div class="reveal delay-2" style="display:flex; gap:12px; flex-wrap:wrap; margin-top:18px;">
           <a class="btn" href="services.html">Explore Services</a>
           <a class="btn secondary" href="pricing.html">View Pricing</a>
         </div>
 
-        <div class="pills" aria-label="Highlights">
+        <div class="pills reveal delay-3" aria-label="Highlights">
           <span class="pill">Short-form video</span>
           <span class="pill">Brand identity</span>
           <span class="pill">Paid ads</span>
@@ -53,51 +54,54 @@
         </div>
       </div>
 
-      <div class="hero-art" aria-label="LaunchPad Media hero image">
+      <div class="hero-art reveal delay-1" aria-label="LaunchPad Media hero image">
         <!-- Inline SVG art (no external images needed) -->
         <svg viewBox="0 0 900 600" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <linearGradient id="g1" x1="0" x2="1">
-              <stop offset="0" stop-color="#4f8cff" stop-opacity="0.95"/>
-              <stop offset="1" stop-color="#7c5cff" stop-opacity="0.9"/>
+              <stop offset="0" stop-color="#00d4ff" stop-opacity="0.95"/>
+              <stop offset="0.6" stop-color="#7c4dff" stop-opacity="0.9"/>
+              <stop offset="1" stop-color="#ff4fd8" stop-opacity="0.85"/>
             </linearGradient>
             <radialGradient id="rg" cx="35%" cy="25%" r="70%">
-              <stop offset="0" stop-color="#4f8cff" stop-opacity="0.35"/>
+              <stop offset="0" stop-color="#00d4ff" stop-opacity="0.28"/>
               <stop offset="1" stop-color="#000000" stop-opacity="0"/>
             </radialGradient>
           </defs>
 
           <rect width="900" height="600" fill="rgba(255,255,255,0.00)"/>
           <circle cx="260" cy="180" r="250" fill="url(#rg)"/>
-          <circle cx="680" cy="380" r="240" fill="rgba(124,92,255,0.12)"/>
+          <circle cx="680" cy="380" r="240" fill="rgba(124,77,255,0.16)"/>
 
           <!-- “Rocket” -->
           <g transform="translate(520 140) rotate(15)">
             <path d="M90 40c60 40 90 110 84 184-74 10-144-22-184-84 26-56 56-84 100-100Z"
-                  fill="url(#g1)" opacity="0.9"/>
+                  fill="url(#g1)" opacity="0.92"/>
             <path d="M58 160c-18 40-8 86 26 120 34 34 80 44 120 26-26-18-60-46-74-88-14-42-8-70-72-58Z"
                   fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.12)"/>
-            <circle cx="130" cy="130" r="24" fill="rgba(11,13,18,0.75)" stroke="rgba(255,255,255,0.22)" stroke-width="4"/>
-            <path d="M40 230c-45 70-48 110-48 110s40-3 110-48" stroke="rgba(79,140,255,0.45)" stroke-width="10" stroke-linecap="round"/>
+            <circle cx="130" cy="130" r="24" fill="rgba(11,13,18,0.70)" stroke="rgba(255,255,255,0.22)" stroke-width="4"/>
+            <path d="M40 230c-45 70-48 110-48 110s40-3 110-48"
+                  stroke="rgba(0,212,255,0.40)" stroke-width="10" stroke-linecap="round"/>
           </g>
 
           <!-- UI-ish cards -->
           <g>
-            <rect x="70" y="360" width="310" height="160" rx="18" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.10)"/>
-            <rect x="95" y="390" width="170" height="16" rx="8" fill="rgba(255,255,255,0.12)"/>
-            <rect x="95" y="420" width="260" height="12" rx="6" fill="rgba(255,255,255,0.09)"/>
-            <rect x="95" y="445" width="240" height="12" rx="6" fill="rgba(255,255,255,0.07)"/>
-            <rect x="95" y="470" width="200" height="12" rx="6" fill="rgba(255,255,255,0.06)"/>
+            <rect x="70" y="360" width="310" height="160" rx="18" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.12)"/>
+            <rect x="95" y="390" width="170" height="16" rx="8" fill="rgba(255,255,255,0.14)"/>
+            <rect x="95" y="420" width="260" height="12" rx="6" fill="rgba(255,255,255,0.10)"/>
+            <rect x="95" y="445" width="240" height="12" rx="6" fill="rgba(255,255,255,0.08)"/>
+            <rect x="95" y="470" width="200" height="12" rx="6" fill="rgba(255,255,255,0.07)"/>
           </g>
         </svg>
       </div>
     </div>
   </section>
 
-  <section class="section">
+  <!-- ✅ SECTION 1: reveal the whole section + pieces -->
+  <section class="section reveal">
     <div class="container">
       <div class="split">
-        <div class="card soft">
+        <div class="card soft reveal delay-1">
           <div class="kicker">What we do</div>
           <h2 class="h2">Modern marketing built for attention.</h2>
           <p class="lead">
@@ -106,15 +110,15 @@
           </p>
           <div class="hr"></div>
           <div class="grid two">
-            <div class="small"><span class="badge blue">Strategy</span><br/>Content plan + brand voice</div>
-            <div class="small"><span class="badge purple">Creative</span><br/>Video, photo, design</div>
-            <div class="small"><span class="badge">Performance</span><br/>Ads + tracking + optimization</div>
-            <div class="small"><span class="badge blue">Conversion</span><br/>Landing pages + funnels</div>
+            <div class="small reveal delay-1"><span class="badge blue">Strategy</span><br/>Content plan + brand voice</div>
+            <div class="small reveal delay-2"><span class="badge purple">Creative</span><br/>Video, photo, design</div>
+            <div class="small reveal delay-3"><span class="badge">Performance</span><br/>Ads + tracking + optimization</div>
+            <div class="small reveal delay-2"><span class="badge blue">Conversion</span><br/>Landing pages + funnels</div>
           </div>
         </div>
 
         <div class="grid">
-          <div class="card">
+          <div class="card reveal delay-2">
             <div class="icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none">
                 <path d="M4 7h16M7 4v16" stroke="white" stroke-width="1.6" opacity="0.9"/>
@@ -124,7 +128,7 @@
             <p>Simple packages, consistent posting, clean reporting, and real timelines.</p>
           </div>
 
-          <div class="card">
+          <div class="card reveal delay-3">
             <div class="icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none">
                 <path d="M6 12h12M12 6v12" stroke="white" stroke-width="1.6" opacity="0.9"/>
@@ -138,15 +142,16 @@
     </div>
   </section>
 
-  <section class="section small">
+  <!-- ✅ CTA SECTION: reveal -->
+  <section class="section small reveal">
     <div class="container">
-      <div class="card">
+      <div class="card reveal delay-1">
         <div class="split">
           <div>
             <h2 class="h2">Want a quick audit?</h2>
             <p class="lead">We’ll review your socials and recommend 3 improvements you can do immediately.</p>
           </div>
-          <div style="display:flex; gap:12px; justify-content:flex-end; align-items:center; flex-wrap:wrap">
+          <div class="reveal delay-2" style="display:flex; gap:12px; justify-content:flex-end; align-items:center; flex-wrap:wrap">
             <a class="btn" href="contact.html">Request Audit</a>
             <a class="btn secondary" href="about.html">Our Mission</a>
           </div>
@@ -156,12 +161,15 @@
   </section>
 </main>
 
-<footer class="footer">
+<footer class="footer reveal">
   <div class="container footer-inner">
     <div>© 2026 LaunchPad Media</div>
     <div class="small">Media • Marketing • Growth</div>
   </div>
 </footer>
+
+<!-- ✅ REQUIRED for scroll-in animations -->
+<script src="app.js"></script>
 
 </body>
 </html>
