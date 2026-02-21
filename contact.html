@@ -11,15 +11,24 @@
 <header class="nav">
   <div class="container nav-inner">
     <a class="brand" href="index.html">
-      <span class="brand-badge" aria-hidden="true">
+      <span class="brand-logo" aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none">
-          <path d="M12 2l3 7 7 3-7 3-3 7-3-7-7-3 7-3 3-7Z" stroke="white" stroke-width="1.6"/>
+          <path d="M6 16c2-4 5-7 10-10" stroke="url(#g)" stroke-width="2.4" stroke-linecap="round"/>
+          <path d="M14.5 5.5c3.2 1.6 4.9 5 4.3 9.1-4.1.6-7.5-1.1-9.1-4.3 1-2.2 2.4-3.7 4.8-4.8Z"
+                fill="url(#g)" opacity="0.95"/>
+          <defs>
+            <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#34c3ff"/>
+              <stop offset="0.55" stop-color="#7c5cff"/>
+              <stop offset="1" stop-color="#ff4fd8"/>
+            </linearGradient>
+          </defs>
         </svg>
       </span>
       LaunchPad Media
     </a>
 
-    <nav class="nav-links" aria-label="Primary">
+    <nav class="nav-links">
       <a href="index.html">Home</a>
       <a href="services.html">Services</a>
       <a href="pricing.html">Prices</a>
@@ -30,18 +39,15 @@
 </header>
 
 <main>
-  <!-- ✅ added reveal classes -->
-  <section class="section reveal">
+  <section class="section">
     <div class="container">
-      <div class="kicker reveal delay-1">Contact</div>
-      <h1 class="h1 reveal delay-2">Let’s build your next campaign.</h1>
-      <p class="lead reveal delay-3">Send a message and we’ll reply within 24–48 hours.</p>
+      <div class="kicker reveal-left">Contact</div>
+      <h1 class="h1 reveal-left delay-1">Let’s build your next campaign.</h1>
+      <p class="lead reveal-left delay-2">Send a message and we’ll reply within 24–48 hours.</p>
 
       <div class="grid two" style="margin-top:18px;">
-        <div class="card reveal delay-1">
+        <div class="card reveal-left">
           <h2 class="h2">Message us</h2>
-
-          <!-- (optional) action left blank so it won't break; you can add Formspree later -->
           <form>
             <div class="form-row">
               <input type="text" placeholder="Your name" required />
@@ -49,27 +55,22 @@
             </div>
             <input type="text" placeholder="Business / Brand name" />
             <textarea placeholder="What do you need help with? (services, goals, budget, timeline)"></textarea>
-
-            <!-- ✅ button type submit is fine; styles.css handles .btn -->
             <button class="btn" type="submit">Send Message</button>
-
-            <p class="small">Tip: If you include your budget and goal, we can recommend the best plan faster.</p>
+            <p class="small">Tip: include your goal + budget and we can recommend the best plan faster.</p>
           </form>
         </div>
 
-        <div class="card reveal delay-2">
+        <div class="card reveal-right">
           <h2 class="h2">Info</h2>
           <div class="hr"></div>
           <p class="small"><strong>Email:</strong> hello@launchpadmedia.com</p>
           <p class="small"><strong>Location:</strong> Your City, Your State</p>
           <p class="small"><strong>Hours:</strong> Mon–Fri, 9am–6pm</p>
-
           <div class="hr"></div>
           <h3>What happens next?</h3>
           <p class="small">1) We reply with questions</p>
-          <p class="small">2) We send a package recommendation</p>
+          <p class="small">2) We recommend a package</p>
           <p class="small">3) You approve + we start production</p>
-
           <div class="hr"></div>
           <a class="btn secondary" href="pricing.html">View Pricing</a>
         </div>
@@ -79,15 +80,13 @@
   </section>
 </main>
 
-<footer class="footer reveal">
+<footer class="footer">
   <div class="container footer-inner">
     <div>© 2026 LaunchPad Media</div>
     <div class="small">Contact • Quotes • Collabs</div>
   </div>
 </footer>
 
-<!-- ✅ REQUIRED: add this before closing body so reveal animations work -->
 <script src="app.js"></script>
-
 </body>
 </html>
