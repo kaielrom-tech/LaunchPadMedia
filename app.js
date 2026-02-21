@@ -1,15 +1,20 @@
+// app.js - scroll reveal (fade + slide from left/right)
 (() => {
-  const items = document.querySelectorAll(".reveal");
-  if (!items.length) return;
+  const els = document.querySelectorAll(".reveal, .reveal-left, .reveal-right");
+
+  if (!("IntersectionObserver" in window)) {
+    els.forEach(el => el.classList.add("is-visible"));
+    return;
+  }
 
   const io = new IntersectionObserver((entries) => {
-    entries.forEach((e) => {
-      if (e.isIntersecting) {
-        e.target.classList.add("is-visible");
-        io.unobserve(e.target);
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("is-visible");
+        io.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.15, rootMargin: "0px 0px -10% 0px" });
+  }, { threshold: 0.15 });
 
-  items.forEach((el) => io.observe(el));
+  els.forEach(el => io.observe(el));
 })();
