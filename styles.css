@@ -80,6 +80,21 @@ img{max-width:100%;display:block;}
   gap:10px;
   font-weight:900;
   letter-spacing:.3px;
+  .brand-mark{
+  width:36px;
+  height:36px;
+  display:grid;
+  place-items:center;
+  border-radius:12px;
+  overflow:hidden;
+  flex:0 0 auto;
+}
+
+.brand-mark svg{
+  width:36px;
+  height:36px;
+  display:block;
+}
 }
 
 .brand-badge{
