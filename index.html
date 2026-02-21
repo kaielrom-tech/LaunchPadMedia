@@ -1,53 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>LaunchPad Media | Home</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
+
 <body>
+
+<!-- Scroll progress bar -->
+<div class="scroll-progress" aria-hidden="true"><span id="scrollBar"></span></div>
 
 <header class="nav">
   <div class="container nav-inner">
-   <span class="brand-mark" aria-hidden="true">
-  <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <linearGradient id="lpGradient" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0%" stop-color="var(--brand)"/>
-        <stop offset="100%" stop-color="var(--brand2)"/>
-      </linearGradient>
-    </defs>
-
-    <!-- Glass square background -->
-    <rect x="8" y="8" width="48" height="48" rx="14"
-          fill="rgba(255,255,255,0.06)"
-          stroke="rgba(255,255,255,0.18)"/>
-
-    <!-- L -->
-    <path d="M22 20v24h14"
-          stroke="url(#lpGradient)"
-          stroke-width="4"
-          stroke-linecap="round"
-          stroke-linejoin="round"/>
-
-    <!-- P -->
-    <path d="M38 44V20h8a8 8 0 0 1 0 16h-8"
-          stroke="url(#lpGradient)"
-          stroke-width="4"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          fill="none"/>
-  </svg>
-</span> aria-label="LaunchPad Media Home">
+    <a class="brand" href="index.html" aria-label="LaunchPad Media Home">
+      <!-- LOGO -->
       <!-- ✅ NEW LOGO (inline SVG) -->
       <span class="brand-logo" aria-hidden="true">
         <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
           <defs>
-            <linearGradient id="lp-g" x1="0" x2="1">
-              <stop offset="0" stop-color="#00d4ff"/>
-              <stop offset="0.55" stop-color="#7c4dff"/>
-              <stop offset="1" stop-color="#ff4fd8"/>
+@@ -26,9 +22,12 @@
             </linearGradient>
           </defs>
 
@@ -60,27 +28,18 @@
           <path d="M41 16c6 4 9 11 8 19-8 1-15-2-19-8 2-5 5-8 11-11Z"
                 fill="url(#lp-g)" opacity="0.95"/>
           <circle cx="43.5" cy="25" r="4.2" fill="rgba(11,13,18,0.75)" stroke="rgba(255,255,255,0.22)" stroke-width="2"/>
-        </svg>
-      </span>
-
-      LaunchPad Media
-    </a>
-
-    <nav class="nav-links" aria-label="Primary">
-      <a class="active" href="index.html">Home</a>
-      <a href="services.html">Services</a>
-      <a href="pricing.html">Prices</a>
-      <a href="about.html">About</a>
-      <a href="contact.html" class="btn secondary">Contact</a>
-    </nav>
-  </div>
+@@ -49,32 +48,31 @@
 </header>
 
 <main>
+
   <!-- HERO -->
   <section class="hero">
     <div class="container hero-wrap">
       <div>
+        <div class="kicker reveal-left delay-1">Media • Marketing • Growth</div>
+        <h1 class="h1 reveal-left delay-2">Launch your brand with content that converts.</h1>
+        <p class="lead reveal-left delay-3">
         <div class="kicker reveal reveal-left delay-1">Media • Marketing • Growth</div>
         <h1 class="h1 reveal reveal-left delay-2">Launch your brand with content that converts.</h1>
         <p class="lead reveal reveal-left delay-3">
@@ -88,11 +47,13 @@
           and ads designed for measurable results.
         </p>
 
+        <div class="reveal-left delay-2" style="display:flex; gap:12px; flex-wrap:wrap; margin-top:18px;">
         <div class="reveal reveal-left delay-2" style="display:flex; gap:12px; flex-wrap:wrap; margin-top:18px;">
           <a class="btn" href="services.html">Explore Services</a>
           <a class="btn secondary" href="pricing.html">View Pricing</a>
         </div>
 
+        <div class="pills reveal-left delay-3" aria-label="Highlights">
         <div class="pills reveal reveal-left delay-3" aria-label="Highlights">
           <span class="pill">Short-form video</span>
           <span class="pill">Brand identity</span>
@@ -101,50 +62,53 @@
         </div>
       </div>
 
+      <div class="hero-art reveal-right delay-1" aria-label="LaunchPad Media hero image">
       <div class="hero-art reveal reveal-right delay-1" aria-label="LaunchPad Media hero image">
         <!-- Inline SVG art -->
         <svg viewBox="0 0 900 600" xmlns="http://www.w3.org/2000/svg">
           <defs>
-            <linearGradient id="g1" x1="0" x2="1">
-              <stop offset="0" stop-color="#00d4ff" stop-opacity="0.95"/>
-              <stop offset="0.6" stop-color="#7c4dff" stop-opacity="0.9"/>
-              <stop offset="1" stop-color="#ff4fd8" stop-opacity="0.85"/>
-            </linearGradient>
-            <radialGradient id="rg" cx="35%" cy="25%" r="70%">
-              <stop offset="0" stop-color="#00d4ff" stop-opacity="0.28"/>
-              <stop offset="1" stop-color="#000000" stop-opacity="0"/>
-            </radialGradient>
-          </defs>
+@@ -115,220 +113,70 @@ <h1 class="h1 reveal-left delay-2">Launch your brand with content that converts.
+    </div>
+  </section>
 
-          <rect width="900" height="600" fill="rgba(255,255,255,0.00)"/>
-          <circle cx="260" cy="180" r="250" fill="url(#rg)"/>
-          <circle cx="680" cy="380" r="240" fill="rgba(124,77,255,0.16)"/>
-
-          <g transform="translate(520 140) rotate(15)">
-            <path d="M90 40c60 40 90 110 84 184-74 10-144-22-184-84 26-56 56-84 100-100Z"
-                  fill="url(#g1)" opacity="0.92"/>
-            <path d="M58 160c-18 40-8 86 26 120 34 34 80 44 120 26-26-18-60-46-74-88-14-42-8-70-72-58Z"
-                  fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.12)"/>
-            <circle cx="130" cy="130" r="24" fill="rgba(11,13,18,0.70)" stroke="rgba(255,255,255,0.22)" stroke-width="4"/>
-            <path d="M40 230c-45 70-48 110-48 110s40-3 110-48"
-                  stroke="rgba(0,212,255,0.40)" stroke-width="10" stroke-linecap="round"/>
-          </g>
-
-          <g>
-            <rect x="70" y="360" width="310" height="160" rx="18" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.12)"/>
-            <rect x="95" y="390" width="170" height="16" rx="8" fill="rgba(255,255,255,0.14)"/>
-            <rect x="95" y="420" width="260" height="12" rx="6" fill="rgba(255,255,255,0.10)"/>
-            <rect x="95" y="445" width="240" height="12" rx="6" fill="rgba(255,255,255,0.08)"/>
-            <rect x="95" y="470" width="200" height="12" rx="6" fill="rgba(255,255,255,0.07)"/>
-          </g>
-        </svg>
+  <!-- QUICK VALUE STRIP -->
+  <section class="section small">
+    <div class="container">
+      <div class="grid three">
+        <div class="card reveal-left">
+          <span class="badge blue">Fast</span>
+          <div class="hr"></div>
+          <p class="small">Quick turnarounds with weekly content cycles so you stay relevant.</p>
+        </div>
+        <div class="card reveal">
+          <span class="badge purple">Clean</span>
+          <div class="hr"></div>
+          <p class="small">Premium visuals + consistent branding that looks expensive and trustworthy.</p>
+        </div>
+        <div class="card reveal-right">
+          <span class="badge">Measured</span>
+          <div class="hr"></div>
+          <p class="small">Tracking + reports so you know what’s working (and what to improve).</p>
+        </div>
       </div>
     </div>
   </section>
 
+  <!-- WHAT WE DO + WHY BETTER (SCROLL STORY) -->
   <!-- SECTION 1 -->
   <section class="section">
     <div class="container">
+      <div class="kicker reveal-left">What we do</div>
+      <h2 class="h2 reveal-left delay-1">A simple system that turns attention into customers.</h2>
+      <p class="lead reveal-left delay-2">
+        We don’t just “post content.” We build a repeatable system: strategy → creation → distribution → optimization.
+      </p>
+
+      <div class="split" style="margin-top:18px;">
+        <!-- Left: Sticky-ish info card -->
+        <div class="card soft reveal-left">
+          <h3 style="margin-bottom:8px;">Why we’re better</h3>
+          <p class="small">Most agencies do one of these. We connect all of them:</p>
       <div class="split">
         <div class="card soft reveal reveal-left">
           <div class="kicker">What we do</div>
@@ -155,6 +119,44 @@
           </p>
           <div class="hr"></div>
 
+          <div class="timeline">
+            <div class="t-item reveal-left delay-1">
+              <div class="t-dot"></div>
+              <div>
+                <strong>Clarity > Chaos</strong>
+                <div class="small">Clear messaging so people understand your offer fast.</div>
+              </div>
+            </div>
+
+            <div class="t-item reveal-left delay-2">
+              <div class="t-dot"></div>
+              <div>
+                <strong>Creative that hooks</strong>
+                <div class="small">Short-form videos + visuals designed to stop the scroll.</div>
+              </div>
+            </div>
+
+            <div class="t-item reveal-left delay-3">
+              <div class="t-dot"></div>
+              <div>
+                <strong>Distribution that scales</strong>
+                <div class="small">We don’t just make content — we push it with ads + targeting.</div>
+              </div>
+            </div>
+
+            <div class="t-item reveal-left delay-3">
+              <div class="t-dot"></div>
+              <div>
+                <strong>Optimization every month</strong>
+                <div class="small">We double down on what works and cut what doesn’t.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="hr"></div>
+          <div style="display:flex; gap:12px; flex-wrap:wrap;">
+            <a class="btn" href="contact.html">Get a Quote</a>
+            <a class="btn secondary" href="services.html">See Services</a>
           <!-- ✅ points slide in alternating left/right -->
           <div class="grid two">
             <div class="small reveal reveal-left delay-1"><span class="badge blue">Strategy</span><br/>Content plan + brand voice</div>
@@ -164,7 +166,34 @@
           </div>
         </div>
 
+        <!-- Right: Cards that scroll in from sides -->
         <div class="grid">
+          <div class="card reveal-right">
+            <h3>Social Growth</h3>
+            <p>Content plan, posting system, captions, and engagement built around your niche.</p>
+            <div class="hr"></div>
+            <p class="small">Best for: local businesses, creators, gyms, restaurants.</p>
+          </div>
+
+          <div class="card reveal-right delay-1">
+            <h3>Content Production</h3>
+            <p>Short-form video, reels/TikToks, editing, and brand visuals that look premium.</p>
+            <div class="hr"></div>
+            <p class="small">Deliverables: clips + thumbnails + captions.</p>
+          </div>
+
+          <div class="card reveal-right delay-2">
+            <h3>Paid Ads + Leads</h3>
+            <p>Meta/Google targeting + creative testing so you get bookings, leads, and sales.</p>
+            <div class="hr"></div>
+            <p class="small">We track results and improve every month.</p>
+          </div>
+
+          <div class="card reveal-right delay-3">
+            <h3>Landing Pages</h3>
+            <p>Fast pages designed to convert clicks into customers — clean, modern, and mobile-ready.</p>
+            <div class="hr"></div>
+            <p class="small">Includes: copy + layout + contact form.</p>
           <div class="card reveal reveal-right delay-1">
             <div class="icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none">
@@ -174,7 +203,44 @@
             <h3>Clear deliverables</h3>
             <p>Simple packages, consistent posting, clean reporting, and real timelines.</p>
           </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
+  <!-- PROCESS SECTION -->
+  <section class="section">
+    <div class="container">
+      <div class="kicker reveal-left">How it works</div>
+      <h2 class="h2 reveal-left delay-1">From idea → content → customers (step by step).</h2>
+
+      <div class="grid three" style="margin-top:18px;">
+        <div class="card reveal-left">
+          <span class="badge blue">1) Audit</span>
+          <div class="hr"></div>
+          <p class="small">We review your socials + competitors and find quick wins.</p>
+        </div>
+        <div class="card reveal">
+          <span class="badge purple">2) Build</span>
+          <div class="hr"></div>
+          <p class="small">We create the content plan, visuals, and campaign structure.</p>
+        </div>
+        <div class="card reveal-right">
+          <span class="badge">3) Launch</span>
+          <div class="hr"></div>
+          <p class="small">We post, run ads (if needed), and track performance.</p>
+        </div>
+      </div>
+
+      <div class="card reveal" style="margin-top:18px;">
+        <div class="split">
+          <div class="reveal-left">
+            <h3>Monthly improvement</h3>
+            <p class="small">Every month we send a simple report and optimize your content + campaigns.</p>
+          </div>
+          <div class="reveal-right" style="display:flex; gap:12px; justify-content:flex-end; align-items:center; flex-wrap:wrap;">
+            <a class="btn" href="pricing.html">View Pricing</a>
+            <a class="btn secondary" href="contact.html">Start Now</a>
           <div class="card reveal reveal-right delay-2">
             <div class="icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none">
@@ -189,32 +255,93 @@
     </div>
   </section>
 
+  <!-- TESTIMONIALS -->
+  <section class="section">
   <!-- CTA -->
   <section class="section small">
     <div class="container">
+      <div class="kicker reveal-left">Testimonials</div>
+      <h2 class="h2 reveal-left delay-1">Real feedback from real clients.</h2>
+      <p class="lead reveal-left delay-2">Replace these with your real customers when you have them.</p>
+
+      <div class="grid three" style="margin-top:18px;">
+        <div class="card testimonial reveal-left">
+          <div class="quote">“LaunchPad cleaned up our brand and our reels started getting real reach. We finally look professional.”</div>
+          <div class="hr"></div>
+          <div class="who">
+            <div class="avatar" aria-hidden="true">A</div>
+            <div>
+              <strong>Alex R.</strong>
+              <div class="small">Local Service Business</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card testimonial reveal">
+          <div class="quote">“They gave us a content system. Posting became consistent and our DMs turned into bookings.”</div>
+          <div class="hr"></div>
+          <div class="who">
+            <div class="avatar" aria-hidden="true">M</div>
+            <div>
+              <strong>Maya L.</strong>
+              <div class="small">Fitness Coach</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card testimonial reveal-right">
+          <div class="quote">“Best part is it’s measurable. We can see what’s working and improve fast instead of guessing.”</div>
+          <div class="hr"></div>
+          <div class="who">
+            <div class="avatar" aria-hidden="true">J</div>
+            <div>
+              <strong>Jordan K.</strong>
+              <div class="small">E-commerce Brand</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card reveal" style="margin-top:18px;">
       <div class="card reveal reveal-left">
         <div class="split">
+          <div class="reveal-left">
+            <h3>Want results like this?</h3>
+            <p class="small">Tell us your goal and we’ll recommend the best plan for your budget.</p>
           <div class="reveal reveal-left delay-1">
             <h2 class="h2">Want a quick audit?</h2>
             <p class="lead">We’ll review your socials and recommend 3 improvements you can do immediately.</p>
           </div>
+          <div class="reveal-right" style="display:flex; gap:12px; justify-content:flex-end; align-items:center; flex-wrap:wrap;">
+            <a class="btn" href="contact.html">Contact Us</a>
+            <a class="btn secondary" href="services.html">Browse Services</a>
           <div class="reveal reveal-right delay-2" style="display:flex; gap:12px; justify-content:flex-end; align-items:center; flex-wrap:wrap">
             <a class="btn" href="contact.html">Request Audit</a>
             <a class="btn secondary" href="about.html">Our Mission</a>
           </div>
         </div>
       </div>
+
     </div>
   </section>
+
 </main>
 
 <footer class="footer reveal">
-  <div class="container footer-inner">
-    <div>© 2026 LaunchPad Media</div>
-    <div class="small">Media • Marketing • Growth</div>
-  </div>
+@@ -339,16 +187,5 @@ <h3>Want results like this?</h3>
 </footer>
 
 <script src="app.js"></script>
+
+<!-- Scroll progress script (tiny + optional, but looks premium) -->
+<script>
+  const bar = document.getElementById("scrollBar");
+  window.addEventListener("scroll", () => {
+    const h = document.documentElement;
+    const scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight);
+    bar.style.width = Math.min(100, Math.max(0, scrolled * 100)) + "%";
+  });
+</script>
+
 </body>
 </html>
