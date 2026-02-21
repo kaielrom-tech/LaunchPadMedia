@@ -11,13 +11,23 @@
 <header class="nav">
   <div class="container nav-inner">
     <a class="brand" href="index.html">
-      <span class="brand-badge" aria-hidden="true">
+      <span class="brand-logo" aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none">
-          <path d="M12 2l3 7 7 3-7 3-3 7-3-7-7-3 7-3 3-7Z" stroke="white" stroke-width="1.6"/>
+          <path d="M6 16c2-4 5-7 10-10" stroke="url(#g)" stroke-width="2.4" stroke-linecap="round"/>
+          <path d="M14.5 5.5c3.2 1.6 4.9 5 4.3 9.1-4.1.6-7.5-1.1-9.1-4.3 1-2.2 2.4-3.7 4.8-4.8Z"
+                fill="url(#g)" opacity="0.95"/>
+          <defs>
+            <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#34c3ff"/>
+              <stop offset="0.55" stop-color="#7c5cff"/>
+              <stop offset="1" stop-color="#ff4fd8"/>
+            </linearGradient>
+          </defs>
         </svg>
       </span>
       LaunchPad Media
     </a>
+
     <nav class="nav-links">
       <a href="index.html">Home</a>
       <a href="services.html">Services</a>
@@ -31,14 +41,14 @@
 <main>
   <section class="section">
     <div class="container">
-      <div class="kicker">Pricing</div>
-      <h1 class="h1">Simple packages. Clear results.</h1>
-      <p class="lead">These are starter prices. Bigger brands can request a custom plan.</p>
+      <div class="kicker reveal-left">Pricing</div>
+      <h1 class="h1 reveal-left delay-1">Simple packages. Clear results.</h1>
+      <p class="lead reveal-left delay-2">Starter pricing below — larger brands can request a custom plan.</p>
 
       <div class="grid three" style="margin-top:18px;">
-        <div class="card">
-          <span class="badge blue">Starter</span>
-          <h2 class="h2" style="margin-top:10px;">$399<span style="font-size:1rem;color:var(--muted)">/mo</span></h2>
+        <div class="card reveal-left">
+          <span class="badge">Starter</span>
+          <h2 class="h2" style="margin-top:10px;">$399 <span class="small">/mo</span></h2>
           <p class="small">Best for businesses starting social media.</p>
           <div class="hr"></div>
           <p class="small">✔ 8 posts / month</p>
@@ -49,9 +59,9 @@
           <a class="btn" href="contact.html">Choose Starter</a>
         </div>
 
-        <div class="card" style="border-color: rgba(79,140,255,.35);">
+        <div class="card reveal" style="border-color: rgba(52,195,255,.22);">
           <span class="badge purple">Most Popular</span>
-          <h2 class="h2" style="margin-top:10px;">$899<span style="font-size:1rem;color:var(--muted)">/mo</span></h2>
+          <h2 class="h2" style="margin-top:10px;">$899 <span class="small">/mo</span></h2>
           <p class="small">For serious growth + consistent content.</p>
           <div class="hr"></div>
           <p class="small">✔ 16 posts / month</p>
@@ -63,9 +73,9 @@
           <a class="btn" href="contact.html">Choose Growth</a>
         </div>
 
-        <div class="card">
-          <span class="badge">Pro</span>
-          <h2 class="h2" style="margin-top:10px;">$1,499<span style="font-size:1rem;color:var(--muted)">/mo</span></h2>
+        <div class="card reveal-right">
+          <span class="badge green">Pro</span>
+          <h2 class="h2" style="margin-top:10px;">$1,499 <span class="small">/mo</span></h2>
           <p class="small">High output + ads support.</p>
           <div class="hr"></div>
           <p class="small">✔ 24 posts / month</p>
@@ -79,10 +89,11 @@
       </div>
 
       <div class="section small">
-        <div class="card">
+        <div class="card reveal">
           <h2 class="h2">One-time services</h2>
-          <p class="lead">If you don’t want a monthly plan, choose a one-time option.</p>
+          <p class="lead">Not ready for a monthly plan? Pick a one-time option.</p>
           <div style="margin-top:14px;"></div>
+
           <table>
             <thead>
               <tr>
@@ -114,9 +125,10 @@
               </tr>
             </tbody>
           </table>
-          <div style="margin-top:16px;">
+
+          <div style="margin-top:16px; display:flex; gap:12px; flex-wrap:wrap;">
             <a class="btn secondary" href="services.html">See Services</a>
-            <a class="btn" href="contact.html" style="margin-left:10px;">Get a Quote</a>
+            <a class="btn" href="contact.html">Get a Quote</a>
           </div>
         </div>
       </div>
@@ -132,103 +144,6 @@
   </div>
 </footer>
 
-</body>
-</html>
-5) about.html (About + Mission)
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LaunchPad Media | About</title>
-  <link rel="stylesheet" href="styles.css" />
-</head>
-<body>
-
-<header class="nav">
-  <div class="container nav-inner">
-    <a class="brand" href="index.html">
-      <span class="brand-badge" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none">
-          <path d="M12 2l3 7 7 3-7 3-3 7-3-7-7-3 7-3 3-7Z" stroke="white" stroke-width="1.6"/>
-        </svg>
-      </span>
-      LaunchPad Media
-    </a>
-    <nav class="nav-links">
-      <a href="index.html">Home</a>
-      <a href="services.html">Services</a>
-      <a href="pricing.html">Prices</a>
-      <a class="active" href="about.html">About</a>
-      <a href="contact.html" class="btn secondary">Contact</a>
-    </nav>
-  </div>
-</header>
-
-<main>
-  <section class="section">
-    <div class="container">
-      <div class="kicker">About</div>
-      <h1 class="h1">We make brands look premium and perform better.</h1>
-      <p class="lead">
-        LaunchPad Media is built for businesses that want clean creative, strong messaging, and marketing that’s actually measurable.
-      </p>
-
-      <div class="grid two" style="margin-top:18px;">
-        <div class="card">
-          <h2 class="h2">Our Mission</h2>
-          <p class="lead">
-            Help brands grow faster by combining high-quality content with clear strategy—so every post, ad, and page has a purpose.
-          </p>
-          <div class="hr"></div>
-          <p class="small">We focus on:</p>
-          <p class="small">• clarity over hype</p>
-          <p class="small">• consistency over randomness</p>
-          <p class="small">• results over vanity metrics</p>
-        </div>
-
-        <div class="card">
-          <h2 class="h2">Our Values</h2>
-          <div class="hr"></div>
-          <p class="small"><span class="badge blue">Speed</span> Quick turnaround, no excuses.</p>
-          <p class="small"><span class="badge purple">Quality</span> Premium look, clean edits, strong branding.</p>
-          <p class="small"><span class="badge">Honesty</span> We tell you what works and what doesn’t.</p>
-          <p class="small"><span class="badge blue">Growth</span> Focused on leads, sales, and customers.</p>
-        </div>
-      </div>
-
-      <div class="section small">
-        <div class="card">
-          <div class="split">
-            <div>
-              <h2 class="h2">About Me (Founder)</h2>
-              <p class="lead">
-                Put your name here and a short story about why you started LaunchPad Media.
-                (Example: “I started LaunchPad to help local businesses compete online with content that looks like a big brand.”)
-              </p>
-            </div>
-            <div class="card soft">
-              <h3>Quick facts</h3>
-              <p class="small">• Based in: (City, State)</p>
-              <p class="small">• Specialty: short-form video + ads</p>
-              <p class="small">• Clients: local businesses + creators</p>
-              <div class="hr"></div>
-              <a class="btn" href="contact.html">Work With Me</a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </section>
-</main>
-
-<footer class="footer">
-  <div class="container footer-inner">
-    <div>© 2026 LaunchPad Media</div>
-    <div class="small">Mission • Values • Trust</div>
-  </div>
-</footer>
-
+<script src="app.js"></script>
 </body>
 </html>
