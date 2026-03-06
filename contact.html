@@ -3,314 +3,209 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LaunchPad Media | About</title>
-
-  <style>
-    :root{
-      --bg:#0b0d12;
-      --panel:#121622;
-      --panel2:#0f1320;
-      --border:#232a3b;
-      --text:#e9ecf5;
-      --muted:#aeb6cc;
-      --brand:#4f8cff;
-      --brand2:#7c5cff;
-      --shadow: 0 10px 30px rgba(0,0,0,.35);
-    }
-    *{box-sizing:border-box;margin:0;padding:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;}
-    body{
-      background: radial-gradient(1200px 600px at 20% -10%, rgba(79,140,255,.22), transparent 55%),
-                  radial-gradient(1000px 500px at 90% 10%, rgba(124,92,255,.18), transparent 50%),
-                  var(--bg);
-      color:var(--text); line-height:1.6;
-    }
-    a{color:inherit;text-decoration:none;}
-    .container{width:min(1120px,92%);margin:0 auto;}
-    .nav{
-      position:sticky; top:0; z-index:50;
-      backdrop-filter: blur(10px);
-      background: rgba(11,13,18,.65);
-      border-bottom:1px solid rgba(35,42,59,.8);
-    }
-    .nav-inner{display:flex;align-items:center;justify-content:space-between;padding:14px 0;gap:18px;}
-    .brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.3px}
-    .brand-logo{
-      width:36px;height:36px;display:block;flex-shrink:0;
-    }
-    .brand-logo svg{width:100%;height:100%;display:block}
-
-    .nav-links{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
-    .nav-links a{color:var(--muted);padding:8px 10px;border-radius:10px;transition:.2s}
-    .nav-links a:hover{color:var(--text);background:rgba(255,255,255,.05)}
-    .nav-links a.active{color:var(--text);background:rgba(79,140,255,.12);border:1px solid rgba(79,140,255,.25)}
-    .btn{
-      display:inline-flex;align-items:center;justify-content:center;gap:10px;
-      padding:12px 16px;border-radius:12px;
-      background:linear-gradient(135deg,var(--brand),var(--brand2));
-      color:white;font-weight:700;border:0;
-      box-shadow: 0 10px 25px rgba(79,140,255,.2);
-      transition: transform .15s ease, filter .15s ease;
-    }
-    .btn:hover{transform: translateY(-1px);filter:brightness(1.05)}
-    .btn.secondary{
-      background:rgba(255,255,255,.06);
-      border:1px solid rgba(255,255,255,.1);
-      box-shadow:none;
-    }
-    .btn.secondary:hover{background:rgba(255,255,255,.08)}
-
-    .section{padding:70px 0}
-    .kicker{color:rgba(79,140,255,.95);font-weight:800;letter-spacing:.12em;text-transform:uppercase;font-size:.8rem}
-    .h1{font-size: clamp(2.2rem, 4vw, 3.25rem);line-height:1.1;margin:12px 0 12px}
-    .h2{font-size: clamp(1.7rem, 2.6vw, 2.2rem);line-height:1.15;margin:10px 0 14px}
-    .lead{color:var(--muted);font-size:1.05rem;max-width:70ch}
-    .grid{display:grid;gap:18px}
-    .grid.two{grid-template-columns: repeat(2, minmax(0, 1fr));}
-    .grid.three{grid-template-columns: repeat(3, minmax(0, 1fr));}
-    @media (max-width: 900px){ .grid.two,.grid.three{grid-template-columns:1fr;} }
-
-    .card{
-      background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
-      border:1px solid rgba(35,42,59,.9);
-      border-radius:18px;
-      padding:22px;
-      box-shadow: var(--shadow);
-    }
-    .card.soft{box-shadow:none;background:rgba(255,255,255,.03)}
-    .hr{height:1px;background:rgba(35,42,59,.8);margin:18px 0}
-    .small{font-size:.92rem;color:var(--muted)}
-    .badge{
-      display:inline-flex;align-items:center;gap:8px;
-      padding:7px 10px;border-radius:999px;font-weight:800;font-size:.85rem;
-      background: rgba(79,140,255,.12); border: 1px solid rgba(79,140,255,.25); color:#dfe9ff;
-    }
-    .badge.purple{background: rgba(124,92,255,.12); border-color: rgba(124,92,255,.25); color:#efe7ff;}
-    .badge.green{background: rgba(34,197,94,.12); border-color: rgba(34,197,94,.22); color:#d7ffe6;}
-
-    .hero{
-      display:grid;grid-template-columns: 1.1fr .9fr;gap:18px;align-items:stretch;
-      margin-top: 16px;
-    }
-    @media (max-width: 900px){ .hero{grid-template-columns:1fr;} }
-
-    .photo{
-      border-radius:22px; border:1px solid rgba(35,42,59,.9);
-      background: radial-gradient(480px 220px at 25% 25%, rgba(79,140,255,.18), transparent 60%),
-                  radial-gradient(460px 220px at 80% 65%, rgba(124,92,255,.16), transparent 55%),
-                  rgba(255,255,255,.03);
-      box-shadow: var(--shadow);
-      overflow:hidden;
-      position:relative;
-      min-height: 330px;
-    }
-    .photo svg{position:absolute;inset:0;width:100%;height:100%}
-
-    .checklist{display:grid;gap:10px;margin-top:12px}
-    .check{
-      display:flex;gap:10px;align-items:flex-start;
-      padding:10px 12px;border-radius:14px;
-      background: rgba(255,255,255,.03);
-      border:1px solid rgba(255,255,255,.08);
-      color: var(--muted);
-    }
-    .dot{
-      width:10px;height:10px;border-radius:999px;margin-top:6px;
-      background: linear-gradient(135deg,var(--brand),var(--brand2));
-      box-shadow: 0 0 0 3px rgba(79,140,255,.12);
-      flex:0 0 auto;
-    }
-
-    .footer{
-      padding:24px 0;
-      border-top:1px solid rgba(35,42,59,.8);
-      color: #8f97ad;
-    }
-    .footer-inner{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
-
-    /* Scroll reveal animation */
-    .reveal{
-      opacity:0;
-      transform: translateY(18px);
-      transition: opacity .75s ease, transform .75s ease;
-      will-change: opacity, transform;
-    }
-    .reveal.is-visible{
-      opacity:1;
-      transform: translateY(0);
-    }
-    .reveal.delay-1{transition-delay:.08s}
-    .reveal.delay-2{transition-delay:.16s}
-    .reveal.delay-3{transition-delay:.24s}
-    @media (prefers-reduced-motion: reduce){
-      .reveal{opacity:1;transform:none;transition:none}
-    }
-  </style>
+  <title>LaunchPad Media | Contact</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
-
 <body>
-  <!-- NAV (FIXED) -->
-  <header class="nav">
-    <div class="container nav-inner">
 
-      <a class="brand" href="index.html">
-        <span class="brand-logo" aria-hidden="true">
-          <!-- ONLY CHANGE: Pricing logo inserted + unique gradient id -->
-          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <linearGradient id="logo-g" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0" stop-color="#34c3ff"/>
-                <stop offset="0.55" stop-color="#7c5cff"/>
-                <stop offset="1" stop-color="#ff4fd8"/>
-              </linearGradient>
-            </defs>
-            <path d="M6 16c2-4 5-7 10-10" stroke="url(#logo-g)" stroke-width="2.4" stroke-linecap="round"/>
-            <path d="M14.5 5.5c3.2 1.6 4.9 5 4.3 9.1-4.1.6-7.5-1.1-9.1-4.3 1-2.2 2.4-3.7 4.8-4.8Z"
-                  fill="url(#logo-g)" opacity="0.95"/>
-          </svg>
-        </span>
-        LaunchPad Media
-      </a>
+<header class="nav">
+  <div class="container nav-inner">
+    <a class="brand" href="index.html">
+      <span class="brand-logo" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none">
+          <defs>
+            <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#34c3ff"/>
+              <stop offset="0.55" stop-color="#7c5cff"/>
+              <stop offset="1" stop-color="#ff4fd8"/>
+            </linearGradient>
+          </defs>
+          <path d="M6 16c2-4 5-7 10-10" stroke="url(#g)" stroke-width="2.4" stroke-linecap="round"/>
+          <path d="M14.5 5.5c3.2 1.6 4.9 5 4.3 9.1-4.1.6-7.5-1.1-9.1-4.3 1-2.2 2.4-3.7 4.8-4.8Z"
+                fill="url(#g)" opacity="0.95"/>
+        </svg>
+      </span>
+      LaunchPad Media
+    </a>
 
-      <nav class="nav-links" aria-label="Primary">
-        <a href="index.html">Home</a>
-        <a href="services.html">Services</a>
-        <a href="pricing.html">Prices</a>
-        <a class="active" href="about.html">About</a>
-        <a href="contact.html" class="btn secondary">Contact</a>
-      </nav>
-    </div>
-  </header>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="index.html">Home</a>
+      <a href="services.html">Services</a>
+      <a href="pricing.html">Prices</a>
+      <a href="about.html">About</a>
+      <a class="active btn secondary" href="contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
 
-  <main>
-    <section class="section reveal">
-      <div class="container">
-        <div class="kicker reveal delay-1">About LaunchPad Media</div>
-        <h1 class="h1 reveal delay-2">A modern media + marketing team built for growth.</h1>
-        <p class="lead reveal delay-3">
-          We help businesses look premium and get more customers using strategy, content, and ads that are clean, consistent, and measurable.
-        </p>
+<main>
+  <section class="section">
+    <div class="container">
 
-        <div class="hero">
-          <div class="card reveal">
-            <h2 class="h2">Our Mission</h2>
-            <p class="lead">
-              Make marketing simple and effective: create content people actually want to watch, pair it with smart targeting,
-              and turn attention into real results.
-            </p>
-            <div class="hr"></div>
+      <div class="kicker reveal-left">Contact</div>
+      <h1 class="h1 reveal-left delay-1">Let's build something great.</h1>
+      <p class="lead reveal-left delay-2">
+        Have a question, ready to start, or just want to see if we're a good fit? Fill out the form and we'll get back to you within 24 hours.
+      </p>
 
-            <div class="checklist">
-              <div class="check reveal delay-1"><span class="dot"></span><div><strong>Clarity</strong><br/>Clear messaging that people understand fast.</div></div>
-              <div class="check reveal delay-2"><span class="dot"></span><div><strong>Consistency</strong><br/>A steady content system so your brand stays visible.</div></div>
-              <div class="check reveal delay-3"><span class="dot"></span><div><strong>Conversion</strong><br/>Posts, pages, and ads designed to get leads and sales.</div></div>
+      <div class="grid two" style="margin-top:24px; align-items:start;">
+
+        <!-- Contact Form -->
+        <div class="card reveal-left delay-1">
+          <h2 class="h2">Send us a message</h2>
+          <p class="small" style="margin-bottom:18px;">We respond to every inquiry within 1 business day.</p>
+          <form action="#" method="POST">
+            <div class="form-row">
+              <input type="text" name="name" placeholder="Your name" required />
+              <input type="email" name="email" placeholder="Your email" required />
             </div>
-
-            <div class="hr"></div>
-            <div style="display:flex; gap:12px; flex-wrap:wrap;" class="reveal delay-2">
-              <a class="btn" href="services.html">See Our Services</a>
-              <a class="btn secondary" href="pricing.html">View Prices</a>
-            </div>
-          </div>
-
-          <div class="photo reveal delay-1" aria-label="Team/brand image">
-            <svg viewBox="0 0 900 650" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <linearGradient id="g" x1="0" x2="1">
-                  <stop offset="0" stop-color="#4f8cff" stop-opacity="0.95"/>
-                  <stop offset="1" stop-color="#7c5cff" stop-opacity="0.9"/>
-                </linearGradient>
-              </defs>
-
-              <rect width="900" height="650" fill="rgba(255,255,255,0.00)"/>
-              <circle cx="240" cy="190" r="170" fill="rgba(79,140,255,0.18)"/>
-              <circle cx="680" cy="430" r="220" fill="rgba(124,92,255,0.14)"/>
-
-              <g>
-                <rect x="120" y="300" width="280" height="250" rx="22" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.12)"/>
-                <circle cx="260" cy="390" r="54" fill="rgba(255,255,255,0.08)"/>
-                <rect x="170" y="460" width="180" height="14" rx="7" fill="rgba(255,255,255,0.13)"/>
-                <rect x="150" y="490" width="220" height="12" rx="6" fill="rgba(255,255,255,0.09)"/>
-                <rect x="160" y="515" width="200" height="12" rx="6" fill="rgba(255,255,255,0.07)"/>
-              </g>
-
-              <g>
-                <rect x="460" y="210" width="320" height="340" rx="22" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.12)"/>
-                <path d="M520 470c40-130 150-180 220-170" stroke="url(#g)" stroke-width="14" stroke-linecap="round" opacity="0.9"/>
-                <path d="M520 510c60-160 180-210 245-195" stroke="rgba(255,255,255,0.10)" stroke-width="10" stroke-linecap="round"/>
-                <rect x="505" y="250" width="170" height="16" rx="8" fill="rgba(255,255,255,0.13)"/>
-                <rect x="505" y="280" width="240" height="12" rx="6" fill="rgba(255,255,255,0.09)"/>
-              </g>
-            </svg>
-          </div>
+            <input type="text" name="subject" placeholder="Subject (e.g. Monthly plan, Strategy session)" />
+            <textarea name="message" placeholder="Tell us about your business and what you're looking for..." required></textarea>
+            <button type="submit" class="btn" style="width:100%; margin-top:4px;">Send Message →</button>
+          </form>
         </div>
 
-        <div class="section reveal" style="padding-bottom:0;">
-          <h2 class="h2 reveal delay-1">What we believe</h2>
-          <p class="lead reveal delay-2">We’re not here to “post random content.” We build a system that grows your business.</p>
+        <!-- Right column -->
+        <div class="grid" style="align-self:start;">
 
-          <div class="grid three" style="margin-top:18px;">
-            <div class="card reveal delay-1">
-              <span class="badge">Strategy first</span>
-              <div class="hr"></div>
-              <p class="small">We start with your goal (leads, sales, bookings) and build content around that.</p>
-            </div>
-            <div class="card reveal delay-2">
-              <span class="badge purple">Premium creative</span>
-              <div class="hr"></div>
-              <p class="small">Clean edits, strong hooks, and a consistent look that matches your brand.</p>
-            </div>
-            <div class="card reveal delay-3">
-              <span class="badge green">Real results</span>
-              <div class="hr"></div>
-              <p class="small">We track performance, improve what works, and stop what doesn’t.</p>
-            </div>
-          </div>
-        </div>
+          <div class="card reveal-right delay-1">
+            <h3 style="margin-bottom:14px;">Reach us directly</h3>
+            <div style="display:flex; flex-direction:column; gap:12px;">
 
-        <div class="section reveal" style="padding-bottom:0;">
-          <div class="card reveal">
-            <h2 class="h2">About Me (Founder)</h2>
-            <p class="lead">
-              Replace this section with your name + your story.
-              Example: “I started LaunchPad Media because I saw too many businesses wasting money on marketing that didn’t bring customers.
-              Now I help brands grow with content and ads that actually perform.”
-            </p>
-            <div class="hr"></div>
-
-            <div class="grid two">
-              <div class="card soft reveal delay-1">
-                <h3>Who we work best with</h3>
-                <p class="small">• Local businesses (restaurants, gyms, services)</p>
-                <p class="small">• Creators & personal brands</p>
-                <p class="small">• Small online stores</p>
+              <div style="display:flex; align-items:center; gap:12px;">
+                <div class="icon" style="margin:0; flex-shrink:0;">
+                  <svg viewBox="0 0 24 24" fill="none">
+                    <path d="M4 4h16v13H4zM8 17l-2 3M16 17l2 3M10 20h4" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+                <div>
+                  <div class="small">Email</div>
+                  <a href="mailto:hello@launchpadmedia.com" style="color:var(--brand); font-weight:700;">hello@launchpadmedia.com</a>
+                </div>
               </div>
-              <div class="card soft reveal delay-2">
-                <h3>How we work</h3>
-                <p class="small">1) Quick audit + goals</p>
-                <p class="small">2) Content plan + shoot/edit</p>
-                <p class="small">3) Post + optimize + report</p>
-              </div>
-            </div>
 
-            <div class="hr"></div>
-            <div style="display:flex; gap:12px; flex-wrap:wrap;" class="reveal delay-3">
-              <a class="btn" href="contact.html">Work With Us</a>
-              <a class="btn secondary" href="services.html">Browse Services</a>
+              <div style="display:flex; align-items:center; gap:12px;">
+                <div class="icon" style="margin:0; flex-shrink:0;">
+                  <svg viewBox="0 0 24 24" fill="none">
+                    <path d="M6.6 10.8a15.2 15.2 0 006.6 6.6l2.2-2.2a1 1 0 011-.25 11.4 11.4 0 003.6.6 1 1 0 011 1V17a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.6 3.6a1 1 0 01-.25 1L6.6 10.8z" stroke="white" stroke-width="1.6" stroke-linecap="round"/>
+                  </svg>
+                </div>
+                <div>
+                  <div class="small">Phone</div>
+                  <a href="tel:+15550000000" style="color:var(--brand); font-weight:700;">+1 (555) 000-0000</a>
+                </div>
+              </div>
+
             </div>
           </div>
-        </div>
 
+          <div class="card reveal-right delay-2">
+            <h3 style="margin-bottom:14px;">Follow us</h3>
+            <div style="display:flex; flex-direction:column; gap:10px;">
+
+              <a href="#" style="display:flex; align-items:center; gap:12px; padding:10px 12px; border-radius:12px; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); transition:.2s;" onmouseover="this.style.background='rgba(255,255,255,.08)'" onmouseout="this.style.background='rgba(255,255,255,.04)'">
+                <div class="icon" style="margin:0; flex-shrink:0; width:36px; height:36px;">
+                  <svg viewBox="0 0 24 24" fill="none">
+                    <rect x="2" y="2" width="20" height="20" rx="6" stroke="white" stroke-width="1.6"/>
+                    <circle cx="12" cy="12" r="4" stroke="white" stroke-width="1.6"/>
+                    <circle cx="17.5" cy="6.5" r="1" fill="white"/>
+                  </svg>
+                </div>
+                <div>
+                  <div style="font-weight:700; font-size:.95rem;">Instagram</div>
+                  <div class="small">@launchpadmedia</div>
+                </div>
+              </a>
+
+              <a href="#" style="display:flex; align-items:center; gap:12px; padding:10px 12px; border-radius:12px; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); transition:.2s;" onmouseover="this.style.background='rgba(255,255,255,.08)'" onmouseout="this.style.background='rgba(255,255,255,.04)'">
+                <div class="icon" style="margin:0; flex-shrink:0; width:36px; height:36px;">
+                  <svg viewBox="0 0 24 24" fill="none">
+                    <path d="M4 4l16 8-16 8V4z" stroke="white" stroke-width="1.6" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+                <div>
+                  <div style="font-weight:700; font-size:.95rem;">TikTok</div>
+                  <div class="small">@launchpadmedia</div>
+                </div>
+              </a>
+
+              <a href="#" style="display:flex; align-items:center; gap:12px; padding:10px 12px; border-radius:12px; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); transition:.2s;" onmouseover="this.style.background='rgba(255,255,255,.08)'" onmouseout="this.style.background='rgba(255,255,255,.04)'">
+                <div class="icon" style="margin:0; flex-shrink:0; width:36px; height:36px;">
+                  <svg viewBox="0 0 24 24" fill="none">
+                    <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z" stroke="white" stroke-width="1.6" stroke-linejoin="round"/>
+                    <circle cx="4" cy="4" r="2" stroke="white" stroke-width="1.6"/>
+                  </svg>
+                </div>
+                <div>
+                  <div style="font-weight:700; font-size:.95rem;">LinkedIn</div>
+                  <div class="small">LaunchPad Media</div>
+                </div>
+              </a>
+
+            </div>
+          </div>
+
+        </div>
       </div>
-    </section>
-  </main>
 
-  <footer class="footer reveal">
-    <div class="container footer-inner">
-      <div>© 2026 LaunchPad Media</div>
-      <div class="small">Mission • Values • Growth</div>
+      <!-- FAQ -->
+      <div class="section small">
+        <h2 class="h2 reveal">Frequently asked questions</h2>
+        <p class="lead reveal delay-1" style="margin-bottom:24px;">Quick answers before you reach out.</p>
+
+        <div class="grid two">
+          <div class="card soft reveal-left delay-1">
+            <div class="kicker" style="margin-bottom:8px;">Response time</div>
+            <h3 style="margin-bottom:8px;">How fast do you respond?</h3>
+            <p class="small">We reply to all inquiries within 1 business day. For urgent requests, reach out directly by phone or DM on Instagram.</p>
+          </div>
+          <div class="card soft reveal-right delay-1">
+            <div class="kicker" style="margin-bottom:8px;">Getting started</div>
+            <h3 style="margin-bottom:8px;">How do we kick things off?</h3>
+            <p class="small">After you reach out, we'll schedule a quick 20-minute discovery call to understand your goals. From there we build a plan and get started.</p>
+          </div>
+          <div class="card soft reveal-left delay-2">
+            <div class="kicker" style="margin-bottom:8px;">Contracts</div>
+            <h3 style="margin-bottom:8px;">Are there long-term contracts?</h3>
+            <p class="small">No lock-in contracts. We work month-to-month so you stay because of results, not fine print.</p>
+          </div>
+          <div class="card soft reveal-right delay-2">
+            <div class="kicker" style="margin-bottom:8px;">Custom plans</div>
+            <h3 style="margin-bottom:8px;">What if none of the packages fit?</h3>
+            <p class="small">No problem — reach out and describe what you need. We put together custom scopes for brands with specific requirements.</p>
+          </div>
+          <div class="card soft reveal-left delay-3">
+            <div class="kicker" style="margin-bottom:8px;">Payments</div>
+            <h3 style="margin-bottom:8px;">How does billing work?</h3>
+            <p class="small">Monthly plans are billed at the start of each month. One-time services require a 50% deposit upfront, remainder on delivery.</p>
+          </div>
+          <div class="card soft reveal-right delay-3">
+            <div class="kicker" style="margin-bottom:8px;">Results</div>
+            <h3 style="margin-bottom:8px;">How soon will I see results?</h3>
+            <p class="small">Most clients see meaningful engagement growth within 30–60 days. Ad campaigns can produce leads in the first week once live.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="card reveal" style="text-align:center; padding:40px 22px;">
+        <div class="kicker" style="margin-bottom:10px;">Ready to launch?</div>
+        <h2 class="h2" style="margin:0 auto 12px; max-width:40ch;">Not sure where to start? Request a free audit.</h2>
+        <p class="lead" style="margin:0 auto 22px;">We'll review your socials and tell you exactly what to fix — no strings attached.</p>
+        <a class="btn" href="#" onclick="window.scrollTo({top:0,behavior:'smooth'}); return false;">Get My Free Audit →</a>
+      </div>
+
     </div>
-  </footer>
+  </section>
+</main>
 
-  <script src="app.js"></script>
+<footer class="footer">
+  <div class="container footer-inner">
+    <div>© 2026 LaunchPad Media</div>
+    <div class="small">Contact • Connect • Launch</div>
+  </div>
+</footer>
+
+<script src="app.js"></script>
 </body>
-</html>
+</html>[
