@@ -262,6 +262,7 @@
     }
     .service-card:nth-child(3n)      { border-right: none; }
     .service-card:nth-last-child(-n+3) { border-bottom: none; }
+    .service-card:last-child { border-right: none; }
     .service-card:hover { background: rgba(124,92,255,0.05); }
     .service-card::before {
       content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
@@ -309,7 +310,7 @@
     .results-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; margin-top: 56px; }
     .result-nums  { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
     .result-box {
-      background: var(--bg2); border: 1px solid var(--border); border-radius: 16px; padding: 26px;
+      background: var(--bg2); border: 1px solid rgba(255,255,255,0.1); border-radius: 18px; padding: 28px;
       transition: border-color .25s, transform .25s;
     }
     .result-box:hover { border-color: rgba(124,92,255,0.4); transform: translateY(-2px); }
@@ -328,11 +329,11 @@
     /* ââ REVIEWS ââ */
     .testi-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; margin-top: 52px; }
     .testi-card {
-      background: var(--bg2); border: 1px solid var(--border); border-radius: 16px; padding: 28px;
-      display: flex; flex-direction: column; transition: border-color .25s, transform .28s;
+      background: var(--bg2); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 30px;
+      display: flex; flex-direction: column; transition: border-color .3s, transform .3s, box-shadow .3s;
     }
-    .testi-card:hover { border-color: rgba(124,92,255,0.38); transform: translateY(-3px); }
-    .testi-stars  { color: #fbbf24; font-size: .95rem; margin-bottom: 14px; letter-spacing: 1px; }
+    .testi-card:hover { border-color: rgba(124,92,255,0.5); transform: translateY(-4px); box-shadow: 0 16px 40px rgba(124,92,255,0.12); }
+    .testi-stars  { color: #fbbf24; font-size: 1.1rem; margin-bottom: 14px; letter-spacing: 2px; font-family: "Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", sans-serif; }
     .testi-text   { font-size: .88rem; color: var(--muted); line-height: 1.72; font-style: italic; flex: 1; margin-bottom: 18px; }
     .testi-author { display: flex; align-items: center; gap: 11px; }
     .testi-avatar {
@@ -347,30 +348,35 @@
     /* ââ REVIEW FORM ââ */
     .review-form-wrap { max-width: 700px; margin: 60px auto 0; }
     .review-form-inner {
-      background: var(--bg); border: 1px solid var(--border); border-radius: 20px; padding: 40px 44px;
+      background: var(--bg2); border: 1px solid rgba(255,255,255,0.12); border-radius: 24px; padding: 44px 48px;
+      box-shadow: 0 0 60px rgba(124,92,255,0.08);
     }
     .review-form-inner .section-kicker { margin-bottom: 10px; }
     .review-form-inner h3 { font-family: 'Syne', sans-serif; font-size: 1.3rem; font-weight: 800; margin-bottom: 7px; }
     .review-form-inner p { font-size: .85rem; color: var(--muted); margin-bottom: 24px; }
-    .star-row { display: flex; gap: 5px; margin-bottom: 22px; }
+    .star-row { display: flex; gap: 8px; margin-bottom: 24px; }
     .star {
-      font-size: 1.75rem; color: var(--border); cursor: pointer; line-height: 1;
-      transition: color .14s, transform .14s; user-select: none;
+      font-size: 2rem;
+      font-family: "Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", "Twemoji Mozilla", sans-serif;
+      color: rgba(255,255,255,0.15);
+      cursor: pointer; line-height: 1;
+      transition: color .15s, transform .18s;
+      user-select: none; display: inline-block;
     }
-    .star.active, .star.hov { color: #fbbf24; transform: scale(1.18); }
+    .star.active, .star.hov { color: #fbbf24; transform: scale(1.22); }
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 0; }
     .form-group { display: flex; flex-direction: column; gap: 7px; margin-top: 14px; }
-    .form-group label { font-size: .78rem; font-weight: 500; color: var(--muted); letter-spacing: .04em; }
+    .form-group label { font-size: .76rem; font-weight: 600; color: var(--muted); letter-spacing: .08em; text-transform: uppercase; }
     .form-group input,
     .form-group textarea {
-      background: var(--bg2); border: 1px solid var(--border); border-radius: 10px;
-      padding: 11px 15px; color: var(--text);
-      font-family: 'DM Sans', sans-serif; font-size: .88rem;
-      outline: none; transition: border-color .2s; resize: none; width: 100%;
+      background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px;
+      padding: 13px 16px; color: var(--text);
+      font-family: 'DM Sans', sans-serif; font-size: .9rem;
+      outline: none; transition: border-color .25s, background .25s; resize: none; width: 100%;
     }
     .form-group input:focus,
-    .form-group textarea:focus { border-color: var(--violet); }
-    .form-submit-row { display: flex; align-items: center; gap: 16px; margin-top: 22px; flex-wrap: wrap; }
+    .form-group textarea:focus { border-color: var(--violet); background: rgba(124,92,255,0.05); }
+    .form-submit-row { display: flex; align-items: center; gap: 16px; margin-top: 28px; flex-wrap: wrap; padding-top: 4px; }
     #form-msg { font-size: .82rem; color: var(--muted); }
 
     /* ââ CTA ââ */
@@ -779,5 +785,6 @@
 </script>
 </body>
 </html>
+
 
 
