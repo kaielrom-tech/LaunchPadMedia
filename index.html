@@ -7,10 +7,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
   <style>
-    /* ── RESET ── */
+    /* ââ RESET ââ */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    /* ── TOKENS ── */
+    /* ââ TOKENS ââ */
     :root {
       --blue:    #34c3ff;
       --violet:  #7c5cff;
@@ -32,7 +32,7 @@
       overflow-x: hidden;
     }
 
-    /* ── CUSTOM CURSOR ── */
+    /* ââ CUSTOM CURSOR ââ */
     #cursor {
       position: fixed; top: 0; left: 0; z-index: 9999;
       pointer-events: none;
@@ -55,12 +55,12 @@
     body:hover #cursor-ring { opacity: 1; }
     #cursor-ring.hovered { width: 56px; height: 56px; border-color: rgba(52,195,255,0.6); }
 
-    /* ── SCROLLBAR ── */
+    /* ââ SCROLLBAR ââ */
     ::-webkit-scrollbar { width: 4px; }
     ::-webkit-scrollbar-track { background: var(--bg); }
     ::-webkit-scrollbar-thumb { background: var(--violet); border-radius: 2px; }
 
-    /* ── NAV ── */
+    /* ââ NAV ââ */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 200;
       padding: 20px 48px;
@@ -97,11 +97,11 @@
       background: rgba(52,195,255,0.07) !important;
     }
 
-    /* ── HERO ── */
+    /* ââ HERO ââ */
     .hero {
       min-height: 100vh; display: flex; align-items: center;
       padding: 140px 48px 100px;
-      position: relative; overflow: hidden;
+      position: relative; overflow: clip;
     }
     .hero-bg { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
     .hero-bg::before {
@@ -221,11 +221,12 @@
     .fc-bar-fill { height: 100%; border-radius: 2px; background: var(--grad); }
     .fc-sub { font-size: .68rem; color: var(--muted); margin-top: 5px; }
 
-    /* ── MARQUEE ── */
+    /* ââ MARQUEE ââ */
     .marquee-wrap {
       overflow: hidden;
       border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
       padding: 16px 0; background: var(--bg2);
+      position: relative; z-index: 1;
     }
     .marquee-track { display: flex; width: max-content; animation: marquee 24s linear infinite; }
     .marquee-item {
@@ -235,8 +236,8 @@
     }
     @keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
 
-    /* ── SECTIONS ── */
-    section { padding: 96px 48px; }
+    /* ââ SECTIONS ââ */
+    section { padding: 96px 48px; position: relative; z-index: 1; }
     .container { max-width: 1180px; margin: 0 auto; }
     .section-kicker {
       font-size: .72rem; font-weight: 700; letter-spacing: .13em; text-transform: uppercase;
@@ -249,7 +250,7 @@
     }
     .section-lead { font-size: 1rem; color: var(--muted); line-height: 1.75; max-width: 540px; font-weight: 300; }
 
-    /* ── SERVICES ── */
+    /* ââ SERVICES ââ */
     .services-grid {
       display: grid; grid-template-columns: repeat(3,1fr);
       margin-top: 56px; border: 1px solid var(--border); border-radius: 20px; overflow: hidden;
@@ -283,7 +284,7 @@
     }
     .service-card:hover .s-link { opacity: 1; transform: translateX(0); }
 
-    /* ── HOW IT WORKS ── */
+    /* ââ HOW IT WORKS ââ */
     .alt-bg { background: var(--bg2); }
     .steps {
       display: grid; grid-template-columns: repeat(4,1fr); gap: 36px;
@@ -304,7 +305,7 @@
     .step h3 { font-family: 'Syne', sans-serif; font-size: .95rem; font-weight: 700; margin-bottom: 7px; }
     .step p  { font-size: .82rem; color: var(--muted); line-height: 1.65; }
 
-    /* ── RESULTS ── */
+    /* ââ RESULTS ââ */
     .results-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; margin-top: 56px; }
     .result-nums  { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
     .result-box {
@@ -322,9 +323,9 @@
       display: flex; align-items: flex-start; gap: 11px;
       font-size: .9rem; color: var(--muted); line-height: 1.6;
     }
-    .result-list li::before { content:'→'; color: var(--blue); flex-shrink: 0; margin-top: 2px; font-size: .85rem; }
+    .result-list li::before { content:'â'; color: var(--blue); flex-shrink: 0; margin-top: 2px; font-size: .85rem; }
 
-    /* ── REVIEWS ── */
+    /* ââ REVIEWS ââ */
     .testi-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; margin-top: 52px; }
     .testi-card {
       background: var(--bg2); border: 1px solid var(--border); border-radius: 16px; padding: 28px;
@@ -343,14 +344,14 @@
     .testi-role { font-size: .75rem; color: var(--muted); margin-top: 1px; }
     #no-reviews { grid-column: 1/-1; text-align: center; padding: 56px 24px; color: var(--muted); font-size: .92rem; }
 
-    /* ── REVIEW FORM ── */
+    /* ââ REVIEW FORM ââ */
     .review-form-wrap { max-width: 700px; margin: 60px auto 0; }
     .review-form-inner {
       background: var(--bg); border: 1px solid var(--border); border-radius: 20px; padding: 40px 44px;
     }
     .review-form-inner .section-kicker { margin-bottom: 10px; }
     .review-form-inner h3 { font-family: 'Syne', sans-serif; font-size: 1.3rem; font-weight: 800; margin-bottom: 7px; }
-    .review-form-inner > p { font-size: .85rem; color: var(--muted); margin-bottom: 24px; }
+    .review-form-inner p { font-size: .85rem; color: var(--muted); margin-bottom: 24px; }
     .star-row { display: flex; gap: 5px; margin-bottom: 22px; }
     .star {
       font-size: 1.75rem; color: var(--border); cursor: pointer; line-height: 1;
@@ -372,7 +373,7 @@
     .form-submit-row { display: flex; align-items: center; gap: 16px; margin-top: 22px; flex-wrap: wrap; }
     #form-msg { font-size: .82rem; color: var(--muted); }
 
-    /* ── CTA ── */
+    /* ââ CTA ââ */
     .cta-section { text-align: center; padding: 120px 48px; position: relative; overflow: hidden; }
     .cta-section::before {
       content: ''; position: absolute; width: 680px; height: 680px; border-radius: 50%;
@@ -384,8 +385,9 @@
     .cta-inner p  { font-size: 1rem; color: var(--muted); line-height: 1.75; margin-bottom: 34px; font-weight: 300; }
     .cta-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
 
-    /* ── FOOTER ── */
+    /* ââ FOOTER ââ */
     footer {
+      position: relative; z-index: 1;
       border-top: 1px solid var(--border); padding: 32px 48px;
       display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;
     }
@@ -395,7 +397,7 @@
     .footer-links a:hover { color: var(--text); }
     .footer-copy { font-size: .78rem; color: var(--muted); }
 
-    /* ── SCROLL REVEAL ── */
+    /* ââ SCROLL REVEAL ââ */
     @keyframes fadeUp { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)} }
     .reveal { opacity: 0; transform: translateY(36px); transition: opacity .65s ease, transform .65s ease; }
     .reveal.visible { opacity: 1; transform: translateY(0); }
@@ -404,7 +406,7 @@
     .reveal-d3 { transition-delay: .28s; }
     .reveal-d4 { transition-delay: .38s; }
 
-    /* ── RESPONSIVE ── */
+    /* ââ RESPONSIVE ââ */
     @media (max-width: 960px) {
       nav { padding: 16px 24px; }
       .nav-links { gap: 18px; }
@@ -471,12 +473,12 @@
   </div>
   <div class="hero-inner">
     <div>
-      <div class="hero-kicker"><span class="kicker-dot"></span>Media · Marketing · Growth</div>
+      <div class="hero-kicker"><span class="kicker-dot"></span>Media Â· Marketing Â· Growth</div>
       <h1>Launch your brand.<br><span class="grad-text">Grow your revenue.</span></h1>
-      <p class="hero-lead">LaunchPad Media helps local businesses get seen online — with content strategy, short-form video, paid ads, and websites built to turn visitors into customers.</p>
+      <p class="hero-lead">LaunchPad Media helps local businesses get seen online â with content strategy, short-form video, paid ads, and websites built to turn visitors into customers.</p>
       <div class="hero-btns">
         <a class="btn-primary" href="services.html">Explore Services</a>
-        <a class="btn-ghost"   href="pricing.html">View Pricing →</a>
+        <a class="btn-ghost"   href="pricing.html">View Pricing â</a>
       </div>
       <div class="hero-stats">
         <div><div class="stat-num">100%</div><div class="stat-label">local business focused</div></div>
@@ -487,16 +489,16 @@
     <div class="hero-right">
       <div class="float-card fc1">
         <div class="fc-label">Services We Offer</div>
-        <div class="fc-row"><span>Short-Form Video</span><span class="fc-tag">✓</span></div>
-        <div class="fc-row"><span>Paid Ads</span><span class="fc-tag">✓</span></div>
-        <div class="fc-row"><span>Web Design</span><span class="fc-tag">✓</span></div>
-        <div class="fc-row"><span>Brand Identity</span><span class="fc-tag">✓</span></div>
+        <div class="fc-row"><span>Short-Form Video</span><span class="fc-tag">â</span></div>
+        <div class="fc-row"><span>Paid Ads</span><span class="fc-tag">â</span></div>
+        <div class="fc-row"><span>Web Design</span><span class="fc-tag">â</span></div>
+        <div class="fc-row"><span>Brand Identity</span><span class="fc-tag">â</span></div>
       </div>
       <div class="float-card fc2">
         <div class="fc-label">Who We Serve</div>
-        <div class="fc-row"><span>Restaurants & Cafés</span><span class="fc-tag">Local</span></div>
-        <div class="fc-row"><span>Salons & Studios</span><span class="fc-tag">Local</span></div>
-        <div class="fc-row"><span>Retail & Shops</span><span class="fc-tag">Local</span></div>
+        <div class="fc-row"><span>Restaurants &amp; CafÃ©s</span><span class="fc-tag">Local</span></div>
+        <div class="fc-row"><span>Salons &amp; Studios</span><span class="fc-tag">Local</span></div>
+        <div class="fc-row"><span>Retail &amp; Shops</span><span class="fc-tag">Local</span></div>
       </div>
       <div class="float-card fc3">
         <div class="fc-label">Turnaround Time</div>
@@ -536,15 +538,15 @@
     <div class="reveal">
       <div class="section-kicker">What We Offer</div>
       <h2>Everything your brand needs<br>to grow online.</h2>
-      <p class="section-lead">From your first post to your first paying client — we handle content, strategy, and ads so you can focus on running your business.</p>
+      <p class="section-lead">From your first post to your first paying client â we handle content, strategy, and ads so you can focus on running your business.</p>
     </div>
     <div class="services-grid">
-      <div class="service-card reveal reveal-d1"><div class="s-icon">🎬</div><h3>Short-Form Video</h3><p>Reels, TikToks, and Shorts scripted, shot, and edited for your audience. Built to stop the scroll and drive profile visits.</p><a class="s-link" href="services.html">Learn more →</a></div>
-      <div class="service-card reveal reveal-d2"><div class="s-icon">🎯</div><h3>Paid Ads</h3><p>Meta and Google ad campaigns with tight targeting, compelling creative, and clear ROI. Data-backed, not guesswork.</p><a class="s-link" href="services.html">Learn more →</a></div>
-      <div class="service-card reveal reveal-d3"><div class="s-icon">🌐</div><h3>Website & Landing Pages</h3><p>Fast, mobile-first websites and conversion-focused landing pages that turn visitors into leads.</p><a class="s-link" href="services.html">Learn more →</a></div>
-      <div class="service-card reveal reveal-d1"><div class="s-icon">📣</div><h3>Brand Identity</h3><p>Logo, color palette, fonts, and voice — a cohesive brand system that makes you look professional from day one.</p><a class="s-link" href="services.html">Learn more →</a></div>
-      <div class="service-card reveal reveal-d2"><div class="s-icon">📧</div><h3>Email & SMS Marketing</h3><p>Automated sequences and newsletters that keep your audience warm and your revenue steady between campaigns.</p><a class="s-link" href="services.html">Learn more →</a></div>
-      <div class="service-card reveal reveal-d3"><div class="s-icon">📊</div><h3>Strategy & Reporting</h3><p>Monthly content calendars, competitor research, and clear performance reports so you always know what's working.</p><a class="s-link" href="services.html">Learn more →</a></div>
+      <div class="service-card reveal reveal-d1"><div class="s-icon">ð¬</div><h3>Short-Form Video</h3><p>Reels, TikToks, and Shorts scripted, shot, and edited for your audience. Built to stop the scroll and drive profile visits.</p><a class="s-link" href="services.html">Learn more â</a></div>
+      <div class="service-card reveal reveal-d2"><div class="s-icon">ð¯</div><h3>Paid Ads</h3><p>Meta and Google ad campaigns with tight targeting, compelling creative, and clear ROI. Data-backed, not guesswork.</p><a class="s-link" href="services.html">Learn more â</a></div>
+      <div class="service-card reveal reveal-d3"><div class="s-icon">ð</div><h3>Website &amp; Landing Pages</h3><p>Fast, mobile-first websites and conversion-focused landing pages that turn visitors into leads.</p><a class="s-link" href="services.html">Learn more â</a></div>
+      <div class="service-card reveal reveal-d1"><div class="s-icon">ð£</div><h3>Brand Identity</h3><p>Logo, color palette, fonts, and voice â a cohesive brand system that makes you look professional from day one.</p><a class="s-link" href="services.html">Learn more â</a></div>
+      <div class="service-card reveal reveal-d2"><div class="s-icon">ð§</div><h3>Email &amp; SMS Marketing</h3><p>Automated sequences and newsletters that keep your audience warm and your revenue steady between campaigns.</p><a class="s-link" href="services.html">Learn more â</a></div>
+      <div class="service-card reveal reveal-d3"><div class="s-icon">ð</div><h3>Strategy &amp; Reporting</h3><p>Monthly content calendars, competitor research, and clear performance reports so you always know what's working.</p><a class="s-link" href="services.html">Learn more â</a></div>
     </div>
   </div>
 </section>
@@ -558,9 +560,9 @@
     </div>
     <div class="steps">
       <div class="step reveal reveal-d1"><div class="step-num">01</div><h3>Discovery Call</h3><p>We learn your brand, goals, audience, and competitors. Free 30-min call, no pressure.</p></div>
-      <div class="step reveal reveal-d2"><div class="step-num">02</div><h3>Strategy Build</h3><p>We map out your content plan and growth targets — tailored to your niche and budget.</p></div>
-      <div class="step reveal reveal-d3"><div class="step-num">03</div><h3>Content & Launch</h3><p>We produce your first batch of content and launch within 48 hours of your approval.</p></div>
-      <div class="step reveal reveal-d4"><div class="step-num">04</div><h3>Optimize & Scale</h3><p>Weekly check-ins and monthly reports to grow your numbers every single month.</p></div>
+      <div class="step reveal reveal-d2"><div class="step-num">02</div><h3>Strategy Build</h3><p>We map out your content plan and growth targets â tailored to your niche and budget.</p></div>
+      <div class="step reveal reveal-d3"><div class="step-num">03</div><h3>Content &amp; Launch</h3><p>We produce your first batch of content and launch within 48 hours of your approval.</p></div>
+      <div class="step reveal reveal-d4"><div class="step-num">04</div><h3>Optimize &amp; Scale</h3><p>Weekly check-ins and monthly reports to grow your numbers every single month.</p></div>
     </div>
   </div>
 </section>
@@ -570,9 +572,9 @@
   <div class="container">
     <div class="results-grid">
       <div class="result-nums">
-        <div class="result-box reveal reveal-d1"><div class="result-big">100%</div><div class="result-label">Local business focused — no corporate clients</div></div>
+        <div class="result-box reveal reveal-d1"><div class="result-big">100%</div><div class="result-label">Local business focused â no corporate clients</div></div>
         <div class="result-box reveal reveal-d2"><div class="result-big">48h</div><div class="result-label">Time to first content delivery after onboarding</div></div>
-        <div class="result-box reveal reveal-d3"><div class="result-big">$0</div><div class="result-label">Setup fees — you only pay for your package</div></div>
+        <div class="result-box reveal reveal-d3"><div class="result-big">$0</div><div class="result-label">Setup fees â you only pay for your package</div></div>
         <div class="result-box reveal reveal-d4"><div class="result-big">Fast</div><div class="result-label">Weekly content cycles so your brand stays active</div></div>
       </div>
       <div class="reveal reveal-d2">
@@ -581,7 +583,7 @@
         <p class="section-lead">No bloated agency overhead. No vague deliverables. Just focused, fast marketing that fits your budget.</p>
         <ul class="result-list">
           <li>Every package includes clear deliverables and deadlines</li>
-          <li>You own all content — no lock-in, no hidden fees</li>
+          <li>You own all content â no lock-in, no hidden fees</li>
           <li>Weekly updates so you're never left guessing</li>
           <li>Strategy rooted in data, not trends or guesswork</li>
         </ul>
@@ -599,7 +601,7 @@
       <p class="section-lead" style="margin:0 auto;">Every review below was submitted by a real client and approved before going live.</p>
     </div>
     <div class="testi-grid" id="reviews-grid">
-      <div id="no-reviews">No reviews yet — be the first to leave one below.</div>
+      <div id="no-reviews">No reviews yet â be the first to leave one below.</div>
     </div>
     <div class="review-form-wrap reveal">
       <div class="review-form-inner">
@@ -607,11 +609,11 @@
         <h3>Worked with us? Tell others.</h3>
         <p>Your review will be visible after we verify it's from a real client. Usually approved within 24 hours.</p>
         <div class="star-row" id="star-picker">
-          <span class="star" data-val="1">★</span>
-          <span class="star" data-val="2">★</span>
-          <span class="star" data-val="3">★</span>
-          <span class="star" data-val="4">★</span>
-          <span class="star" data-val="5">★</span>
+          <span class="star" data-val="1">â</span>
+          <span class="star" data-val="2">â</span>
+          <span class="star" data-val="3">â</span>
+          <span class="star" data-val="4">â</span>
+          <span class="star" data-val="5">â</span>
         </div>
         <div class="form-row">
           <div class="form-group">
@@ -620,12 +622,12 @@
           </div>
           <div class="form-group">
             <label>Business Name <span style="opacity:.6;font-size:.75rem">(optional)</span></label>
-            <input type="text" id="r-biz" placeholder="e.g. Sunrise Café" maxlength="80">
+            <input type="text" id="r-biz" placeholder="e.g. Sunrise CafÃ©" maxlength="80">
           </div>
         </div>
         <div class="form-group">
           <label>Your Review</label>
-          <textarea id="r-body" rows="4" placeholder="Tell others about your experience with LaunchPad Media..." maxlength="400"><\/textarea>
+          <textarea id="r-body" rows="4" placeholder="Tell others about your experience with LaunchPad Media..." maxlength="400"></textarea>
         </div>
         <div class="form-submit-row">
           <button class="btn-primary" id="submit-review">Submit Review</button>
@@ -641,10 +643,10 @@
   <div class="cta-inner reveal">
     <div class="section-kicker">Get Started</div>
     <h2>Ready to <span class="grad-text">launch?</span></h2>
-    <p>Book a free 30-minute audit. We'll review your current online presence and give you 3 actionable improvements — no strings attached.</p>
+    <p>Book a free 30-minute audit. We'll review your current online presence and give you 3 actionable improvements â no strings attached.</p>
     <div class="cta-btns">
       <a class="btn-primary" href="contact.html">Book Free Audit</a>
-      <a class="btn-ghost"   href="about.html">Our Mission →</a>
+      <a class="btn-ghost"   href="about.html">Our Mission â</a>
     </div>
   </div>
 </section>
@@ -658,11 +660,11 @@
     <a href="about.html">About</a>
     <a href="contact.html">Contact</a>
   </div>
-  <div class="footer-copy">© 2026 LaunchPad Media</div>
+  <div class="footer-copy">Â© 2026 LaunchPad Media</div>
 </footer>
 
 <script>
-  // ── CURSOR ──────────────────────────────────────────
+  // ââ CURSOR ââââââââââââââââââââââââââââââââââââââââââ
   const cur  = document.getElementById('cursor');
   const ring = document.getElementById('cursor-ring');
   let mx = 0, my = 0, rx = 0, ry = 0;
@@ -684,19 +686,27 @@
     el.addEventListener('mouseleave', () => ring.classList.remove('hovered'));
   });
 
-  // ── NAV ─────────────────────────────────────────────
+  // ââ NAV âââââââââââââââââââââââââââââââââââââââââââââ
   const navEl = document.getElementById('nav');
   window.addEventListener('scroll', () => {
     navEl.classList.toggle('scrolled', window.scrollY > 30);
   }, { passive: true });
 
-  // ── SCROLL REVEAL ────────────────────────────────────
+  // ââ SCROLL REVEAL ââââââââââââââââââââââââââââââââââââ
   const revObs = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold: 0.1 });
+  }, { threshold: 0, rootMargin: "0px 0px -40px 0px" });
   document.querySelectorAll('.reveal').forEach(el => revObs.observe(el));
 
-  // ── REVIEWS ──────────────────────────────────────────
+  // Fallback: if page is already scrolled or observer fails, show everything
+  setTimeout(() => {
+    document.querySelectorAll('.reveal:not(.visible)').forEach(el => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight) el.classList.add('visible');
+    });
+  }, 300);
+
+  // ââ REVIEWS ââââââââââââââââââââââââââââââââââââââââââ
   const STORAGE_KEY = 'lpm_reviews';
   function getReviews() { try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; } catch { return []; } }
   function saveReviews(list) { localStorage.setItem(STORAGE_KEY, JSON.stringify(list)); }
@@ -711,7 +721,7 @@
     empty.style.display = 'none';
     const delays = ['reveal-d1','reveal-d2','reveal-d3'];
     approved.forEach((r, i) => {
-      const stars = '★'.repeat(r.stars) + '☆'.repeat(5 - r.stars);
+      const stars = 'â'.repeat(r.stars) + 'â'.repeat(5 - r.stars);
       const card  = document.createElement('div');
       card.className = 'testi-card reveal ' + delays[i % 3];
       card.innerHTML = `
@@ -757,7 +767,7 @@
     reviews.push({ id: Date.now(), name, biz, body, stars: selectedStars, status: 'pending', submitted: new Date().toISOString() });
     saveReviews(reviews);
     msgEl.style.color = '#4ade80';
-    msgEl.textContent = '✓ Submitted! Your review goes live after approval — usually within 24 hours.';
+    msgEl.textContent = 'â Submitted! Your review goes live after approval â usually within 24 hours.';
     document.getElementById('r-name').value = '';
     document.getElementById('r-biz').value  = '';
     document.getElementById('r-body').value = '';
@@ -769,4 +779,5 @@
 </script>
 </body>
 </html>
+
 
