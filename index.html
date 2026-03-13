@@ -324,7 +324,7 @@
       display: flex; align-items: flex-start; gap: 11px;
       font-size: .9rem; color: var(--muted); line-height: 1.6;
     }
-    .result-list li::before { content:'â'; color: var(--blue); flex-shrink: 0; margin-top: 2px; font-size: .85rem; }
+    .result-list li::before { content:''; display:inline-block; width:8px; height:8px; border-right:2px solid var(--blue); border-top:2px solid var(--blue); transform:rotate(45deg); flex-shrink:0; margin-top:5px; }
 
     /* ââ REVIEWS ââ */
     .testi-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; margin-top: 52px; }
@@ -333,7 +333,7 @@
       display: flex; flex-direction: column; transition: border-color .3s, transform .3s, box-shadow .3s;
     }
     .testi-card:hover { border-color: rgba(124,92,255,0.5); transform: translateY(-4px); box-shadow: 0 16px 40px rgba(124,92,255,0.12); }
-    .testi-stars  { color: #fbbf24; font-size: 1.1rem; margin-bottom: 14px; letter-spacing: 2px; font-family: "Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", sans-serif; }
+    .testi-stars  { color: #fbbf24; font-size: 1.1rem; margin-bottom: 14px; letter-spacing: 2px; font-family: Georgia, "Times New Roman", serif; }
     .testi-text   { font-size: .88rem; color: var(--muted); line-height: 1.72; font-style: italic; flex: 1; margin-bottom: 18px; }
     .testi-author { display: flex; align-items: center; gap: 11px; }
     .testi-avatar {
@@ -354,16 +354,16 @@
     .review-form-inner .section-kicker { margin-bottom: 10px; }
     .review-form-inner h3 { font-family: 'Syne', sans-serif; font-size: 1.3rem; font-weight: 800; margin-bottom: 7px; }
     .review-form-inner p { font-size: .85rem; color: var(--muted); margin-bottom: 24px; }
-    .star-row { display: flex; gap: 8px; margin-bottom: 24px; }
+    .star-row { display: flex; gap: 10px; margin-bottom: 24px; }
     .star {
       font-size: 2rem;
-      font-family: "Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", "Twemoji Mozilla", sans-serif;
-      color: rgba(255,255,255,0.15);
+      font-family: Georgia, "Times New Roman", serif;
+      color: rgba(255,255,255,0.2);
       cursor: pointer; line-height: 1;
       transition: color .15s, transform .18s;
       user-select: none; display: inline-block;
     }
-    .star.active, .star.hov { color: #fbbf24; transform: scale(1.22); }
+    .star.active, .star.hov { color: #fbbf24; transform: scale(1.2); }
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 0; }
     .form-group { display: flex; flex-direction: column; gap: 7px; margin-top: 14px; }
     .form-group label { font-size: .76rem; font-weight: 600; color: var(--muted); letter-spacing: .08em; text-transform: uppercase; }
@@ -479,12 +479,12 @@
   </div>
   <div class="hero-inner">
     <div>
-      <div class="hero-kicker"><span class="kicker-dot"></span>Media Â· Marketing Â· Growth</div>
+      <div class="hero-kicker"><span class="kicker-dot"></span>Media &mdash; Marketing &mdash; Growth</div>
       <h1>Launch your brand.<br><span class="grad-text">Grow your revenue.</span></h1>
       <p class="hero-lead">LaunchPad Media helps local businesses get seen online â with content strategy, short-form video, paid ads, and websites built to turn visitors into customers.</p>
       <div class="hero-btns">
         <a class="btn-primary" href="services.html">Explore Services</a>
-        <a class="btn-ghost"   href="pricing.html">View Pricing â</a>
+        <a class="btn-ghost"   href="pricing.html">View Pricing</a>
       </div>
       <div class="hero-stats">
         <div><div class="stat-num">100%</div><div class="stat-label">local business focused</div></div>
@@ -495,10 +495,10 @@
     <div class="hero-right">
       <div class="float-card fc1">
         <div class="fc-label">Services We Offer</div>
-        <div class="fc-row"><span>Short-Form Video</span><span class="fc-tag">â</span></div>
-        <div class="fc-row"><span>Paid Ads</span><span class="fc-tag">â</span></div>
-        <div class="fc-row"><span>Web Design</span><span class="fc-tag">â</span></div>
-        <div class="fc-row"><span>Brand Identity</span><span class="fc-tag">â</span></div>
+        <div class="fc-row"><span>Short-Form Video</span><span class="fc-tag">Yes</span></div>
+        <div class="fc-row"><span>Paid Ads</span><span class="fc-tag">Yes</span></div>
+        <div class="fc-row"><span>Web Design</span><span class="fc-tag">Yes</span></div>
+        <div class="fc-row"><span>Brand Identity</span><span class="fc-tag">Yes</span></div>
       </div>
       <div class="float-card fc2">
         <div class="fc-label">Who We Serve</div>
@@ -547,12 +547,12 @@
       <p class="section-lead">From your first post to your first paying client â we handle content, strategy, and ads so you can focus on running your business.</p>
     </div>
     <div class="services-grid">
-      <div class="service-card reveal reveal-d1"><div class="s-icon">ð¬</div><h3>Short-Form Video</h3><p>Reels, TikToks, and Shorts scripted, shot, and edited for your audience. Built to stop the scroll and drive profile visits.</p><a class="s-link" href="services.html">Learn more â</a></div>
-      <div class="service-card reveal reveal-d2"><div class="s-icon">ð¯</div><h3>Paid Ads</h3><p>Meta and Google ad campaigns with tight targeting, compelling creative, and clear ROI. Data-backed, not guesswork.</p><a class="s-link" href="services.html">Learn more â</a></div>
-      <div class="service-card reveal reveal-d3"><div class="s-icon">ð</div><h3>Website &amp; Landing Pages</h3><p>Fast, mobile-first websites and conversion-focused landing pages that turn visitors into leads.</p><a class="s-link" href="services.html">Learn more â</a></div>
-      <div class="service-card reveal reveal-d1"><div class="s-icon">ð£</div><h3>Brand Identity</h3><p>Logo, color palette, fonts, and voice â a cohesive brand system that makes you look professional from day one.</p><a class="s-link" href="services.html">Learn more â</a></div>
-      <div class="service-card reveal reveal-d2"><div class="s-icon">ð§</div><h3>Email &amp; SMS Marketing</h3><p>Automated sequences and newsletters that keep your audience warm and your revenue steady between campaigns.</p><a class="s-link" href="services.html">Learn more â</a></div>
-      <div class="service-card reveal reveal-d3"><div class="s-icon">ð</div><h3>Strategy &amp; Reporting</h3><p>Monthly content calendars, competitor research, and clear performance reports so you always know what's working.</p><a class="s-link" href="services.html">Learn more â</a></div>
+      <div class="service-card reveal reveal-d1"><div class="s-icon">ð¬</div><h3>Short-Form Video</h3><p>Reels, TikToks, and Shorts scripted, shot, and edited for your audience. Built to stop the scroll and drive profile visits.</p><a class="s-link" href="services.html">Learn more</a></div>
+      <div class="service-card reveal reveal-d2"><div class="s-icon">ð¯</div><h3>Paid Ads</h3><p>Meta and Google ad campaigns with tight targeting, compelling creative, and clear ROI. Data-backed, not guesswork.</p><a class="s-link" href="services.html">Learn more</a></div>
+      <div class="service-card reveal reveal-d3"><div class="s-icon">ð</div><h3>Website &amp; Landing Pages</h3><p>Fast, mobile-first websites and conversion-focused landing pages that turn visitors into leads.</p><a class="s-link" href="services.html">Learn more</a></div>
+      <div class="service-card reveal reveal-d1"><div class="s-icon">ð£</div><h3>Brand Identity</h3><p>Logo, color palette, fonts, and voice â a cohesive brand system that makes you look professional from day one.</p><a class="s-link" href="services.html">Learn more</a></div>
+      <div class="service-card reveal reveal-d2"><div class="s-icon">ð§</div><h3>Email &amp; SMS Marketing</h3><p>Automated sequences and newsletters that keep your audience warm and your revenue steady between campaigns.</p><a class="s-link" href="services.html">Learn more</a></div>
+      <div class="service-card reveal reveal-d3"><div class="s-icon">ð</div><h3>Strategy &amp; Reporting</h3><p>Monthly content calendars, competitor research, and clear performance reports so you always know what's working.</p><a class="s-link" href="services.html">Learn more</a></div>
     </div>
   </div>
 </section>
@@ -615,11 +615,11 @@
         <h3>Worked with us? Tell others.</h3>
         <p>Your review will be visible after we verify it's from a real client. Usually approved within 24 hours.</p>
         <div class="star-row" id="star-picker">
-          <span class="star" data-val="1">â</span>
-          <span class="star" data-val="2">â</span>
-          <span class="star" data-val="3">â</span>
-          <span class="star" data-val="4">â</span>
-          <span class="star" data-val="5">â</span>
+          <span class="star" data-val="1">&#9733;</span>
+          <span class="star" data-val="2">&#9733;</span>
+          <span class="star" data-val="3">&#9733;</span>
+          <span class="star" data-val="4">&#9733;</span>
+          <span class="star" data-val="5">&#9733;</span>
         </div>
         <div class="form-row">
           <div class="form-group">
@@ -652,7 +652,7 @@
     <p>Book a free 30-minute audit. We'll review your current online presence and give you 3 actionable improvements â no strings attached.</p>
     <div class="cta-btns">
       <a class="btn-primary" href="contact.html">Book Free Audit</a>
-      <a class="btn-ghost"   href="about.html">Our Mission â</a>
+      <a class="btn-ghost"   href="about.html">Our Mission</a>
     </div>
   </div>
 </section>
@@ -727,7 +727,7 @@
     empty.style.display = 'none';
     const delays = ['reveal-d1','reveal-d2','reveal-d3'];
     approved.forEach((r, i) => {
-      const stars = 'â'.repeat(r.stars) + 'â'.repeat(5 - r.stars);
+      const stars = '&#9733;'.repeat(r.stars) + '&#9734;'.repeat(5 - r.stars);
       const card  = document.createElement('div');
       card.className = 'testi-card reveal ' + delays[i % 3];
       card.innerHTML = `
@@ -785,6 +785,4 @@
 </script>
 </body>
 </html>
-
-
 
