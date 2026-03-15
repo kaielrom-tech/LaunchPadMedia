@@ -91,24 +91,6 @@
     .status-approved { background: rgba(74,222,128,0.12); color: var(--green); }
 
     .empty-state { text-align: center; padding: 60px; color: var(--muted); font-size: .95rem; }
-
-    .msg-card {
-      background: var(--bg2); border: 1px solid var(--border); border-radius: 16px;
-      padding: 24px 28px; margin-bottom: 16px;
-    }
-    .msg-card.unread { border-color: rgba(255,79,216,0.3); }
-    .msg-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 10px; flex-wrap: wrap; gap: 8px; }
-    .msg-from { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; }
-    .msg-email { font-size: .8rem; color: var(--muted); margin-top: 2px; }
-    .msg-service { font-size: .72rem; padding: 2px 10px; border-radius: 100px; background: rgba(52,195,255,0.12); color: var(--blue); font-weight: 600; }
-    .msg-body { font-size: .9rem; color: var(--text); line-height: 1.65; margin: 12px 0; }
-    .msg-date { font-size: .75rem; color: var(--muted); }
-    .msg-actions { display: flex; gap: 8px; margin-top: 14px; flex-wrap: wrap; }
-    .btn-reply { padding: 7px 18px; border-radius: 8px; background: rgba(52,195,255,0.12); color: var(--blue); font-size: .82rem; font-weight: 600; border: none; cursor: pointer; text-decoration: none; display: inline-block; }
-    .btn-reply:hover { background: rgba(52,195,255,0.22); }
-    .btn-dismiss { padding: 7px 18px; border-radius: 8px; border: 1px solid var(--border); background: none; color: var(--muted); font-size: .82rem; cursor: pointer; }
-    .btn-dismiss:hover { border-color: var(--red); color: var(--red); }
-    .unread-dot { width: 8px; height: 8px; border-radius: 50%; background: #ff4fd8; display: inline-block; margin-right: 6px; flex-shrink: 0; }
   </style>
 </head>
 <body>
@@ -135,14 +117,12 @@
   </div>
 
   <div class="tabs">
-    <div class="tab active" data-tab="pending">Pending Reviews</div>
-    <div class="tab" data-tab="approved">Approved Reviews</div>
-    <div class="tab" data-tab="messages">Messages <span id="msg-badge" style="background:rgba(255,79,216,0.2);color:#ff4fd8;padding:1px 8px;border-radius:100px;font-size:.72rem;margin-left:4px;"></span></div>
+    <div class="tab active" data-tab="pending">Pending</div>
+    <div class="tab" data-tab="approved">Approved</div>
   </div>
 
   <div id="tab-pending"></div>
   <div id="tab-approved" style="display:none;"></div>
-  <div id="tab-messages" style="display:none;"></div>
 </div>
 
 <script>
@@ -150,14 +130,6 @@
   // Change this password to whatever you want
   const ADMIN_PASSWORD = 'launchpad2026';
   const STORAGE_KEY = 'lpm_reviews';
-
-  function updateMsgBadge() {
-    try {
-      const unread = JSON.parse(localStorage.getItem('lpm_messages') || '[]').filter(m => !m.read).length;
-      const badge = document.getElementById('msg-badge');
-      if (badge) badge.textContent = unread > 0 ? unread + ' new' : '';
-    } catch(e){}
-  }
 
   // ââ HELPERS ââââââââââââââââââââââââââââââââââââââââââ
   function getReviews() {
@@ -179,7 +151,6 @@
     const approved = reviews.filter(r => r.status === 'approved');
 
     document.getElementById('pending-count').textContent = pending.length + ' pending';
-    updateMsgBadge();
 
     renderList('tab-pending', pending, ['approve', 'reject']);
     renderList('tab-approved', approved, ['reject', 'delete']);
@@ -232,56 +203,8 @@
       tab.classList.add('active');
       document.getElementById('tab-pending').style.display  = tab.dataset.tab === 'pending'  ? 'block' : 'none';
       document.getElementById('tab-approved').style.display = tab.dataset.tab === 'approved' ? 'block' : 'none';
-      document.getElementById('tab-messages').style.display = tab.dataset.tab === 'messages' ? 'block' : 'none';
-      if (tab.dataset.tab === 'messages') renderMessages();
     });
   });
-
-  // ââ MESSAGES âââââââââââââââââââââââââââââââââââââââââ
-  function getMessages() {
-    try { return JSON.parse(localStorage.getItem('lpm_messages')) || []; }
-    catch { return []; }
-  }
-  function saveMessages(m) { localStorage.setItem('lpm_messages', JSON.stringify(m)); }
-
-  function renderMessages() {
-    const el = document.getElementById('tab-messages');
-    const msgs = getMessages();
-    // Mark all as read when tab is opened
-    const updated = msgs.map(m => ({...m, read: true}));
-    saveMessages(updated);
-    updateMsgBadge();
-
-    if (!msgs.length) {
-      el.innerHTML = '<div class="empty-state">No messages yet.</div>';
-      return;
-    }
-
-    // Sort newest first
-    const sorted = [...msgs].reverse();
-    el.innerHTML = sorted.map(m => `
-      <div class="msg-card ${m.read ? '' : 'unread'}" id="msg-${m.id}">
-        <div class="msg-header">
-          <div>
-            <div class="msg-from">${m.read ? '' : '<span class="unread-dot"></span>'}${m.name}</div>
-            <div class="msg-email">${m.email}</div>
-          </div>
-          ${m.service ? '<span class="msg-service">' + m.service + '</span>' : ''}
-        </div>
-        <div class="msg-body">${m.msg}</div>
-        <div class="msg-date">Received ${formatDate(m.submitted)}</div>
-        <div class="msg-actions">
-          <a class="btn-reply" href="mailto:${m.email}?subject=Re: LaunchPad Media Inquiry&body=Hi ${m.name},%0D%0A%0D%0AThanks for reaching out!%0D%0A%0D%0A">Reply via Email</a>
-          <button class="btn-dismiss" onclick="dismissMessage(${m.id})">Delete</button>
-        </div>
-      </div>`).join('');
-  }
-
-  function dismissMessage(id) {
-    if (!confirm('Delete this message permanently?')) return;
-    saveMessages(getMessages().filter(m => m.id !== id));
-    renderMessages();
-  }
 
   // ââ AUTH âââââââââââââââââââââââââââââââââââââââââââââ
   function showPanel() {
