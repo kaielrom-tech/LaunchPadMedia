@@ -303,20 +303,10 @@
             </div>
             <div>
               <div class="ci-label">Email</div>
-              <a class="ci-value" href="mailto:hello@launchpadmedia.com">hello@launchpadmedia.com</a>
+              <a class="ci-value" href="mailto:launchpadmedia@gmail.com">launchpadmedia@gmail.com</a>
             </div>
           </div>
-          <div class="contact-item">
-            <div class="ci-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="rgba(52,195,255,0.9)" stroke-width="1.8" stroke-linecap="round">
-                <path d="M6.6 10.8a15.2 15.2 0 006.6 6.6l2.2-2.2a1 1 0 011-.25 11.4 11.4 0 003.6.6 1 1 0 011 1V17a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.6 3.6a1 1 0 01-.25 1L6.6 10.8z"/>
-              </svg>
-            </div>
-            <div>
-              <div class="ci-label">Phone</div>
-              <a class="ci-value" href="tel:+15550000000">+1 (555) 000-0000</a>
-            </div>
-          </div>
+
           <div class="contact-item">
             <div class="ci-icon">
               <svg viewBox="0 0 24 24" fill="none" stroke="rgba(52,195,255,0.9)" stroke-width="1.8" stroke-linecap="round">
@@ -410,7 +400,7 @@
       <div class="faq-card reveal reveal-d1">
         <div class="faq-tag">Billing</div>
         <h3>How does billing work?</h3>
-        <p>Monthly plans are billed at the start of each month. One-time services require a 50% deposit upfront, remainder on delivery.</p>
+        <p>All services require a 50% deposit upfront with the remainder due on delivery. No recurring charges or surprise fees.</p>
       </div>
       <div class="faq-card reveal reveal-d2">
         <div class="faq-tag">Results</div>
@@ -475,19 +465,32 @@
 
   // FORM
   function submitForm() {
-    const name  = document.getElementById('f-name').value.trim();
-    const email = document.getElementById('f-email').value.trim();
-    const msg   = document.getElementById('f-msg').value.trim();
-    const err   = document.getElementById('form-err');
+    const name    = document.getElementById('f-name').value.trim();
+    const email   = document.getElementById('f-email').value.trim();
+    const service = document.getElementById('f-service').value;
+    const msg     = document.getElementById('f-msg').value.trim();
+    const err     = document.getElementById('form-err');
     err.textContent = '';
-    if (!name)              { err.textContent = 'Please enter your name.'; return; }
+    if (!name)                          { err.textContent = 'Please enter your name.'; return; }
     if (!email || !email.includes('@')) { err.textContent = 'Please enter a valid email.'; return; }
-    if (msg.length < 10)   { err.textContent = 'Please add a message.'; return; }
+    if (msg.length < 10)                { err.textContent = 'Please add a message.'; return; }
+
+    // Save to localStorage so admin panel can read it
+    const messages = JSON.parse(localStorage.getItem('lpm_messages') || '[]');
+    messages.push({
+      id: Date.now(),
+      name, email, service, msg,
+      submitted: new Date().toISOString(),
+      read: false
+    });
+    localStorage.setItem('lpm_messages', JSON.stringify(messages));
+
     document.getElementById('contact-form').style.display = 'none';
     document.getElementById('form-success').style.display = 'block';
   }
 </script>
 </body>
 </html>
+
 
 </html>[
