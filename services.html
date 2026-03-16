@@ -4,6 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>LaunchPad Media | Services</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -14,8 +16,7 @@
       <span class="brand-logo" aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none">
           <path d="M6 16c2-4 5-7 10-10" stroke="url(#g)" stroke-width="2.4" stroke-linecap="round"/>
-          <path d="M14.5 5.5c3.2 1.6 4.9 5 4.3 9.1-4.1.6-7.5-1.1-9.1-4.3 1-2.2 2.4-3.7 4.8-4.8Z"
-                fill="url(#g)" opacity="0.95"/>
+          <path d="M14.5 5.5c3.2 1.6 4.9 5 4.3 9.1-4.1.6-7.5-1.1-9.1-4.3 1-2.2 2.4-3.7 4.8-4.8Z" fill="url(#g)" opacity="0.95"/>
           <defs>
             <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
               <stop offset="0" stop-color="#34c3ff"/>
@@ -27,7 +28,6 @@
       </span>
       LaunchPad Media
     </a>
-
     <nav class="nav-links">
       <a href="index.html">Home</a>
       <a class="active" href="services.html">Services</a>
@@ -39,201 +39,245 @@
 </header>
 
 <main>
+
+  <!-- ── HERO ─────────────────────────────────────────── -->
+  <section class="section" style="padding-bottom:0;">
+    <div class="container">
+      <div class="kicker reveal-left">What We Do</div>
+      <h1 class="h1 reveal-left delay-1">
+        Built to get your brand<br>
+        <span class="grad-text">online and looking right.</span>
+      </h1>
+      <p class="lead reveal-left delay-2">
+        We focus on the things that actually matter — a clean website, a professional social presence, and a brand identity worth showing off. No filler, no fluff.
+      </p>
+
+      <div class="stat-row reveal delay-3">
+        <div class="stat">
+          <div class="stat-num">5</div>
+          <div class="stat-label">Core Services</div>
+        </div>
+        <div class="stat-div"></div>
+        <div class="stat">
+          <div class="stat-num">24h</div>
+          <div class="stat-label">Response Time</div>
+        </div>
+        <div class="stat-div"></div>
+        <div class="stat">
+          <div class="stat-num">Free</div>
+          <div class="stat-label">Strategy Call</div>
+        </div>
+      </div>
+
+      <!-- highlight strip -->
+      <div class="highlight-strip reveal">
+        <div class="hl-item"><div class="hl-dot"></div><span class="hl-text">Website Design</span></div>
+        <div class="hl-item"><div class="hl-dot"></div><span class="hl-text">Landing Pages</span></div>
+        <div class="hl-item"><div class="hl-dot"></div><span class="hl-text">Social Media Setup</span></div>
+        <div class="hl-item"><div class="hl-dot"></div><span class="hl-text">Branding &amp; Identity</span></div>
+        <div class="hl-item"><div class="hl-dot"></div><span class="hl-text">Strategy Calls</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SERVICES GRID ──────────────────────────────────── -->
   <section class="section">
     <div class="container">
 
-      <div class="kicker reveal-left">What We Do</div>
-      <h1 class="h1 reveal-left delay-1">Built to get your brand online — fast.</h1>
-      <p class="lead reveal-left delay-2">
-        We focus on what actually moves the needle: a clean website, a professional social presence, and a brand that looks like it means business. No fluff, no bloated packages.
-      </p>
+      <div class="kicker reveal">Services</div>
+      <h2 class="h2 reveal delay-1">Everything we offer.</h2>
 
-      <!-- CORE SERVICES -->
-      <div class="grid three" style="margin-top:18px;">
+      <div class="grid three" style="margin-top:28px;">
 
         <!-- Website Design -->
-        <div class="card reveal-left">
-          <div class="icon" aria-hidden="true">
+        <div class="card featured reveal-left">
+          <div class="service-tag blue">Most Popular</div>
+          <div class="icon blue">
             <svg viewBox="0 0 24 24" fill="none">
-              <rect x="3" y="4" width="18" height="14" rx="2" stroke="white" stroke-width="1.6"/>
-              <path d="M3 8h18M7 4v4" stroke="white" stroke-width="1.6" stroke-linecap="round"/>
-              <path d="M8 13h8M8 16h5" stroke="white" stroke-width="1.4" stroke-linecap="round"/>
+              <rect x="3" y="4" width="18" height="14" rx="2" stroke="#34c3ff" stroke-width="1.6"/>
+              <path d="M3 8h18" stroke="#34c3ff" stroke-width="1.6" stroke-linecap="round"/>
+              <path d="M7 12h4M7 15h6" stroke="#34c3ff" stroke-width="1.4" stroke-linecap="round"/>
             </svg>
           </div>
           <h3>Website Design</h3>
-          <p class="small">
-            A clean, fast, mobile-ready website that makes your business look legit and turns visitors into leads.
-          </p>
+          <p class="small" style="margin-bottom:16px;">A clean, fast, mobile-ready site that makes your business look legit and turns visitors into leads.</p>
           <div class="hr"></div>
-          <p class="small">Includes:</p>
-          <p class="small">• Custom design built for your brand</p>
-          <p class="small">• Mobile + desktop optimized</p>
-          <p class="small">• Contact form + call-to-action setup</p>
-          <p class="small">• Up to 5 pages</p>
-          <p class="small">• Basic SEO setup</p>
-          <div class="hr"></div>
-          <p class="small">Best for: businesses that need a real online home.</p>
+          <ul class="includes-list">
+            <li>Custom design built around your brand</li>
+            <li>Mobile + desktop optimized</li>
+            <li>Up to 5 pages</li>
+            <li>Contact form + CTA setup</li>
+            <li>Basic SEO foundation</li>
+          </ul>
+          <p class="best-for">Best for: businesses that need a real home on the internet.</p>
         </div>
 
         <!-- Landing Pages -->
         <div class="card reveal">
-          <div class="icon" aria-hidden="true">
+          <div class="service-tag blue">Quick Turnaround</div>
+          <div class="icon blue">
             <svg viewBox="0 0 24 24" fill="none">
-              <path d="M5 7h14M5 12h14M5 17h10" stroke="white" stroke-width="1.6" stroke-linecap="round"/>
+              <path d="M5 7h14M5 12h14M5 17h9" stroke="#34c3ff" stroke-width="1.6" stroke-linecap="round"/>
             </svg>
           </div>
           <h3>Landing Pages</h3>
-          <p class="small">
-            One focused page designed to convert. Great for a new offer, a promo, or anywhere you're sending traffic.
-          </p>
+          <p class="small" style="margin-bottom:16px;">One focused page built to convert — great for a new offer, a promo, or anywhere you're sending traffic.</p>
           <div class="hr"></div>
-          <p class="small">Includes:</p>
-          <p class="small">• Single-page layout built to convert</p>
-          <p class="small">• Copywriting assistance</p>
-          <p class="small">• Mobile-friendly design</p>
-          <p class="small">• Contact form or booking link</p>
-          <p class="small">• Fast turnaround</p>
-          <div class="hr"></div>
-          <p class="small">Best for: promotions, new services, or driving specific actions.</p>
+          <ul class="includes-list">
+            <li>Single-page layout built to convert</li>
+            <li>Copywriting assistance</li>
+            <li>Mobile-friendly design</li>
+            <li>Contact form or booking link</li>
+            <li>Fast delivery</li>
+          </ul>
+          <p class="best-for">Best for: promotions, new offers, or driving a specific action.</p>
         </div>
 
         <!-- Social Media Setup -->
         <div class="card reveal-right">
-          <div class="icon" aria-hidden="true">
+          <div class="service-tag">Platform Setup</div>
+          <div class="icon">
             <svg viewBox="0 0 24 24" fill="none">
-              <circle cx="12" cy="8" r="3" stroke="white" stroke-width="1.6"/>
-              <circle cx="5"  cy="17" r="2" stroke="white" stroke-width="1.6"/>
-              <circle cx="19" cy="17" r="2" stroke="white" stroke-width="1.6"/>
-              <path d="M7 16c1-3 8-3 10 0" stroke="white" stroke-width="1.6" stroke-linecap="round"/>
+              <circle cx="12" cy="7" r="3" stroke="#7c5cff" stroke-width="1.6"/>
+              <circle cx="5"  cy="18" r="2" stroke="#7c5cff" stroke-width="1.6"/>
+              <circle cx="19" cy="18" r="2" stroke="#7c5cff" stroke-width="1.6"/>
+              <path d="M7 17c1.2-3 8.8-3 10 0" stroke="#7c5cff" stroke-width="1.6" stroke-linecap="round"/>
             </svg>
           </div>
           <h3>Social Media Setup</h3>
-          <p class="small">
-            Get your Instagram, Facebook, or other platforms looking clean, consistent, and ready to impress from day one.
-          </p>
+          <p class="small" style="margin-bottom:16px;">Get your Instagram or other platforms looking clean, consistent, and ready to impress from day one.</p>
           <div class="hr"></div>
-          <p class="small">Includes:</p>
-          <p class="small">• Profile photo + banner setup</p>
-          <p class="small">• Bio rewrite + link-in-bio</p>
-          <p class="small">• Username + handle consistency</p>
-          <p class="small">• Highlight covers</p>
-          <p class="small">• First 6 posts to launch your feed</p>
-          <div class="hr"></div>
-          <p class="small">Best for: new businesses or profiles that need a reset.</p>
+          <ul class="includes-list">
+            <li>Profile photo + banner setup</li>
+            <li>Bio rewrite + link-in-bio</li>
+            <li>Handle + username consistency</li>
+            <li>Highlight covers</li>
+            <li>First 6 posts to launch your feed</li>
+          </ul>
+          <p class="best-for">Best for: new businesses or profiles that need a reset.</p>
         </div>
 
         <!-- Branding -->
         <div class="card reveal-left">
-          <div class="icon" aria-hidden="true">
+          <div class="service-tag pink">Visual Identity</div>
+          <div class="icon pink">
             <svg viewBox="0 0 24 24" fill="none">
-              <path d="M12 3l2.5 5.5L20 9.5l-4 4 .9 5.5L12 16.5 7.1 19l.9-5.5-4-4 5.5-.9L12 3z" stroke="white" stroke-width="1.6" stroke-linejoin="round"/>
+              <path d="M12 3l2.5 5.5L20 9.27l-4 3.9.94 5.5L12 16l-4.94 2.67.94-5.5-4-3.9 5.5-.77L12 3z" stroke="#ff4fd8" stroke-width="1.6" stroke-linejoin="round"/>
             </svg>
           </div>
           <h3>Branding + Visual Identity</h3>
-          <p class="small">
-            A cohesive look that works across your website, socials, and anywhere your brand shows up.
-          </p>
+          <p class="small" style="margin-bottom:16px;">A cohesive look that works across your website, socials, and anywhere else your brand shows up.</p>
           <div class="hr"></div>
-          <p class="small">Includes:</p>
-          <p class="small">• Brand colors + typography</p>
-          <p class="small">• Logo design or refresh</p>
-          <p class="small">• Post + story templates</p>
-          <p class="small">• Visual style guide</p>
-          <p class="small">• Consistent look across platforms</p>
-          <div class="hr"></div>
-          <p class="small">Great for: new brands, rebrands, or anyone who looks inconsistent online.</p>
+          <ul class="includes-list">
+            <li>Brand colors + typography</li>
+            <li>Logo design or refresh</li>
+            <li>Post + story templates</li>
+            <li>Visual style guide</li>
+            <li>Consistent look across platforms</li>
+          </ul>
+          <p class="best-for">Great for: new brands, rebrands, or anyone who looks inconsistent online.</p>
         </div>
 
         <!-- Content Calendar -->
         <div class="card reveal">
-          <div class="icon" aria-hidden="true">
+          <div class="service-tag">Planning</div>
+          <div class="icon">
             <svg viewBox="0 0 24 24" fill="none">
-              <rect x="3" y="5" width="18" height="16" rx="2" stroke="white" stroke-width="1.6"/>
-              <path d="M3 10h18M8 3v4M16 3v4" stroke="white" stroke-width="1.6" stroke-linecap="round"/>
-              <path d="M7 14h2M11 14h2M15 14h2M7 17h2M11 17h2" stroke="white" stroke-width="1.4" stroke-linecap="round"/>
+              <rect x="3" y="5" width="18" height="16" rx="2" stroke="#7c5cff" stroke-width="1.6"/>
+              <path d="M3 10h18M8 3v4M16 3v4" stroke="#7c5cff" stroke-width="1.6" stroke-linecap="round"/>
+              <path d="M7 14h2M11 14h2M15 14h2M7 17h2M11 17h2" stroke="#7c5cff" stroke-width="1.4" stroke-linecap="round"/>
             </svg>
           </div>
           <h3>Content Calendar</h3>
-          <p class="small">
-            A week-by-week plan of exactly what to post so you never stare at a blank screen again.
-          </p>
+          <p class="small" style="margin-bottom:16px;">A week-by-week plan of exactly what to post so you never stare at a blank screen again.</p>
           <div class="hr"></div>
-          <p class="small">Includes:</p>
-          <p class="small">• 1-week planned content calendar</p>
-          <p class="small">• Post ideas + caption direction</p>
-          <p class="small">• Hashtag suggestions per post</p>
-          <p class="small">• Posting time recommendations</p>
-          <p class="small">• Easy to follow — no guesswork</p>
-          <div class="hr"></div>
-          <p class="small">Best for: anyone who knows what they want to post but doesn't know how to plan it.</p>
+          <ul class="includes-list">
+            <li>1-week planned content calendar</li>
+            <li>Post ideas + caption direction</li>
+            <li>Hashtag suggestions per post</li>
+            <li>Best posting times included</li>
+            <li>Easy to follow — no guesswork</li>
+          </ul>
+          <p class="best-for">Best for: anyone who wants a clear plan without the ongoing commitment.</p>
         </div>
 
         <!-- Strategy Call -->
         <div class="card reveal-right">
-          <div class="icon" aria-hidden="true">
+          <div class="service-tag blue">Free</div>
+          <div class="icon blue">
             <svg viewBox="0 0 24 24" fill="none">
-              <path d="M8 10h8M8 14h5" stroke="white" stroke-width="1.6" stroke-linecap="round"/>
-              <path d="M5 5h14a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H8l-4 3V6a1 1 0 0 1 1-1z" stroke="white" stroke-width="1.6" stroke-linejoin="round"/>
+              <path d="M8 10h8M8 14h5" stroke="#34c3ff" stroke-width="1.6" stroke-linecap="round"/>
+              <path d="M5 5h14a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H8l-4 3V6a1 1 0 0 1 1-1z" stroke="#34c3ff" stroke-width="1.6" stroke-linejoin="round"/>
             </svg>
           </div>
           <h3>Strategy Call</h3>
-          <p class="small">
-            A focused 15–20 minute call where we look at your current setup and tell you exactly what to fix and where to focus.
-          </p>
+          <p class="small" style="margin-bottom:16px;">A focused 15–20 minute call where we look at your setup and tell you exactly what to fix and where to focus.</p>
           <div class="hr"></div>
-          <p class="small">Includes:</p>
-          <p class="small">• Quick audit of your profiles or website</p>
-          <p class="small">• Clear direction on what to prioritize</p>
-          <p class="small">• Actionable next steps — no fluff</p>
-          <p class="small">• Honest feedback on what's working</p>
-          <div class="hr"></div>
-          <p class="small">Perfect if you want a clear direction before committing to anything.</p>
+          <ul class="includes-list">
+            <li>Quick audit of your profiles or site</li>
+            <li>Clear direction on what to prioritize</li>
+            <li>Honest feedback on what's working</li>
+            <li>Actionable next steps — no fluff</li>
+          </ul>
+          <p class="best-for">Perfect if you want a clear direction before committing to anything.</p>
         </div>
 
       </div>
-
-      <!-- HOW IT WORKS -->
-      <div class="section small">
-        <div class="card reveal">
-          <div class="kicker">How It Works</div>
-          <h2 class="h2">Simple from start to finish.</h2>
-          <p class="lead">No confusing processes. No waiting weeks to hear back.</p>
-          <div class="hr"></div>
-          <div class="grid three">
-            <div class="card soft reveal-left">
-              <h3>01 — You reach out</h3>
-              <p class="small">Tell us what you need via the contact form. We reply within 24 hours.</p>
-            </div>
-            <div class="card soft reveal">
-              <h3>02 — Quick call</h3>
-              <p class="small">We hop on a 15–20 min call to make sure we're aligned on the goal and scope.</p>
-            </div>
-            <div class="card soft reveal-right">
-              <h3>03 — We deliver</h3>
-              <p class="small">You get your website, setup, or branding delivered clean and on time. Simple.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- CTA -->
-      <div class="section small">
-        <div class="card reveal">
-          <div class="grid two" style="align-items:center;">
-            <div class="reveal-left">
-              <h2 class="h2">Not sure where to start?</h2>
-              <p class="lead">Book a free 15-minute strategy call and we'll point you in the right direction.</p>
-            </div>
-            <div class="reveal-right" style="display:flex; gap:12px; justify-content:flex-end; flex-wrap:wrap;">
-              <a class="btn" href="contact.html">Book a Call</a>
-              <a class="btn secondary" href="pricing.html">See Prices</a>
-            </div>
-          </div>
-        </div>
-      </div>
-
     </div>
   </section>
+
+  <!-- ── HOW IT WORKS ───────────────────────────────────── -->
+  <section class="section small">
+    <div class="container">
+      <div class="kicker reveal">Process</div>
+      <h2 class="h2 reveal delay-1">Simple from start to finish.</h2>
+      <p class="lead reveal delay-2" style="margin-bottom:32px;">No confusing back-and-forth. No waiting weeks to hear back.</p>
+
+      <div class="grid three">
+        <div class="step-card reveal-left">
+          <div class="step-num">01</div>
+          <div class="step-body">
+            <h3>You reach out</h3>
+            <p>Tell us what you need via the contact form. We reply within 24 hours, no exceptions.</p>
+          </div>
+        </div>
+        <div class="step-card reveal">
+          <div class="step-num">02</div>
+          <div class="step-body">
+            <h3>Quick call</h3>
+            <p>We hop on a free 15–20 min call to align on the goal, scope, and what you actually need.</p>
+          </div>
+        </div>
+        <div class="step-card reveal-right">
+          <div class="step-num">03</div>
+          <div class="step-body">
+            <h3>We deliver</h3>
+            <p>Your website, setup, or branding lands clean and on time. You get files, links, everything handed off.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA ───────────────────────────────────────────── -->
+  <section class="section small" style="padding-bottom:80px;">
+    <div class="container">
+      <div class="card featured reveal">
+        <div class="grid two" style="align-items:center; gap:32px;">
+          <div>
+            <div class="kicker" style="margin-bottom:14px;">Get Started</div>
+            <h2 class="h2" style="margin-bottom:10px;">Not sure where to start?</h2>
+            <p class="lead" style="font-size:.95rem;">Book a free 15-minute strategy call and we'll point you in the right direction — no strings attached.</p>
+          </div>
+          <div style="display:flex; gap:12px; justify-content:flex-end; flex-wrap:wrap; align-items:center;">
+            <a class="btn" href="contact.html">Book a Free Call</a>
+            <a class="btn secondary" href="pricing.html">See Pricing</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
 </main>
 
 <footer class="footer">
