@@ -104,11 +104,7 @@
     .value-card h3 { font-size:1.05rem;margin-bottom:10px; }
     .value-card p { font-size:.85rem;color:var(--muted);line-height:1.65; }
 
-    .founder-grid { display:grid;grid-template-columns:1fr 1.6fr;gap:48px;align-items:start; }
-    .founder-avatar-wrap { position:relative; }
-    .founder-avatar { width:100%;aspect-ratio:1;border-radius:24px;background:linear-gradient(135deg,rgba(124,92,255,0.15),rgba(52,195,255,0.1));border:1px solid rgba(124,92,255,0.2);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:4rem;font-weight:800;color:var(--violet);position:relative;overflow:hidden; }
-    .founder-avatar::after { content:'';position:absolute;inset:0;background:radial-gradient(circle at 30% 30%,rgba(52,195,255,0.12),transparent 60%); }
-    .founder-tag { position:absolute;bottom:-12px;left:50%;transform:translateX(-50%);background:var(--bg2);border:1px solid rgba(124,92,255,0.3);border-radius:100px;padding:6px 18px;font-size:.75rem;font-weight:700;color:var(--violet);white-space:nowrap;letter-spacing:.06em; }
+    .founder-section { max-width:780px; }
     .founder-bio { font-size:.95rem;color:var(--muted);line-height:1.85;margin-bottom:20px; }
     .founder-stats { display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:32px;margin-top:32px; }
     .fstat { background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:14px;padding:18px 16px;text-align:center; }
@@ -151,9 +147,6 @@
       section { padding:72px 24px; }
       .hero { padding:110px 24px 72px; }
       .values-grid,.help-grid,.how-grid { grid-template-columns:1fr 1fr; }
-      .founder-grid { grid-template-columns:1fr; }
-      .founder-avatar { max-width:280px;margin:0 auto 32px; }
-      .founder-avatar-wrap { text-align:center; }
       .mission-block { padding:32px 28px; }
       footer { flex-direction:column;text-align:center; }
       .cta-section { padding:80px 24px; }
@@ -270,48 +263,36 @@
 <!-- FOUNDER -->
 <section class="alt-bg">
   <div class="container">
-    <div class="founder-grid">
-
-      <div class="founder-avatar-wrap reveal">
-        <div class="founder-avatar">K</div>
-        <div class="founder-tag">Founder &amp; Owner</div>
-      </div>
-
-      <div class="reveal reveal-d1">
-        <div class="section-kicker">The Person Behind It</div>
-        <h2>Hey, I'm Kai.</h2>
-
-        <p class="founder-bio">
-          I started LaunchPad Media because I genuinely care about small businesses. The people who wake up early, stay late, and pour everything into what they've built — the family-owned restaurant, the solo contractor, the neighborhood boutique. These businesses matter to their communities, and they deserve to be seen online the way they show up in real life.
-        </p>
-        <p class="founder-bio">
-          I know how overwhelming it can feel to think about websites and branding when you're already wearing ten hats. That's exactly why I keep things simple, affordable, and pressure-free. My goal isn't to upsell you on things you don't need — it's to help you look as good online as you are in person, so the right customers can find you and trust you before they even walk through your door.
-        </p>
-        <p class="founder-bio">
-          At the end of the day, when a small business grows, the whole community benefits. That's what drives this. If you're ready to take your online presence seriously, I'd love to help make that happen.
-        </p>
-
-        <div class="founder-stats">
-          <div class="fstat">
-            <div class="fstat-num">24h</div>
-            <div class="fstat-label">Response Time</div>
-          </div>
-          <div class="fstat">
-            <div class="fstat-num">$0</div>
-            <div class="fstat-label">Setup Fees</div>
-          </div>
-          <div class="fstat">
-            <div class="fstat-num">Free</div>
-            <div class="fstat-label">Strategy Call</div>
-          </div>
+    <div class="founder-section reveal">
+      <div class="section-kicker">The Person Behind It</div>
+      <h2>Hey, I'm Kai.</h2>
+      <p class="founder-bio">
+        I started LaunchPad Media because I genuinely care about small businesses. The people who wake up early, stay late, and pour everything into what they've built — the family-owned restaurant, the solo contractor, the neighborhood boutique. These businesses matter to their communities, and they deserve to be seen online the way they show up in real life.
+      </p>
+      <p class="founder-bio">
+        I know how overwhelming it can feel to think about websites and branding when you're already wearing ten hats. That's exactly why I keep things simple, affordable, and pressure-free. My goal isn't to upsell you on things you don't need — it's to help you look as good online as you are in person, so the right customers can find you and trust you before they even walk through your door.
+      </p>
+      <p class="founder-bio">
+        At the end of the day, when a small business grows, the whole community benefits. That's what drives this. If you're ready to take your online presence seriously, I'd love to help make that happen.
+      </p>
+      <div class="founder-stats">
+        <div class="fstat">
+          <div class="fstat-num">24h</div>
+          <div class="fstat-label">Response Time</div>
         </div>
-
-        <div style="display:flex;gap:12px;flex-wrap:wrap;">
-          <a class="btn-primary" href="contact.html">Book a Free Call</a>
-          <a class="btn-ghost"   href="pricing.html">See Pricing</a>
+        <div class="fstat">
+          <div class="fstat-num">$0</div>
+          <div class="fstat-label">Setup Fees</div>
+        </div>
+        <div class="fstat">
+          <div class="fstat-num">Free</div>
+          <div class="fstat-label">Strategy Call</div>
         </div>
       </div>
-
+      <div style="display:flex;gap:12px;flex-wrap:wrap;">
+        <a class="btn-primary" href="contact.html">Book a Free Call</a>
+        <a class="btn-ghost"   href="pricing.html">See Pricing</a>
+      </div>
     </div>
   </div>
 </section>
