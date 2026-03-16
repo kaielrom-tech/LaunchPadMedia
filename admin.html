@@ -1,3 +1,4 @@
+html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,28 +17,14 @@
     }
     body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
 
-    /* LOGIN SCREEN */
-    #login-screen {
-      display: flex; align-items: center; justify-content: center; min-height: 100vh;
-    }
-    .login-box {
-      background: var(--bg2); border: 1px solid var(--border); border-radius: 20px;
-      padding: 48px; width: 380px; text-align: center;
-    }
+    /* LOGIN */
+    #login-screen { display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+    .login-box { background: var(--bg2); border: 1px solid var(--border); border-radius: 20px; padding: 48px; width: 380px; text-align: center; }
     .login-box h1 { font-family: 'Syne', sans-serif; font-size: 1.4rem; font-weight: 800; margin-bottom: 8px; }
     .login-box p { font-size: .88rem; color: var(--muted); margin-bottom: 28px; }
-    .login-box input {
-      width: 100%; padding: 13px 16px; border-radius: 10px;
-      background: var(--bg); border: 1px solid var(--border);
-      color: var(--text); font-family: 'DM Sans', sans-serif; font-size: .95rem;
-      outline: none; margin-bottom: 14px; transition: border-color .2s;
-    }
+    .login-box input { width: 100%; padding: 13px 16px; border-radius: 10px; background: var(--bg); border: 1px solid var(--border); color: var(--text); font-family: 'DM Sans', sans-serif; font-size: .95rem; outline: none; margin-bottom: 14px; transition: border-color .2s; }
     .login-box input:focus { border-color: var(--violet); }
-    .btn-grad {
-      width: 100%; padding: 13px; border-radius: 100px; border: none;
-      background: var(--grad); color: #fff; font-weight: 600; font-size: .95rem;
-      cursor: pointer; transition: opacity .2s;
-    }
+    .btn-grad { width: 100%; padding: 13px; border-radius: 100px; border: none; background: var(--grad); color: #fff; font-weight: 600; font-size: .95rem; cursor: pointer; transition: opacity .2s; }
     .btn-grad:hover { opacity: .88; }
     .login-err { font-size: .82rem; color: var(--red); margin-top: 10px; min-height: 18px; }
 
@@ -45,50 +32,53 @@
     #admin-panel { display: none; padding: 48px; max-width: 1000px; margin: 0 auto; }
     .admin-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 40px; flex-wrap: wrap; gap: 16px; }
     .admin-header h1 { font-family: 'Syne', sans-serif; font-size: 1.6rem; font-weight: 800; }
+    .header-badges { display: flex; align-items: center; gap: 10px; }
     .badge-count { padding: 4px 14px; border-radius: 100px; background: rgba(124,92,255,0.15); border: 1px solid rgba(124,92,255,0.3); color: var(--violet); font-size: .82rem; font-weight: 600; }
+    .badge-msg { padding: 4px 14px; border-radius: 100px; background: rgba(52,195,255,0.12); border: 1px solid rgba(52,195,255,0.3); color: var(--blue); font-size: .82rem; font-weight: 600; }
     .btn-logout { padding: 8px 20px; border-radius: 100px; border: 1px solid var(--border); background: none; color: var(--muted); font-size: .82rem; cursor: pointer; transition: border-color .2s; }
     .btn-logout:hover { border-color: var(--red); color: var(--red); }
 
+    /* TABS */
     .tabs { display: flex; gap: 4px; margin-bottom: 32px; border-bottom: 1px solid var(--border); }
-    .tab { padding: 10px 22px; font-size: .88rem; font-weight: 500; color: var(--muted); cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -1px; transition: color .2s, border-color .2s; }
+    .tab { padding: 10px 22px; font-size: .88rem; font-weight: 500; color: var(--muted); cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -1px; transition: color .2s, border-color .2s; position: relative; }
     .tab.active { color: var(--text); border-bottom-color: var(--violet); }
+    .tab-dot { position: absolute; top: 8px; right: 8px; width: 7px; height: 7px; border-radius: 50%; background: var(--blue); display: none; }
+    .tab-dot.show { display: block; }
 
-    .review-card {
-      background: var(--bg2); border: 1px solid var(--border); border-radius: 16px;
-      padding: 24px 28px; margin-bottom: 16px;
-      display: grid; grid-template-columns: 1fr auto; gap: 20px; align-items: start;
-    }
+    /* REVIEW CARDS */
+    .review-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 16px; padding: 24px 28px; margin-bottom: 16px; display: grid; grid-template-columns: 1fr auto; gap: 20px; align-items: start; }
     .rc-stars { color: #fbbf24; font-size: .95rem; margin-bottom: 6px; }
     .rc-body { font-size: .92rem; color: var(--text); line-height: 1.6; margin-bottom: 10px; font-style: italic; }
     .rc-meta { font-size: .8rem; color: var(--muted); }
     .rc-meta strong { color: var(--text); }
     .rc-date { font-size: .75rem; color: var(--muted); margin-top: 4px; }
     .rc-actions { display: flex; flex-direction: column; gap: 8px; flex-shrink: 0; }
-    .btn-approve {
-      padding: 8px 18px; border-radius: 8px; border: none;
-      background: rgba(74,222,128,0.12); color: var(--green);
-      font-size: .82rem; font-weight: 600; cursor: pointer; white-space: nowrap;
-      transition: background .2s;
-    }
+    .btn-approve { padding: 8px 18px; border-radius: 8px; border: none; background: rgba(74,222,128,0.12); color: var(--green); font-size: .82rem; font-weight: 600; cursor: pointer; white-space: nowrap; transition: background .2s; }
     .btn-approve:hover { background: rgba(74,222,128,0.22); }
-    .btn-reject {
-      padding: 8px 18px; border-radius: 8px; border: none;
-      background: rgba(248,113,113,0.10); color: var(--red);
-      font-size: .82rem; font-weight: 600; cursor: pointer; white-space: nowrap;
-      transition: background .2s;
-    }
+    .btn-reject { padding: 8px 18px; border-radius: 8px; border: none; background: rgba(248,113,113,0.10); color: var(--red); font-size: .82rem; font-weight: 600; cursor: pointer; white-space: nowrap; transition: background .2s; }
     .btn-reject:hover { background: rgba(248,113,113,0.2); }
-    .btn-delete {
-      padding: 8px 18px; border-radius: 8px; border: 1px solid var(--border);
-      background: none; color: var(--muted);
-      font-size: .82rem; cursor: pointer; white-space: nowrap;
-      transition: border-color .2s, color .2s;
-    }
+    .btn-delete { padding: 8px 18px; border-radius: 8px; border: 1px solid var(--border); background: none; color: var(--muted); font-size: .82rem; cursor: pointer; white-space: nowrap; transition: border-color .2s, color .2s; }
     .btn-delete:hover { border-color: var(--red); color: var(--red); }
-
     .status-pill { display: inline-block; padding: 2px 10px; border-radius: 100px; font-size: .72rem; font-weight: 600; }
     .status-pending { background: rgba(251,191,36,0.12); color: #fbbf24; }
     .status-approved { background: rgba(74,222,128,0.12); color: var(--green); }
+
+    /* MESSAGE CARDS */
+    .msg-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 16px; padding: 24px 28px; margin-bottom: 16px; display: grid; grid-template-columns: 1fr auto; gap: 20px; align-items: start; transition: border-color .2s; }
+    .msg-card.unread { border-color: rgba(52,195,255,0.3); }
+    .msg-top { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; flex-wrap: wrap; }
+    .msg-name { font-weight: 600; font-size: .95rem; }
+    .msg-email { font-size: .82rem; color: var(--blue); text-decoration: none; }
+    .msg-email:hover { text-decoration: underline; }
+    .msg-service-pill { padding: 2px 10px; border-radius: 100px; font-size: .72rem; font-weight: 600; background: rgba(124,92,255,0.12); color: var(--violet); border: 1px solid rgba(124,92,255,0.22); }
+    .unread-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--blue); flex-shrink: 0; }
+    .msg-body { font-size: .9rem; color: var(--text); line-height: 1.65; margin-bottom: 10px; }
+    .msg-date { font-size: .75rem; color: var(--muted); }
+    .msg-actions { display: flex; flex-direction: column; gap: 8px; flex-shrink: 0; }
+    .btn-mark-read { padding: 8px 18px; border-radius: 8px; border: none; background: rgba(52,195,255,0.1); color: var(--blue); font-size: .82rem; font-weight: 600; cursor: pointer; white-space: nowrap; transition: background .2s; }
+    .btn-mark-read:hover { background: rgba(52,195,255,0.2); }
+    .btn-reply { padding: 8px 18px; border-radius: 8px; border: none; background: rgba(74,222,128,0.12); color: var(--green); font-size: .82rem; font-weight: 600; cursor: pointer; white-space: nowrap; transition: background .2s; text-decoration: none; display: block; text-align: center; }
+    .btn-reply:hover { background: rgba(74,222,128,0.22); }
 
     .empty-state { text-align: center; padding: 60px; color: var(--muted); font-size: .95rem; }
   </style>
@@ -99,7 +89,7 @@
 <div id="login-screen">
   <div class="login-box">
     <h1>Admin Login</h1>
-    <p>LaunchPad Media Â· Review Portal</p>
+    <p>LaunchPad Media · Admin Portal</p>
     <input type="password" id="pw-input" placeholder="Enter admin password" />
     <button class="btn-grad" id="login-btn">Log In</button>
     <div class="login-err" id="login-err"></div>
@@ -110,112 +100,143 @@
 <div id="admin-panel">
   <div class="admin-header">
     <div style="display:flex;align-items:center;gap:14px;">
-      <h1>Review Manager</h1>
-      <span class="badge-count" id="pending-count">0 pending</span>
+      <h1>Admin Panel</h1>
+      <div class="header-badges">
+        <span class="badge-count" id="pending-count">0 pending</span>
+        <span class="badge-msg" id="unread-count" style="display:none;"></span>
+      </div>
     </div>
     <button class="btn-logout" id="logout-btn">Log out</button>
   </div>
 
   <div class="tabs">
-    <div class="tab active" data-tab="pending">Pending</div>
-    <div class="tab" data-tab="approved">Approved</div>
+    <div class="tab active" data-tab="pending">Pending Reviews</div>
+    <div class="tab" data-tab="approved">Approved Reviews</div>
+    <div class="tab" data-tab="messages">Messages <span class="tab-dot" id="msg-dot"></span></div>
   </div>
 
   <div id="tab-pending"></div>
   <div id="tab-approved" style="display:none;"></div>
+  <div id="tab-messages" style="display:none;"></div>
 </div>
 
 <script>
-  // ââ CONFIG âââââââââââââââââââââââââââââââââââââââââââ
-  // Change this password to whatever you want
   const ADMIN_PASSWORD = 'launchpad2026';
-  const STORAGE_KEY = 'lpm_reviews';
+  const REVIEWS_KEY   = 'lpm_reviews';
+  const MESSAGES_KEY  = 'lpm_messages';
 
-  // ââ HELPERS ââââââââââââââââââââââââââââââââââââââââââ
-  function getReviews() {
-    try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; }
-    catch { return []; }
-  }
-  function saveReviews(r) { localStorage.setItem(STORAGE_KEY, JSON.stringify(r)); }
+  function getReviews()  { try { return JSON.parse(localStorage.getItem(REVIEWS_KEY))  || []; } catch { return []; } }
+  function saveReviews(r){ localStorage.setItem(REVIEWS_KEY,  JSON.stringify(r)); }
+  function getMessages() { try { return JSON.parse(localStorage.getItem(MESSAGES_KEY)) || []; } catch { return []; } }
+  function saveMessages(m){ localStorage.setItem(MESSAGES_KEY, JSON.stringify(m)); }
 
   function formatDate(iso) {
-    return new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+    return new Date(iso).toLocaleDateString('en-US', { month:'short', day:'numeric', year:'numeric', hour:'2-digit', minute:'2-digit' });
   }
+  function stars(n) { return '★'.repeat(n) + '☆'.repeat(5 - n); }
 
-  function stars(n) { return 'â'.repeat(n) + 'â'.repeat(5 - n); }
-
-  // ââ RENDER âââââââââââââââââââââââââââââââââââââââââââ
+  // ── RENDER ───────────────────────────────────────────
   function renderPanel() {
-    const reviews = getReviews();
+    const reviews  = getReviews();
+    const messages = getMessages();
     const pending  = reviews.filter(r => r.status === 'pending');
     const approved = reviews.filter(r => r.status === 'approved');
+    const unread   = messages.filter(m => !m.read);
 
     document.getElementById('pending-count').textContent = pending.length + ' pending';
+    const unreadBadge = document.getElementById('unread-count');
+    if (unread.length > 0) {
+      unreadBadge.style.display = 'inline-block';
+      unreadBadge.textContent = unread.length + ' unread';
+    } else {
+      unreadBadge.style.display = 'none';
+    }
+    document.getElementById('msg-dot').classList.toggle('show', unread.length > 0);
 
-    renderList('tab-pending', pending, ['approve', 'reject']);
-    renderList('tab-approved', approved, ['reject', 'delete']);
+    renderReviews('tab-pending',  pending,  ['approve', 'reject']);
+    renderReviews('tab-approved', approved, ['reject', 'delete']);
+    renderMessages('tab-messages', messages);
   }
 
-  function renderList(containerId, list, actions) {
+  function renderReviews(containerId, list, actions) {
     const el = document.getElementById(containerId);
-    if (list.length === 0) {
-      el.innerHTML = '<div class="empty-state">No reviews here.</div>';
-      return;
-    }
+    if (list.length === 0) { el.innerHTML = '<div class="empty-state">No reviews here.</div>'; return; }
     el.innerHTML = list.map(r => `
       <div class="review-card" id="card-${r.id}">
         <div>
           <div class="rc-stars">${stars(r.stars)}</div>
           <div class="rc-body">"${r.body}"</div>
           <div class="rc-meta">
-            <strong>${r.name}</strong>${r.biz ? ' Â· ' + r.biz : ''}
+            <strong>${r.name}</strong>${r.biz ? ' · ' + r.biz : ''}
             <span class="status-pill status-${r.status}" style="margin-left:8px;">${r.status}</span>
           </div>
           <div class="rc-date">Submitted ${formatDate(r.submitted)}</div>
         </div>
         <div class="rc-actions">
-          ${actions.includes('approve') ? `<button class="btn-approve" onclick="approveReview(${r.id})">â Approve</button>` : ''}
-          ${actions.includes('reject')  ? `<button class="btn-reject"  onclick="rejectReview(${r.id})">â Reject</button>` : ''}
-          ${actions.includes('delete')  ? `<button class="btn-delete"  onclick="deleteReview(${r.id})">Delete</button>` : ''}
+          ${actions.includes('approve') ? `<button class="btn-approve" onclick="approveReview(${r.id})">✓ Approve</button>` : ''}
+          ${actions.includes('reject')  ? `<button class="btn-reject"  onclick="rejectReview(${r.id})">✕ Reject</button>`  : ''}
+          ${actions.includes('delete')  ? `<button class="btn-delete"  onclick="deleteReview(${r.id})">Delete</button>`    : ''}
         </div>
       </div>`).join('');
   }
 
-  function approveReview(id) {
-    const reviews = getReviews().map(r => r.id === id ? {...r, status: 'approved'} : r);
-    saveReviews(reviews); renderPanel();
-  }
-  function rejectReview(id) {
-    if (!confirm('Reject this review? It will be removed.')) return;
-    const reviews = getReviews().filter(r => r.id !== id);
-    saveReviews(reviews); renderPanel();
-  }
-  function deleteReview(id) {
-    if (!confirm('Permanently delete this approved review?')) return;
-    const reviews = getReviews().filter(r => r.id !== id);
-    saveReviews(reviews); renderPanel();
+  function renderMessages(containerId, list) {
+    const el = document.getElementById(containerId);
+    if (list.length === 0) { el.innerHTML = '<div class="empty-state">No messages yet.</div>'; return; }
+    const sorted = [...list].sort((a, b) => {
+      if (!a.read && b.read) return -1;
+      if (a.read && !b.read) return 1;
+      return new Date(b.submitted) - new Date(a.submitted);
+    });
+    el.innerHTML = sorted.map(m => `
+      <div class="msg-card ${m.read ? '' : 'unread'}" id="msg-${m.id}">
+        <div>
+          <div class="msg-top">
+            ${!m.read ? '<div class="unread-dot"></div>' : ''}
+            <span class="msg-name">${m.name}</span>
+            <a href="mailto:${m.email}" class="msg-email">${m.email}</a>
+            ${m.service ? `<span class="msg-service-pill">${m.service}</span>` : ''}
+          </div>
+          <div class="msg-body">${m.msg}</div>
+          <div class="msg-date">Received ${formatDate(m.submitted)}</div>
+        </div>
+        <div class="msg-actions">
+          ${!m.read ? `<button class="btn-mark-read" onclick="markRead(${m.id})">Mark read</button>` : ''}
+          <a class="btn-reply" href="mailto:${m.email}?subject=Re: Your LaunchPad Media Inquiry">Reply ↗</a>
+          <button class="btn-delete" onclick="deleteMessage(${m.id})">Delete</button>
+        </div>
+      </div>`).join('');
   }
 
-  // ââ TABS âââââââââââââââââââââââââââââââââââââââââââââ
+  // ── REVIEW ACTIONS ───────────────────────────────────
+  function approveReview(id) { saveReviews(getReviews().map(r => r.id === id ? {...r, status:'approved'} : r)); renderPanel(); }
+  function rejectReview(id)  { if (!confirm('Reject and remove this review?')) return; saveReviews(getReviews().filter(r => r.id !== id)); renderPanel(); }
+  function deleteReview(id)  { if (!confirm('Permanently delete this review?')) return; saveReviews(getReviews().filter(r => r.id !== id)); renderPanel(); }
+
+  // ── MESSAGE ACTIONS ──────────────────────────────────
+  function markRead(id)      { saveMessages(getMessages().map(m => m.id === id ? {...m, read:true} : m)); renderPanel(); }
+  function deleteMessage(id) { if (!confirm('Delete this message?')) return; saveMessages(getMessages().filter(m => m.id !== id)); renderPanel(); }
+
+  // ── TABS ─────────────────────────────────────────────
   document.querySelectorAll('.tab').forEach(tab => {
     tab.addEventListener('click', () => {
       document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
       tab.classList.add('active');
       document.getElementById('tab-pending').style.display  = tab.dataset.tab === 'pending'  ? 'block' : 'none';
       document.getElementById('tab-approved').style.display = tab.dataset.tab === 'approved' ? 'block' : 'none';
+      document.getElementById('tab-messages').style.display = tab.dataset.tab === 'messages' ? 'block' : 'none';
     });
   });
 
-  // ââ AUTH âââââââââââââââââââââââââââââââââââââââââââââ
+  // ── AUTH ─────────────────────────────────────────────
   function showPanel() {
     document.getElementById('login-screen').style.display = 'none';
-    document.getElementById('admin-panel').style.display = 'block';
+    document.getElementById('admin-panel').style.display  = 'block';
     renderPanel();
   }
 
   document.getElementById('login-btn').addEventListener('click', () => {
-    const val = document.getElementById('pw-input').value;
-    if (val === ADMIN_PASSWORD) {
+    if (document.getElementById('pw-input').value === ADMIN_PASSWORD) {
       sessionStorage.setItem('lpm_admin', '1');
       showPanel();
     } else {
@@ -229,12 +250,11 @@
 
   document.getElementById('logout-btn').addEventListener('click', () => {
     sessionStorage.removeItem('lpm_admin');
-    document.getElementById('admin-panel').style.display = 'none';
+    document.getElementById('admin-panel').style.display  = 'none';
     document.getElementById('login-screen').style.display = 'flex';
     document.getElementById('pw-input').value = '';
   });
 
-  // Auto-login if already authenticated this session
   if (sessionStorage.getItem('lpm_admin') === '1') showPanel();
 </script>
 </body>
