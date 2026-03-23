@@ -4,9 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>LaunchPad Media | Contact</title>
+  <meta name="description" content="Contact LaunchPad Media for websites, social setup, and branding. We reply within one business day." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -27,8 +28,10 @@
     <section class="hero">
       <div class="container">
         <span class="eyebrow reveal">Contact</span>
-        <h1 class="reveal">Tell us what you need and we will reply within 24 hours.</h1>
-        <p class="reveal">We can start with a free strategy call or a direct project quote.</p>
+        <h1 class="reveal">Tell us about your business and what you need.</h1>
+        <p class="reveal">
+          We reply within one business day. For a quick alignment, ask for a free intro call in your message.
+        </p>
       </div>
     </section>
 
@@ -36,48 +39,47 @@
       <div class="container">
         <div class="grid two">
           <div class="card reveal">
-            <h3>Send a message</h3>
-            <p style="margin-bottom:12px;">Share your business type, what you need help with, and your timeline.</p>
+            <h3>Message</h3>
+            <p style="margin-bottom:14px;">Include your business name, what you offer, and whether you need a site, social help, branding, or a mix.</p>
             <form id="contact-form">
               <div class="form-grid">
                 <div class="field">
                   <label for="c-name">Name</label>
-                  <input id="c-name" type="text" required />
+                  <input id="c-name" type="text" required autocomplete="name" />
                 </div>
                 <div class="field">
                   <label for="c-email">Email</label>
-                  <input id="c-email" type="email" required />
+                  <input id="c-email" type="email" required autocomplete="email" />
                 </div>
               </div>
               <div class="field">
-                <label for="c-service">Service of interest</label>
+                <label for="c-service">Interest</label>
                 <select id="c-service">
-                  <option value="">Not sure yet</option>
-                  <option>Website Design</option>
-                  <option>Landing Page</option>
-                  <option>Social Profile Setup</option>
-                  <option>Brand Identity</option>
-                  <option>Content Planning</option>
+                  <option value="">Not sure</option>
+                  <option>Website</option>
+                  <option>Landing page</option>
+                  <option>Social setup</option>
+                  <option>Branding</option>
+                  <option>Content plan</option>
                 </select>
               </div>
               <div class="field">
-                <label for="c-message">Message</label>
-                <textarea id="c-message" required></textarea>
+                <label for="c-message">Details</label>
+                <textarea id="c-message" required placeholder="Timeline, budget range if you have one, link to current site or profile…"></textarea>
               </div>
-              <button class="btn primary" type="submit">Send Message</button>
-              <p id="contact-status" style="margin-top:10px;"></p>
+              <button class="btn primary" type="submit">Send</button>
+              <p id="contact-status" style="margin-top:12px;font-size:0.9rem;"></p>
             </form>
           </div>
 
           <aside class="card reveal">
-            <h3>What happens next</h3>
+            <h3>After you write in</h3>
             <ul class="list-check">
-              <li>We review your request within one business day.</li>
-              <li>We reply with questions and a recommended next step.</li>
-              <li>If needed, we schedule a short strategy call.</li>
-              <li>You receive a clear scope and fixed quote.</li>
+              <li>We read your note and respond with any clarifying questions.</li>
+              <li>If it helps, we book a short call.</li>
+              <li>You receive a written scope and price before work starts.</li>
             </ul>
-            <p style="margin-top:12px;"><strong>Email:</strong> contact.launch.pad.media@gmail.com</p>
+            <p style="margin-top:16px;font-size:0.9375rem;"><strong style="color:var(--ink);">Email:</strong> contact.launch.pad.media@gmail.com</p>
           </aside>
         </div>
       </div>
@@ -87,7 +89,7 @@
   <footer class="site-footer">
     <div class="container footer-row">
       <span>© 2026 LaunchPad Media</span>
-      <span>We reply within 24 hours.</span>
+      <span>One business day response time.</span>
     </div>
   </footer>
   <script src="app.js"></script>

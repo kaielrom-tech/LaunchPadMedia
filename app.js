@@ -51,6 +51,6 @@
 
     e.preventDefault();
     form.reset();
-    if (status) status.textContent = "Thanks - we received your message and will reply within 24 hours.";
+    if (status) status.textContent = "Thanks — we received your message and will reply within one business day.";
   });
 })();
