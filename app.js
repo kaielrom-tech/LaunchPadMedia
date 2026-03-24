@@ -1,6 +1,61 @@
 (() => {
   const revealEls = document.querySelectorAll(".reveal");
   const REVIEWS_KEY = "lpm_reviews";
+  const MESSAGES_KEY = "lpm_messages";
+
+  function useRemote() {
+    return typeof window.LPM_USE_REMOTE === "function" && window.LPM_USE_REMOTE();
+  }
+
+  function sbBase() {
+    const c = window.LPM_CONFIG || {};
+    return String(c.supabaseUrl || "").replace(/\/$/, "");
+  }
+
+  function sbHeaders(extra = {}) {
+    const c = window.LPM_CONFIG || {};
+    return {
+      apikey: c.supabaseAnonKey,
+      Authorization: `Bearer ${c.supabaseAnonKey}`,
+      "Content-Type": "application/json",
+      Prefer: "return=minimal",
+      ...extra
+    };
+  }
+
+  async function sbFetchApprovedReviews() {
+    const u = new URL(`${sbBase()}/rest/v1/reviews`);
+    u.searchParams.set("select", "*");
+    u.searchParams.set("status", "eq.approved");
+    u.searchParams.set("order", "submitted.desc");
+    const c = window.LPM_CONFIG || {};
+    const res = await fetch(u.toString(), {
+      headers: {
+        apikey: c.supabaseAnonKey,
+        Authorization: `Bearer ${c.supabaseAnonKey}`
+      }
+    });
+    if (!res.ok) throw new Error(await res.text());
+    return res.json();
+  }
+
+  async function sbInsertReview(row) {
+    const res = await fetch(`${sbBase()}/rest/v1/reviews`, {
+      method: "POST",
+      headers: sbHeaders(),
+      body: JSON.stringify(row)
+    });
+    if (!res.ok) throw new Error(await res.text());
+  }
+
+  async function sbInsertContact(row) {
+    const res = await fetch(`${sbBase()}/rest/v1/contact_messages`, {
+      method: "POST",
+      headers: sbHeaders(),
+      body: JSON.stringify(row)
+    });
+    if (!res.ok) throw new Error(await res.text());
+  }
 
   function getReviews() {
     try {
@@ -14,13 +69,28 @@
     localStorage.setItem(REVIEWS_KEY, JSON.stringify(items));
   }
 
-  function renderApprovedReviews() {
+  async function renderApprovedReviews() {
     const list = document.getElementById("reviews-list");
     if (!list) return;
     list.innerHTML = "";
-    const approved = getReviews()
-      .filter((r) => r.status === "approved")
-      .sort((a, b) => new Date(b.submitted || 0) - new Date(a.submitted || 0));
+
+    let approved = [];
+    if (useRemote()) {
+      try {
+        approved = await sbFetchApprovedReviews();
+      } catch {
+        const p = document.createElement("p");
+        p.className = "reviews-empty";
+        p.textContent = "Reviews could not load. Check js/lpm-config.js and Supabase RLS.";
+        list.appendChild(p);
+        return;
+      }
+    } else {
+      approved = getReviews()
+        .filter((r) => r.status === "approved")
+        .sort((a, b) => new Date(b.submitted || 0) - new Date(a.submitted || 0));
+    }
+
     if (!approved.length) {
       const p = document.createElement("p");
       p.className = "reviews-empty";
@@ -61,7 +131,7 @@
     const form = document.getElementById("review-form");
     if (!form) return;
     const status = document.getElementById("review-status");
-    form.addEventListener("submit", (e) => {
+    form.addEventListener("submit", async (e) => {
       e.preventDefault();
       const name = document.getElementById("r-name")?.value.trim();
       const stars = document.getElementById("r-stars")?.value;
@@ -74,9 +144,27 @@
         if (status) status.textContent = "Please write at least a short review (15+ characters).";
         return;
       }
+      if (useRemote()) {
+        try {
+          await sbInsertReview({
+            name,
+            stars: Number(stars),
+            body,
+            status: "pending"
+          });
+          form.reset();
+          if (status) {
+            status.textContent =
+              "Thanks — your review was submitted for moderation and will appear after approval.";
+          }
+        } catch (err) {
+          if (status) status.textContent = "Could not submit. Check connection and Supabase setup.";
+        }
+        return;
+      }
       const all = getReviews();
       all.push({
-        id: Date.now(),
+        id: String(Date.now()),
         name,
         stars: Number(stars),
         body,
@@ -248,38 +336,66 @@
     revealEls.forEach((el) => el.classList.add("is-visible"));
   }
 
-  renderApprovedReviews();
+  renderApprovedReviews().catch(() => {});
+
+  if (useRemote() && document.getElementById("reviews-list")) {
+    setInterval(() => {
+      renderApprovedReviews().catch(() => {});
+    }, 120000);
+  }
+
   initReviewForm();
 
   window.addEventListener("storage", (e) => {
-    if (e.key === REVIEWS_KEY && document.getElementById("reviews-list")) {
-      renderApprovedReviews();
+    if (!useRemote() && e.key === REVIEWS_KEY && document.getElementById("reviews-list")) {
+      renderApprovedReviews().catch(() => {});
     }
   });
 
   const contactForm = document.getElementById("contact-form");
   if (contactForm) {
-    contactForm.addEventListener("submit", (e) => {
+    contactForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
       const name = document.getElementById("c-name")?.value.trim();
       const email = document.getElementById("c-email")?.value.trim();
       const message = document.getElementById("c-message")?.value.trim();
       const status = document.getElementById("contact-status");
 
       if (!name || !email || !message) {
-        e.preventDefault();
         if (status) status.textContent = "Please fill out all required fields.";
         return;
       }
 
       if (!email.includes("@")) {
-        e.preventDefault();
         if (status) status.textContent = "Please enter a valid email address.";
         return;
       }
 
-      const payload = JSON.parse(localStorage.getItem("lpm_messages") || "[]");
+      if (useRemote()) {
+        try {
+          await sbInsertContact({
+            name,
+            email,
+            service: document.getElementById("c-service")?.value || "",
+            msg: message,
+            read: false,
+            replied: false,
+            reply_draft: ""
+          });
+          contactForm.reset();
+          if (status) {
+            status.textContent =
+              "Thanks — we received your message and will reply within one business day.";
+          }
+        } catch {
+          if (status) status.textContent = "Could not send. Check connection and Supabase setup.";
+        }
+        return;
+      }
+
+      const payload = JSON.parse(localStorage.getItem(MESSAGES_KEY) || "[]");
       payload.push({
-        id: Date.now(),
+        id: String(Date.now()),
         name,
         email,
         service: document.getElementById("c-service")?.value || "",
@@ -289,9 +405,8 @@
         replied: false,
         replyDraft: ""
       });
-      localStorage.setItem("lpm_messages", JSON.stringify(payload));
+      localStorage.setItem(MESSAGES_KEY, JSON.stringify(payload));
 
-      e.preventDefault();
       contactForm.reset();
       if (status) {
         status.textContent = "Thanks — we received your message and will reply within one business day.";
