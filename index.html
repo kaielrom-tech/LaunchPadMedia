@@ -161,7 +161,45 @@
       </div>
     </section>
 
-    <section class="section alt">
+    <section class="section alt" id="reviews">
+      <div class="container">
+        <header class="section-head reveal">
+          <span class="section-label">Reviews</span>
+          <h2>Client feedback</h2>
+          <p class="section-lead">Only approved reviews appear here. New submissions go through moderation first.</p>
+        </header>
+        <div id="reviews-list" class="reviews-grid reveal"></div>
+        <div class="card review-submit-card reveal">
+          <h3>Submit a review</h3>
+          <p class="review-submit-lead">If we worked together, you can leave a short note. It will show up after we approve it.</p>
+          <form id="review-form">
+            <div class="field">
+              <label for="r-name">Name</label>
+              <input id="r-name" type="text" required maxlength="80" autocomplete="name" />
+            </div>
+            <div class="field">
+              <label for="r-stars">Rating</label>
+              <select id="r-stars" required>
+                <option value="" disabled selected hidden>Select…</option>
+                <option value="5">5 — Excellent</option>
+                <option value="4">4 — Very good</option>
+                <option value="3">3 — Good</option>
+                <option value="2">2 — Fair</option>
+                <option value="1">1 — Poor</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="r-body">Your review</label>
+              <textarea id="r-body" required minlength="15" maxlength="1200" placeholder="What stood out about the project?"></textarea>
+            </div>
+            <button class="btn primary" type="submit">Submit for moderation</button>
+            <p id="review-status" class="review-form-status" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
       <div class="container reveal">
         <div class="cta-band">
           <div>

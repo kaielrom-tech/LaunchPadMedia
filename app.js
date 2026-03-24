@@ -1,5 +1,95 @@
 (() => {
   const revealEls = document.querySelectorAll(".reveal");
+  const REVIEWS_KEY = "lpm_reviews";
+
+  function getReviews() {
+    try {
+      return JSON.parse(localStorage.getItem(REVIEWS_KEY)) || [];
+    } catch {
+      return [];
+    }
+  }
+
+  function saveReviews(items) {
+    localStorage.setItem(REVIEWS_KEY, JSON.stringify(items));
+  }
+
+  function renderApprovedReviews() {
+    const list = document.getElementById("reviews-list");
+    if (!list) return;
+    list.innerHTML = "";
+    const approved = getReviews()
+      .filter((r) => r.status === "approved")
+      .sort((a, b) => new Date(b.submitted || 0) - new Date(a.submitted || 0));
+    if (!approved.length) {
+      const p = document.createElement("p");
+      p.className = "reviews-empty";
+      p.textContent = "No published reviews yet.";
+      list.appendChild(p);
+      return;
+    }
+    approved.forEach((r) => {
+      const art = document.createElement("article");
+      art.className = "review-card";
+      const n = Number(r.stars) || 0;
+      const starsEl = document.createElement("div");
+      starsEl.className = "review-stars";
+      starsEl.setAttribute("aria-label", `${n} out of 5 stars`);
+      starsEl.textContent = "★".repeat(Math.min(5, Math.max(0, n))) + "☆".repeat(5 - Math.min(5, Math.max(0, n)));
+      const body = document.createElement("p");
+      body.className = "review-body";
+      body.textContent = r.body || "";
+      const foot = document.createElement("footer");
+      foot.className = "review-meta";
+      const who = document.createElement("strong");
+      who.textContent = r.name || "Client";
+      foot.appendChild(who);
+      if (r.submitted) {
+        const d = document.createElement("span");
+        d.className = "review-date";
+        d.textContent = ` · ${new Date(r.submitted).toLocaleDateString()}`;
+        foot.appendChild(d);
+      }
+      art.appendChild(starsEl);
+      art.appendChild(body);
+      art.appendChild(foot);
+      list.appendChild(art);
+    });
+  }
+
+  function initReviewForm() {
+    const form = document.getElementById("review-form");
+    if (!form) return;
+    const status = document.getElementById("review-status");
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const name = document.getElementById("r-name")?.value.trim();
+      const stars = document.getElementById("r-stars")?.value;
+      const body = document.getElementById("r-body")?.value.trim();
+      if (!name || !stars || !body) {
+        if (status) status.textContent = "Please fill out every field.";
+        return;
+      }
+      if (body.length < 15) {
+        if (status) status.textContent = "Please write at least a short review (15+ characters).";
+        return;
+      }
+      const all = getReviews();
+      all.push({
+        id: Date.now(),
+        name,
+        stars: Number(stars),
+        body,
+        status: "pending",
+        submitted: new Date().toISOString()
+      });
+      saveReviews(all);
+      form.reset();
+      if (status) {
+        status.textContent = "Thanks — your review was submitted for moderation and will appear after approval.";
+      }
+    });
+  }
 
   function initSlider(root) {
     if (!root) return;
@@ -122,41 +212,52 @@
     revealEls.forEach((el) => el.classList.add("is-visible"));
   }
 
-  const form = document.getElementById("contact-form");
-  if (!form) return;
+  renderApprovedReviews();
+  initReviewForm();
 
-  form.addEventListener("submit", (e) => {
-    const name = document.getElementById("c-name")?.value.trim();
-    const email = document.getElementById("c-email")?.value.trim();
-    const message = document.getElementById("c-message")?.value.trim();
-    const status = document.getElementById("contact-status");
-
-    if (!name || !email || !message) {
-      e.preventDefault();
-      if (status) status.textContent = "Please fill out all required fields.";
-      return;
+  window.addEventListener("storage", (e) => {
+    if (e.key === REVIEWS_KEY && document.getElementById("reviews-list")) {
+      renderApprovedReviews();
     }
-
-    if (!email.includes("@")) {
-      e.preventDefault();
-      if (status) status.textContent = "Please enter a valid email address.";
-      return;
-    }
-
-    const payload = JSON.parse(localStorage.getItem("lpm_messages") || "[]");
-    payload.push({
-      id: Date.now(),
-      name,
-      email,
-      service: document.getElementById("c-service")?.value || "",
-      msg: message,
-      submitted: new Date().toISOString(),
-      read: false
-    });
-    localStorage.setItem("lpm_messages", JSON.stringify(payload));
-
-    e.preventDefault();
-    form.reset();
-    if (status) status.textContent = "Thanks — we received your message and will reply within one business day.";
   });
+
+  const contactForm = document.getElementById("contact-form");
+  if (contactForm) {
+    contactForm.addEventListener("submit", (e) => {
+      const name = document.getElementById("c-name")?.value.trim();
+      const email = document.getElementById("c-email")?.value.trim();
+      const message = document.getElementById("c-message")?.value.trim();
+      const status = document.getElementById("contact-status");
+
+      if (!name || !email || !message) {
+        e.preventDefault();
+        if (status) status.textContent = "Please fill out all required fields.";
+        return;
+      }
+
+      if (!email.includes("@")) {
+        e.preventDefault();
+        if (status) status.textContent = "Please enter a valid email address.";
+        return;
+      }
+
+      const payload = JSON.parse(localStorage.getItem("lpm_messages") || "[]");
+      payload.push({
+        id: Date.now(),
+        name,
+        email,
+        service: document.getElementById("c-service")?.value || "",
+        msg: message,
+        submitted: new Date().toISOString(),
+        read: false
+      });
+      localStorage.setItem("lpm_messages", JSON.stringify(payload));
+
+      e.preventDefault();
+      contactForm.reset();
+      if (status) {
+        status.textContent = "Thanks — we received your message and will reply within one business day.";
+      }
+    });
+  }
 })();

@@ -12,29 +12,39 @@
 <body>
   <main class="section">
     <div class="container">
-      <div id="login" class="card" style="max-width:420px;margin:20px auto;">
+      <div id="login" class="card admin-login-card">
         <h2>Admin Login</h2>
-        <p style="margin:10px 0 14px;">Internal moderation panel for reviews and contact messages.</p>
+        <p class="admin-login-lead">Moderate reviews and read contact submissions. Data lives in this browser’s <code>localStorage</code> (same site origin as the public pages).</p>
         <div class="field">
           <label for="pw">Password</label>
-          <input id="pw" type="password" />
+          <input id="pw" type="password" autocomplete="current-password" />
         </div>
-        <button class="btn primary" id="login-btn">Log In</button>
-        <p id="login-msg" style="margin-top:8px;"></p>
+        <button class="btn primary" type="button" id="login-btn">Log In</button>
+        <p id="login-msg" class="admin-msg"></p>
       </div>
 
-      <div id="panel" style="display:none;">
-        <h1 style="margin-bottom:14px;">Admin Panel</h1>
-        <div class="grid two">
+      <div id="panel" class="admin-panel" hidden>
+        <h1 class="admin-title">Admin Panel</h1>
+        <p class="admin-panel-lead">
+          <strong>Reviews</strong> use <code>lpm_reviews</code>. <strong>Contact</strong> form uses <code>lpm_messages</code>. Submissions only appear here if they were sent from this same domain in this browser.
+        </p>
+        <div class="grid two admin-grid">
           <section class="card">
-            <h3>Pending Reviews</h3>
-            <div id="pending-reviews" style="margin-top:10px;"></div>
+            <h3>Reviews — pending</h3>
+            <p class="admin-section-hint">Approve to publish on the home page. Deny to reject without deleting (archive below).</p>
+            <div id="pending-reviews" class="admin-list"></div>
           </section>
           <section class="card">
-            <h3>Inbox Messages</h3>
-            <div id="inbox-messages" style="margin-top:10px;"></div>
+            <h3>Contact — inbox</h3>
+            <p class="admin-section-hint">Submissions from <a class="text-link" href="contact.html">contact.html</a>.</p>
+            <div id="inbox-messages" class="admin-list"></div>
           </section>
         </div>
+        <section class="card admin-rejected-card">
+          <h3>Reviews — denied</h3>
+          <p class="admin-section-hint">Not shown on the site. Delete permanently when you are done.</p>
+          <div id="rejected-reviews" class="admin-list"></div>
+        </section>
       </div>
     </div>
   </main>
@@ -48,54 +58,121 @@
     const panel = document.getElementById("panel");
     const loginMsg = document.getElementById("login-msg");
 
-    function getReviews() { try { return JSON.parse(localStorage.getItem(REVIEWS_KEY)) || []; } catch { return []; } }
-    function saveReviews(v) { localStorage.setItem(REVIEWS_KEY, JSON.stringify(v)); }
-    function getMessages() { try { return JSON.parse(localStorage.getItem(MESSAGES_KEY)) || []; } catch { return []; } }
-    function saveMessages(v) { localStorage.setItem(MESSAGES_KEY, JSON.stringify(v)); }
+    function escapeHtml(s) {
+      return String(s ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
+
+    function getReviews() {
+      try {
+        return JSON.parse(localStorage.getItem(REVIEWS_KEY)) || [];
+      } catch {
+        return [];
+      }
+    }
+
+    function saveReviews(v) {
+      localStorage.setItem(REVIEWS_KEY, JSON.stringify(v));
+    }
+
+    function getMessages() {
+      try {
+        return JSON.parse(localStorage.getItem(MESSAGES_KEY)) || [];
+      } catch {
+        return [];
+      }
+    }
+
+    function saveMessages(v) {
+      localStorage.setItem(MESSAGES_KEY, JSON.stringify(v));
+    }
+
+    function isPendingReview(r) {
+      return r.status !== "approved" && r.status !== "rejected";
+    }
 
     function render() {
-      const pending = getReviews().filter((r) => r.status !== "approved");
+      const all = getReviews();
+      const pending = all.filter(isPendingReview);
+      const rejected = all.filter((r) => r.status === "rejected");
       const messages = getMessages().sort((a, b) => new Date(b.submitted) - new Date(a.submitted));
 
       const pendingEl = document.getElementById("pending-reviews");
+      const rejectedEl = document.getElementById("rejected-reviews");
       const msgEl = document.getElementById("inbox-messages");
 
-      pendingEl.innerHTML = pending.length ? pending.map((r) => `
-        <div style="border:1px solid var(--line);border-radius:12px;padding:10px;margin-bottom:8px;">
-          <p><strong>${r.name || "Anonymous"}</strong> (${r.stars || 0}/5)</p>
-          <p>${r.body || ""}</p>
-          <div style="margin-top:8px;display:flex;gap:8px;">
-            <button class="btn primary" onclick="approve(${r.id})">Approve</button>
-            <button class="btn ghost" onclick="removeReview(${r.id})">Delete</button>
+      pendingEl.innerHTML = pending.length
+        ? pending
+            .map(
+              (r) => `
+        <article class="admin-item">
+          <p class="admin-item-head"><strong>${escapeHtml(r.name || "Anonymous")}</strong> <span class="admin-muted">(${escapeHtml(String(r.stars || 0))}/5)</span></p>
+          <p class="admin-item-body">${escapeHtml(r.body || "")}</p>
+          <p class="admin-item-meta">${r.submitted ? escapeHtml(new Date(r.submitted).toLocaleString()) : ""}</p>
+          <div class="admin-actions">
+            <button type="button" class="btn primary" data-act="approve-review" data-id="${r.id}">Approve</button>
+            <button type="button" class="btn ghost" data-act="deny-review" data-id="${r.id}">Deny</button>
+            <button type="button" class="btn ghost" data-act="delete-review" data-id="${r.id}">Delete</button>
           </div>
-        </div>
-      `).join("") : "<p>No pending reviews.</p>";
+        </article>`
+            )
+            .join("")
+        : "<p class=\"admin-empty\">No pending reviews.</p>";
 
-      msgEl.innerHTML = messages.length ? messages.map((m) => `
-        <div style="border:1px solid var(--line);border-radius:12px;padding:10px;margin-bottom:8px;">
-          <p><strong>${m.name || "Unknown"}</strong> - ${m.email || "No email"}</p>
-          <p>${m.msg || ""}</p>
-          <p style="font-size:.8rem;">${m.submitted ? new Date(m.submitted).toLocaleString() : ""}</p>
-          <button class="btn ghost" onclick="removeMessage(${m.id})">Delete</button>
-        </div>
-      `).join("") : "<p>No messages yet.</p>";
+      rejectedEl.innerHTML = rejected.length
+        ? rejected
+            .map(
+              (r) => `
+        <article class="admin-item admin-item-muted">
+          <p class="admin-item-head"><strong>${escapeHtml(r.name || "Anonymous")}</strong></p>
+          <p class="admin-item-body">${escapeHtml(r.body || "")}</p>
+          <div class="admin-actions">
+            <button type="button" class="btn ghost" data-act="delete-review" data-id="${r.id}">Delete permanently</button>
+          </div>
+        </article>`
+            )
+            .join("")
+        : "<p class=\"admin-empty\">No denied reviews.</p>";
+
+      msgEl.innerHTML = messages.length
+        ? messages
+            .map(
+              (m) => `
+        <article class="admin-item">
+          <p class="admin-item-head"><strong>${escapeHtml(m.name || "Unknown")}</strong> <span class="admin-muted">&lt;${escapeHtml(m.email || "")}&gt;</span></p>
+          ${m.service ? `<p class="admin-tag">Interest: ${escapeHtml(m.service)}</p>` : ""}
+          <p class="admin-item-body">${escapeHtml(m.msg || "")}</p>
+          <p class="admin-item-meta">${m.submitted ? escapeHtml(new Date(m.submitted).toLocaleString()) : ""}</p>
+          <div class="admin-actions">
+            <button type="button" class="btn ghost" data-act="delete-message" data-id="${m.id}">Delete</button>
+          </div>
+        </article>`
+            )
+            .join("")
+        : "<p class=\"admin-empty\">No messages yet. Send a test from <a class=\"text-link\" href=\"contact.html\">Contact</a>.</p>";
     }
 
-    function approve(id) {
-      const all = getReviews().map((r) => r.id === id ? { ...r, status: "approved" } : r);
-      saveReviews(all);
+    panel.addEventListener("click", (e) => {
+      const btn = e.target.closest("button[data-act]");
+      if (!btn || !panel.contains(btn)) return;
+      const act = btn.getAttribute("data-act");
+      const id = Number(btn.getAttribute("data-id"));
+      if (!act || Number.isNaN(id)) return;
+
+      if (act === "approve-review") {
+        saveReviews(getReviews().map((r) => (r.id === id ? { ...r, status: "approved" } : r)));
+      } else if (act === "deny-review") {
+        saveReviews(getReviews().map((r) => (r.id === id ? { ...r, status: "rejected" } : r)));
+      } else if (act === "delete-review") {
+        saveReviews(getReviews().filter((r) => r.id !== id));
+      } else if (act === "delete-message") {
+        saveMessages(getMessages().filter((m) => m.id !== id));
+      }
       render();
-    }
-
-    function removeReview(id) {
-      saveReviews(getReviews().filter((r) => r.id !== id));
-      render();
-    }
-
-    function removeMessage(id) {
-      saveMessages(getMessages().filter((m) => m.id !== id));
-      render();
-    }
+    });
 
     document.getElementById("login-btn").addEventListener("click", () => {
       const val = document.getElementById("pw").value;
@@ -104,14 +181,14 @@
         return;
       }
       sessionStorage.setItem("lpm_admin", "1");
-      loginWrap.style.display = "none";
-      panel.style.display = "block";
+      loginWrap.hidden = true;
+      panel.hidden = false;
       render();
     });
 
     if (sessionStorage.getItem("lpm_admin") === "1") {
-      loginWrap.style.display = "none";
-      panel.style.display = "block";
+      loginWrap.hidden = true;
+      panel.hidden = false;
       render();
     }
   </script>
