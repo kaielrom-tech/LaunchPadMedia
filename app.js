@@ -1,14 +1,15 @@
 (() => {
   const revealEls = document.querySelectorAll(".reveal");
 
-  const homeSlider = document.getElementById("home-slider");
-  if (homeSlider) {
-    const viewport = homeSlider.querySelector(".slider-viewport");
-    const track = homeSlider.querySelector(".slider-track");
-    const slides = homeSlider.querySelectorAll(".slider-slide");
-    const prev = homeSlider.querySelector(".slider-prev");
-    const next = homeSlider.querySelector(".slider-next");
-    const dotsRoot = homeSlider.querySelector(".slider-dots");
+  function initSlider(root) {
+    if (!root) return;
+    const viewport = root.querySelector(".slider-viewport");
+    const track = root.querySelector(".slider-track");
+    const slides = root.querySelectorAll(".slider-slide");
+    const prev = root.querySelector(".slider-prev");
+    const next = root.querySelector(".slider-next");
+    const dotsRoot = root.querySelector(".slider-dots");
+    if (!viewport || !track || !slides.length || !prev || !next) return;
     let index = 0;
     let slideW = 0;
     let resizeTimer;
@@ -70,6 +71,8 @@
       resizeTimer = setTimeout(measure, 120);
     });
   }
+
+  initSlider(document.getElementById("services-slider"));
 
   if ("IntersectionObserver" in window) {
     const io = new IntersectionObserver((entries) => {
