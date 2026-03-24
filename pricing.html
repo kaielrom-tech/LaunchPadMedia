@@ -14,7 +14,12 @@
   <header class="site-header">
     <div class="container nav">
       <a class="brand" href="index.html">LaunchPad Media</a>
-      <nav class="nav-links">
+      <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu">
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+      </button>
+      <nav class="nav-links" id="site-nav">
         <a href="index.html">Home</a>
         <a href="services.html">Services</a>
         <a class="active" href="pricing.html">Pricing</a>
@@ -44,6 +49,7 @@
           <p class="section-lead">Pick one line or combine with a bundle. Exact deliverables appear in your proposal.</p>
         </header>
         <div class="reveal">
+          <div class="table-scroll">
           <table class="table">
             <thead>
               <tr><th>Item</th><th>Typical scope</th><th>From</th></tr>
@@ -67,6 +73,7 @@
               <tr><td>Local SEO basics</td><td>Meta, headings, checklist for launch</td><td>$49</td></tr>
             </tbody>
           </table>
+          </div>
           <p class="table-note">USD. Rush timelines or heavy custom illustration/photography may change the quote—we show any delta before you pay.</p>
         </div>
       </div>

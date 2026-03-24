@@ -197,6 +197,42 @@
 
   initBundleScroll();
 
+  function initMobileNav() {
+    const nav = document.querySelector(".site-header .nav");
+    const toggle = document.querySelector(".nav-toggle");
+    const links = document.getElementById("site-nav");
+    if (!nav || !toggle || !links) return;
+
+    function setOpen(open) {
+      nav.classList.toggle("is-open", open);
+      toggle.setAttribute("aria-expanded", open ? "true" : "false");
+      toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+      document.body.classList.toggle("nav-open", open);
+    }
+
+    toggle.addEventListener("click", () => {
+      setOpen(!nav.classList.contains("is-open"));
+    });
+
+    links.querySelectorAll("a").forEach((a) => {
+      a.addEventListener("click", () => setOpen(false));
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") setOpen(false);
+    });
+
+    let resizeTimer;
+    window.addEventListener("resize", () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        if (window.matchMedia("(min-width: 961px)").matches) setOpen(false);
+      }, 120);
+    });
+  }
+
+  initMobileNav();
+
   if ("IntersectionObserver" in window) {
     const io = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
