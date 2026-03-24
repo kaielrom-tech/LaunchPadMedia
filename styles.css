@@ -709,20 +709,22 @@ textarea { min-height: 128px; resize: vertical; }
 /* —— Process stepper (arrows between steps) —— */
 .process-stepper {
   display: flex;
+  flex-direction: column;
   align-items: stretch;
-  justify-content: space-between;
-  gap: 8px;
-  flex-wrap: wrap;
+  gap: 0;
+  max-width: 520px;
+  margin-inline: auto;
 }
 
 .process-step {
-  flex: 1 1 160px;
-  min-width: 140px;
   border: 1px solid var(--line);
   border-radius: var(--radius);
   background: var(--surface);
   padding: 18px 16px;
   box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
 }
 
 .process-step .step-num {
@@ -742,6 +744,8 @@ textarea { min-height: 128px; resize: vertical; }
 .process-step p {
   font-size: 0.8125rem;
   line-height: 1.5;
+  color: var(--muted);
+  margin: 0;
 }
 
 .process-arrow {
@@ -749,10 +753,31 @@ textarea { min-height: 128px; resize: vertical; }
   align-items: center;
   justify-content: center;
   color: var(--muted);
-  font-size: 1.25rem;
+  font-size: 1.35rem;
+  line-height: 1;
   flex: 0 0 auto;
   align-self: center;
   user-select: none;
+  padding: 10px 0;
+  transform: rotate(90deg);
+}
+
+@media (min-width: 1024px) {
+  .process-stepper {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr);
+    gap: 0 12px;
+    align-items: stretch;
+    max-width: none;
+    margin-inline: 0;
+  }
+
+  .process-arrow {
+    transform: none;
+    padding: 0 4px;
+    font-size: 1.15rem;
+    align-self: center;
+  }
 }
 
 /* —— Bundle cards —— */
@@ -989,9 +1014,6 @@ textarea { min-height: 128px; resize: vertical; }
   }
 
   .slider-shell-wrap .slider-dots { grid-row: 3; }
-
-  .process-stepper { flex-direction: column; align-items: stretch; }
-  .process-arrow { transform: rotate(90deg); margin: -4px 0; }
 
   .bundle-grid { grid-template-columns: 1fr; }
 
