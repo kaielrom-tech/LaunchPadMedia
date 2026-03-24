@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>LaunchPad Media | Pricing</title>
-  <meta name="description" content="À la carte services and bundles from Spark ($119) to Signature ($1,649). Fixed project pricing for small businesses." />
+  <meta name="description" content="À la carte services and bundles from Spark ($119) to Elite ($2,299). Fixed project pricing for small businesses." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
@@ -79,70 +79,139 @@
           <h2>Budget to full launch</h2>
           <p class="section-lead">Entry bundles for quick wins; premium for a coordinated site, brand, social, and content push. All adjustable after we talk.</p>
         </header>
-        <div class="bundle-grid reveal">
-          <article class="bundle-card tier-budget">
-            <span class="bundle-tier-tag">Budget</span>
-            <h3>Spark</h3>
-            <div class="bundle-price">$119</div>
-            <p class="fine">Momentum without a full build yet.</p>
-            <ul>
-              <li>Bio rewrite for one platform</li>
-              <li>5 caption templates tailored to your offer</li>
-              <li>Link-in-bio wireframe (structure + copy notes)</li>
-            </ul>
-            <a class="btn ghost bundle-card-cta" href="contact.html">Book Spark</a>
-          </article>
-          <article class="bundle-card">
-            <span class="bundle-tier-tag">Starter</span>
-            <h3>Core</h3>
-            <div class="bundle-price">$329</div>
-            <p class="fine">Social-first launch plus light planning.</p>
-            <ul>
-              <li>Full setup on one social platform</li>
-              <li>1-week content calendar</li>
-              <li>Google Business blurb + category pass</li>
-            </ul>
-            <a class="btn ghost bundle-card-cta" href="contact.html">Book Core</a>
-          </article>
-          <article class="bundle-card featured">
-            <span class="bundle-tier-tag">Most booked</span>
-            <h3>Growth</h3>
-            <div class="bundle-price">$579</div>
-            <p class="fine">Site + brand + one social aligned.</p>
-            <ul>
-              <li>3-page website</li>
-              <li>Brand mini (logo direction, palette, type)</li>
-              <li>Social setup on one platform</li>
-            </ul>
-            <a class="btn primary bundle-card-cta" href="contact.html">Book Growth</a>
-          </article>
-          <article class="bundle-card">
-            <span class="bundle-tier-tag">Scale</span>
-            <h3>Scale</h3>
-            <div class="bundle-price">$949</div>
-            <p class="fine">Larger site and two socials.</p>
-            <ul>
-              <li>5-page website</li>
-              <li>Full brand kit + guidelines PDF</li>
-              <li>Social setup on two platforms</li>
-              <li>2-week content calendar</li>
-            </ul>
-            <a class="btn ghost bundle-card-cta" href="contact.html">Book Scale</a>
-          </article>
-          <article class="bundle-card tier-premium">
-            <span class="bundle-tier-tag">Premium</span>
-            <h3>Signature</h3>
-            <div class="bundle-price">$1,649</div>
-            <p class="fine">Serious launch or rebrand—maximum coverage.</p>
-            <ul>
-              <li>Everything in Scale</li>
-              <li>4-week content calendar</li>
-              <li>One campaign landing page</li>
-              <li>Extra revision round on site + brand</li>
-              <li>Script pack (5 short-form scripts)</li>
-            </ul>
-            <a class="btn ghost bundle-card-cta" href="contact.html">Book Signature</a>
-          </article>
+        <div class="bundle-carousel reveal" id="bundle-carousel">
+          <button type="button" class="bundle-scroll-btn prev" aria-label="Scroll bundles left">‹</button>
+          <div class="bundle-scroll-viewport">
+            <div class="bundle-scroll-track">
+              <article class="bundle-card tier-budget">
+                <span class="bundle-tier-tag">Budget</span>
+                <h3>Spark</h3>
+                <div class="bundle-price">$119</div>
+                <p class="fine">Momentum without a full build yet.</p>
+                <ul>
+                  <li>Bio rewrite for one platform</li>
+                  <li>5 caption templates tailored to your offer</li>
+                  <li>Link-in-bio wireframe (structure + copy notes)</li>
+                </ul>
+                <a class="btn ghost bundle-card-cta" href="contact.html">Book Spark</a>
+              </article>
+              <article class="bundle-card tier-budget">
+                <span class="bundle-tier-tag">Entry</span>
+                <h3>Ignite</h3>
+                <div class="bundle-price">$199</div>
+                <p class="fine">Local presence + a week of direction.</p>
+                <ul>
+                  <li>Google Business Profile refresh</li>
+                  <li>1-week content calendar</li>
+                  <li>Short-form script pack (5 scripts)</li>
+                </ul>
+                <a class="btn ghost bundle-card-cta" href="contact.html">Book Ignite</a>
+              </article>
+              <article class="bundle-card">
+                <span class="bundle-tier-tag">Starter</span>
+                <h3>Core</h3>
+                <div class="bundle-price">$329</div>
+                <p class="fine">Social-first launch plus light planning.</p>
+                <ul>
+                  <li>Full setup on one social platform</li>
+                  <li>1-week content calendar</li>
+                  <li>Google Business blurb + category pass</li>
+                </ul>
+                <a class="btn ghost bundle-card-cta" href="contact.html">Book Core</a>
+              </article>
+              <article class="bundle-card">
+                <span class="bundle-tier-tag">Site + social</span>
+                <h3>Momentum</h3>
+                <div class="bundle-price">$449</div>
+                <p class="fine">One sharp page plus social polish.</p>
+                <ul>
+                  <li>Landing page (one conversion goal)</li>
+                  <li>Link-in-bio page</li>
+                  <li>Social setup on one platform</li>
+                </ul>
+                <a class="btn ghost bundle-card-cta" href="contact.html">Book Momentum</a>
+              </article>
+              <article class="bundle-card featured">
+                <span class="bundle-tier-tag">Most booked</span>
+                <h3>Growth</h3>
+                <div class="bundle-price">$579</div>
+                <p class="fine">Site + brand + one social aligned.</p>
+                <ul>
+                  <li>3-page website</li>
+                  <li>Brand mini (logo direction, palette, type)</li>
+                  <li>Social setup on one platform</li>
+                </ul>
+                <a class="btn primary bundle-card-cta" href="contact.html">Book Growth</a>
+              </article>
+              <article class="bundle-card">
+                <span class="bundle-tier-tag">Build</span>
+                <h3>Ascend</h3>
+                <div class="bundle-price">$739</div>
+                <p class="fine">Strong site + two weeks of content rhythm.</p>
+                <ul>
+                  <li>3-page website</li>
+                  <li>2-week content calendar</li>
+                  <li>Social setup on one platform</li>
+                  <li>Email capture block</li>
+                </ul>
+                <a class="btn ghost bundle-card-cta" href="contact.html">Book Ascend</a>
+              </article>
+              <article class="bundle-card">
+                <span class="bundle-tier-tag">Scale</span>
+                <h3>Scale</h3>
+                <div class="bundle-price">$949</div>
+                <p class="fine">Larger site and two socials.</p>
+                <ul>
+                  <li>5-page website</li>
+                  <li>Full brand kit + guidelines PDF</li>
+                  <li>Social setup on two platforms</li>
+                  <li>2-week content calendar</li>
+                </ul>
+                <a class="btn ghost bundle-card-cta" href="contact.html">Book Scale</a>
+              </article>
+              <article class="bundle-card">
+                <span class="bundle-tier-tag">Launch+</span>
+                <h3>Prime</h3>
+                <div class="bundle-price">$1,249</div>
+                <p class="fine">Scale deliverables with a longer content runway.</p>
+                <ul>
+                  <li>Everything in Scale</li>
+                  <li>4-week content calendar (upgrade)</li>
+                  <li>Script pack (5 short-form scripts)</li>
+                </ul>
+                <a class="btn ghost bundle-card-cta" href="contact.html">Book Prime</a>
+              </article>
+              <article class="bundle-card tier-premium">
+                <span class="bundle-tier-tag">Premium</span>
+                <h3>Signature</h3>
+                <div class="bundle-price">$1,649</div>
+                <p class="fine">Serious launch or rebrand—maximum coverage.</p>
+                <ul>
+                  <li>Everything in Scale</li>
+                  <li>4-week content calendar</li>
+                  <li>One campaign landing page</li>
+                  <li>Extra revision round on site + brand</li>
+                  <li>Script pack (5 short-form scripts)</li>
+                </ul>
+                <a class="btn ghost bundle-card-cta" href="contact.html">Book Signature</a>
+              </article>
+              <article class="bundle-card tier-premium">
+                <span class="bundle-tier-tag">Flagship</span>
+                <h3>Elite</h3>
+                <div class="bundle-price">$2,299</div>
+                <p class="fine">Signature scope plus deeper site and capture.</p>
+                <ul>
+                  <li>Everything in Signature</li>
+                  <li>Extra website page (6-page site total)</li>
+                  <li>Second campaign landing or long-form page</li>
+                  <li>Local SEO basics pass on launch</li>
+                </ul>
+                <a class="btn ghost bundle-card-cta" href="contact.html">Book Elite</a>
+              </article>
+            </div>
+          </div>
+          <button type="button" class="bundle-scroll-btn next" aria-label="Scroll bundles right">›</button>
+          <p class="bundle-scroll-hint">Use the arrows or the scrollbar under the cards to browse every bundle.</p>
         </div>
       </div>
     </section>

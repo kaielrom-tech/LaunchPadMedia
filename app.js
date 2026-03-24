@@ -74,6 +74,39 @@
 
   initSlider(document.getElementById("services-slider"));
 
+  function initBundleScroll() {
+    const root = document.getElementById("bundle-carousel");
+    if (!root) return;
+    const viewport = root.querySelector(".bundle-scroll-viewport");
+    const prev = root.querySelector(".bundle-scroll-btn.prev");
+    const next = root.querySelector(".bundle-scroll-btn.next");
+    if (!viewport || !prev || !next) return;
+
+    const step = () => Math.max(240, Math.round(viewport.clientWidth * 0.85));
+
+    function updateButtons() {
+      const maxScroll = Math.max(0, viewport.scrollWidth - viewport.clientWidth - 1);
+      const left = viewport.scrollLeft;
+      prev.disabled = left <= 1;
+      next.disabled = left >= maxScroll - 1;
+    }
+
+    prev.addEventListener("click", () => {
+      viewport.scrollBy({ left: -step(), behavior: "smooth" });
+    });
+    next.addEventListener("click", () => {
+      viewport.scrollBy({ left: step(), behavior: "smooth" });
+    });
+    viewport.addEventListener("scroll", () => requestAnimationFrame(updateButtons), { passive: true });
+    window.addEventListener("resize", updateButtons);
+    if ("ResizeObserver" in window) {
+      new ResizeObserver(updateButtons).observe(viewport);
+    }
+    updateButtons();
+  }
+
+  initBundleScroll();
+
   if ("IntersectionObserver" in window) {
     const io = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
