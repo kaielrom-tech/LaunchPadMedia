@@ -285,7 +285,9 @@
         service: document.getElementById("c-service")?.value || "",
         msg: message,
         submitted: new Date().toISOString(),
-        read: false
+        read: false,
+        replied: false,
+        replyDraft: ""
       });
       localStorage.setItem("lpm_messages", JSON.stringify(payload));
 
