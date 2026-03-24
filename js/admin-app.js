@@ -111,6 +111,16 @@
     return s.slice(0, MAILTO_BODY_MAX) + "\n\n[Truncated — full text is in Admin.]";
   }
 
+  function gmailComposeUrl(to, subject, body) {
+    const u = new URL("https://mail.google.com/mail/");
+    u.searchParams.set("view", "cm");
+    u.searchParams.set("fs", "1");
+    u.searchParams.set("to", to);
+    u.searchParams.set("su", subject);
+    u.searchParams.set("body", body);
+    return u.toString();
+  }
+
   function sameId(a, b) {
     return String(a) === String(b);
   }
@@ -120,6 +130,7 @@
     const publishedEl = document.getElementById("published-reviews");
     const rejectedEl = document.getElementById("rejected-reviews");
     const msgEl = document.getElementById("inbox-messages");
+    const gmailHint = String((window.LPM_CONFIG && window.LPM_CONFIG.adminGmailAccountHint) || "").trim();
 
     let all = [];
     let messages = [];
@@ -211,10 +222,18 @@
           ${m.service ? `<p class="admin-tag">Interest: ${escapeHtml(m.service)}</p>` : ""}
           <p class="admin-item-body">${escapeHtml(m.msg || "")}</p>
           <p class="admin-item-meta">${m.submitted ? escapeHtml(new Date(m.submitted).toLocaleString()) : ""}</p>
-          <label class="admin-reply-label" for="reply-draft-${rid}">Your reply (opens in your email app)</label>
+          <label class="admin-reply-label" for="reply-draft-${rid}">Your reply</label>
           <textarea class="admin-reply-draft" id="reply-draft-${rid}" rows="4" placeholder="Write your reply here. It will be placed in a new email to this address.">${escapeHtml(m.replyDraft || "")}</textarea>
+          ${
+            hasEmail && gmailHint
+              ? `<p class="admin-inline-note">Compose in Gmail opens in <em>this</em> browser. Use the Gmail tab where you’re signed in as <strong>${escapeHtml(gmailHint)}</strong> (or switch accounts in Gmail).</p>`
+              : hasEmail
+                ? '<p class="admin-inline-note">Use <strong>Compose in Gmail</strong> to stay in this browser. <strong>Mail app</strong> uses Windows’ default handler (often Edge).</p>'
+                : ""
+          }
           <div class="admin-actions">
-            <button type="button" class="btn primary" data-act="reply-email" data-id="${escapeHtml(rid)}"${hasEmail ? "" : " disabled"}>Compose in email</button>
+            <button type="button" class="btn primary" data-act="reply-gmail" data-id="${escapeHtml(rid)}"${hasEmail ? "" : " disabled"}>Compose in Gmail</button>
+            <button type="button" class="btn ghost" data-act="reply-mailto" data-id="${escapeHtml(rid)}"${hasEmail ? "" : " disabled"}>Mail app</button>
             <button type="button" class="btn ghost" data-act="toggle-replied" data-id="${escapeHtml(rid)}">${m.replied ? "Mark unread" : "Mark replied"}</button>
             <button type="button" class="btn ghost" data-act="delete-message" data-id="${escapeHtml(rid)}">Delete</button>
           </div>
@@ -245,7 +264,7 @@
       } else if (act === "delete-message") {
         if (remote) await adminApi("messages:delete", { id: idRaw });
         else saveMessages(getMessages().filter((m) => !sameId(m.id, idRaw)));
-      } else if (act === "reply-email") {
+      } else if (act === "reply-gmail" || act === "reply-mailto") {
         let m;
         if (remote) {
           const data = await adminApi("bootstrap");
@@ -261,7 +280,7 @@
         const bodyCore = draft ? `${draft}\n\n${quote}` : `Hi ${m.name || "there"},\n\n\n\n${quote}`;
         const body = trimForMailto(bodyCore);
         const subject = `Re: LaunchPad Media — ${m.service || "inquiry"}`;
-        const href = `mailto:${encodeURIComponent(m.email.trim())}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        const to = m.email.trim();
         if (remote) {
           await adminApi("messages:update", {
             id: idRaw,
@@ -272,7 +291,13 @@
             getMessages().map((x) => (sameId(x.id, idRaw) ? { ...x, replyDraft: draftPersist, replied: true } : x))
           );
         }
-        window.location.href = href;
+        if (act === "reply-gmail") {
+          const gUrl = gmailComposeUrl(to, subject, body);
+          window.open(gUrl, "_blank", "noopener,noreferrer");
+        } else {
+          const href = `mailto:${encodeURIComponent(to)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+          window.location.href = href;
+        }
       } else if (act === "toggle-replied") {
         const ta = document.getElementById(`reply-draft-${idRaw}`);
         const draftVal = ta ? ta.value : undefined;

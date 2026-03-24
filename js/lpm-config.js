@@ -5,7 +5,9 @@
 window.LPM_CONFIG = {
   supabaseUrl: "",
   supabaseAnonKey: "",
-  adminFunctionUrl: "/.netlify/functions/lpm-admin"
+  adminFunctionUrl: "/.netlify/functions/lpm-admin",
+  /** Optional: shown in Admin as a reminder — “From” is whoever is logged in at mail.google.com in this browser. */
+  adminGmailAccountHint: "contact.launch.pad.media@gmail.com"
 };
 
 window.LPM_USE_REMOTE = function () {
