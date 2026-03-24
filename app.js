@@ -1,6 +1,76 @@
 (() => {
   const revealEls = document.querySelectorAll(".reveal");
 
+  const homeSlider = document.getElementById("home-slider");
+  if (homeSlider) {
+    const viewport = homeSlider.querySelector(".slider-viewport");
+    const track = homeSlider.querySelector(".slider-track");
+    const slides = homeSlider.querySelectorAll(".slider-slide");
+    const prev = homeSlider.querySelector(".slider-prev");
+    const next = homeSlider.querySelector(".slider-next");
+    const dotsRoot = homeSlider.querySelector(".slider-dots");
+    let index = 0;
+    let slideW = 0;
+    let resizeTimer;
+
+    function measure() {
+      if (!viewport || !track || !slides.length) return;
+      slideW = viewport.offsetWidth;
+      slides.forEach((s) => {
+        s.style.width = `${slideW}px`;
+        s.style.flexBasis = `${slideW}px`;
+      });
+      track.style.width = `${slideW * slides.length}px`;
+      go(index, false);
+    }
+
+    function go(i, animate) {
+      index = (i + slides.length) % slides.length;
+      if (!animate) {
+        track.style.transition = "none";
+      } else {
+        track.style.transition = "";
+      }
+      if (slideW > 0) {
+        track.style.transform = `translateX(-${index * slideW}px)`;
+      }
+      if (!animate) {
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            track.style.transition = "";
+          });
+        });
+      }
+      if (dotsRoot) {
+        dotsRoot.querySelectorAll(".slider-dot").forEach((d, di) => {
+          d.classList.toggle("active", di === index);
+          d.setAttribute("aria-current", di === index ? "true" : "false");
+        });
+      }
+    }
+
+    if (dotsRoot) {
+      slides.forEach((_, di) => {
+        const b = document.createElement("button");
+        b.type = "button";
+        b.className = "slider-dot" + (di === 0 ? " active" : "");
+        b.setAttribute("aria-label", `Slide ${di + 1}`);
+        b.setAttribute("aria-current", di === 0 ? "true" : "false");
+        b.addEventListener("click", () => go(di, true));
+        dotsRoot.appendChild(b);
+      });
+    }
+
+    prev.addEventListener("click", () => go(index - 1, true));
+    next.addEventListener("click", () => go(index + 1, true));
+
+    measure();
+    window.addEventListener("resize", () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(measure, 120);
+    });
+  }
+
   if ("IntersectionObserver" in window) {
     const io = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
