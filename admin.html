@@ -14,7 +14,7 @@
     <div class="container">
       <div id="login" class="card admin-login-card">
         <h2>Admin Login</h2>
-        <p class="admin-login-lead">Manage reviews and read contact submissions. Data lives in this browser’s <code>localStorage</code> (same site origin as the public pages).</p>
+        <p class="admin-login-lead">Moderate reviews and read contact submissions. Data lives in this browser’s <code>localStorage</code> (same site origin as the public pages).</p>
         <div class="field">
           <label for="pw">Password</label>
           <input id="pw" type="password" autocomplete="current-password" />
@@ -30,9 +30,9 @@
         </p>
         <div class="grid two admin-grid">
           <section class="card">
-            <h3>Reviews on site</h3>
-            <p class="admin-section-hint">Same list visitors see on the home page. New reviews publish automatically. Use <strong>Remove</strong> to delete one for everyone.</p>
-            <div id="site-reviews" class="admin-list"></div>
+            <h3>Reviews — pending</h3>
+            <p class="admin-section-hint">Approve to publish on the home page. Deny to reject without deleting (archive below).</p>
+            <div id="pending-reviews" class="admin-list"></div>
           </section>
           <section class="card">
             <h3>Contact — inbox</h3>
@@ -40,6 +40,16 @@
             <div id="inbox-messages" class="admin-list"></div>
           </section>
         </div>
+        <section class="card admin-published-card">
+          <h3>Reviews — live on site</h3>
+          <p class="admin-section-hint">These are approved and visible on the home page. Remove takes them down immediately.</p>
+          <div id="published-reviews" class="admin-list"></div>
+        </section>
+        <section class="card admin-rejected-card">
+          <h3>Reviews — denied</h3>
+          <p class="admin-section-hint">Not shown on the site. Delete permanently when you are done.</p>
+          <div id="rejected-reviews" class="admin-list"></div>
+        </section>
       </div>
     </div>
   </main>

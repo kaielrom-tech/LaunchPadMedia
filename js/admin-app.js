@@ -17,8 +17,8 @@
 
   if (loginLead) {
     loginLead.innerHTML = remote
-      ? "Manage reviews and contact messages. Data is stored in <strong>Supabase</strong> — visible here from any device once your host env vars are set."
-      : 'Manage reviews and read contact submissions. Data lives in this browser’s <code>localStorage</code> (same site origin as the public pages).';
+      ? "Moderate reviews and contact messages. Data is stored in <strong>Supabase</strong> — visible here from any device once your host env vars are set."
+      : 'Moderate reviews and read contact submissions. Data lives in this browser’s <code>localStorage</code> (same site origin as the public pages).';
   }
   if (panelLead) {
     panelLead.innerHTML = remote
@@ -56,6 +56,10 @@
 
   function saveMessages(v) {
     localStorage.setItem(MESSAGES_KEY, JSON.stringify(v));
+  }
+
+  function isPendingReview(r) {
+    return r.status !== "approved" && r.status !== "rejected";
   }
 
   function normMessage(row) {
@@ -124,7 +128,9 @@
   }
 
   async function render() {
-    const siteReviewsEl = document.getElementById("site-reviews");
+    const pendingEl = document.getElementById("pending-reviews");
+    const publishedEl = document.getElementById("published-reviews");
+    const rejectedEl = document.getElementById("rejected-reviews");
     const msgEl = document.getElementById("inbox-messages");
     const gmailHint = String((window.LPM_CONFIG && window.LPM_CONFIG.adminGmailAccountHint) || "").trim();
 
@@ -139,8 +145,10 @@
           .map(normMessage)
           .sort((a, b) => new Date(b.submitted) - new Date(a.submitted));
       } catch (e) {
-        siteReviewsEl.innerHTML =
+        pendingEl.innerHTML =
           `<p class="admin-empty">Could not load data: ${escapeHtml(e.message)}. Check Pages Function logs and env vars (<code>/api/lpm-admin</code>).</p>`;
+        publishedEl.innerHTML = "";
+        rejectedEl.innerHTML = "";
         msgEl.innerHTML = "";
         return;
       }
@@ -149,12 +157,14 @@
       messages = getMessages().sort((a, b) => new Date(b.submitted) - new Date(a.submitted));
     }
 
-    const onSite = all
+    const pending = all.filter(isPendingReview);
+    const published = all
       .filter((r) => r.status === "approved")
       .sort((a, b) => new Date(b.submitted || 0) - new Date(a.submitted || 0));
+    const rejected = all.filter((r) => r.status === "rejected");
 
-    siteReviewsEl.innerHTML = onSite.length
-      ? onSite
+    pendingEl.innerHTML = pending.length
+      ? pending
           .map(
             (r) => `
         <article class="admin-item">
@@ -162,12 +172,45 @@
           <p class="admin-item-body">${escapeHtml(r.body || "")}</p>
           <p class="admin-item-meta">${r.submitted ? escapeHtml(new Date(r.submitted).toLocaleString()) : ""}</p>
           <div class="admin-actions">
-            <button type="button" class="btn ghost" data-act="delete-review" data-id="${escapeHtml(String(r.id))}">Remove</button>
+            <button type="button" class="btn primary" data-act="approve-review" data-id="${escapeHtml(String(r.id))}">Approve</button>
+            <button type="button" class="btn ghost" data-act="deny-review" data-id="${escapeHtml(String(r.id))}">Deny</button>
+            <button type="button" class="btn ghost" data-act="delete-review" data-id="${escapeHtml(String(r.id))}">Delete</button>
           </div>
         </article>`
           )
           .join("")
-      : '<p class="admin-empty">No reviews on the site yet.</p>';
+      : '<p class="admin-empty">No pending reviews.</p>';
+
+    publishedEl.innerHTML = published.length
+      ? published
+          .map(
+            (r) => `
+        <article class="admin-item">
+          <p class="admin-item-head"><strong>${escapeHtml(r.name || "Anonymous")}</strong> <span class="admin-muted">(${escapeHtml(String(r.stars || 0))}/5)</span></p>
+          <p class="admin-item-body">${escapeHtml(r.body || "")}</p>
+          <p class="admin-item-meta">${r.submitted ? escapeHtml(new Date(r.submitted).toLocaleString()) : ""}</p>
+          <div class="admin-actions">
+            <button type="button" class="btn ghost" data-act="delete-review" data-id="${escapeHtml(String(r.id))}">Remove from site</button>
+          </div>
+        </article>`
+          )
+          .join("")
+      : '<p class="admin-empty">No published reviews yet.</p>';
+
+    rejectedEl.innerHTML = rejected.length
+      ? rejected
+          .map(
+            (r) => `
+        <article class="admin-item admin-item-muted">
+          <p class="admin-item-head"><strong>${escapeHtml(r.name || "Anonymous")}</strong></p>
+          <p class="admin-item-body">${escapeHtml(r.body || "")}</p>
+          <div class="admin-actions">
+            <button type="button" class="btn ghost" data-act="delete-review" data-id="${escapeHtml(String(r.id))}">Delete permanently</button>
+          </div>
+        </article>`
+          )
+          .join("")
+      : '<p class="admin-empty">No denied reviews.</p>';
 
     msgEl.innerHTML = messages.length
       ? messages
@@ -211,7 +254,13 @@
     if (!act || idRaw == null || idRaw === "") return;
 
     try {
-      if (act === "delete-review") {
+      if (act === "approve-review") {
+        if (remote) await adminApi("reviews:update", { id: idRaw, patch: { status: "approved" } });
+        else saveReviews(getReviews().map((r) => (sameId(r.id, idRaw) ? { ...r, status: "approved" } : r)));
+      } else if (act === "deny-review") {
+        if (remote) await adminApi("reviews:update", { id: idRaw, patch: { status: "rejected" } });
+        else saveReviews(getReviews().map((r) => (sameId(r.id, idRaw) ? { ...r, status: "rejected" } : r)));
+      } else if (act === "delete-review") {
         if (remote) await adminApi("reviews:delete", { id: idRaw });
         else saveReviews(getReviews().filter((r) => !sameId(r.id, idRaw)));
       } else if (act === "delete-message") {

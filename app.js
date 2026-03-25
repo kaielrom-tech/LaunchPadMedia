@@ -152,13 +152,13 @@
             name,
             stars: Number(stars),
             body,
-            status: "approved"
+            status: "pending"
           });
           form.reset();
           if (status) {
-            status.textContent = "Thanks — your review was posted.";
+            status.textContent =
+              "Thanks — your review was submitted for moderation and will appear after approval.";
           }
-          renderApprovedReviews().catch(() => {});
         } catch (err) {
           if (status) status.textContent = "Could not submit. Check connection and Supabase setup.";
         }
@@ -170,15 +170,15 @@
         name,
         stars: Number(stars),
         body,
-        status: "approved",
+        status: "pending",
         submitted: new Date().toISOString()
       });
       saveReviews(all);
       form.reset();
       if (status) {
-        status.textContent = "Thanks — your review was posted.";
+        status.textContent =
+          "Thanks — your review was submitted for moderation and will appear after approval.";
       }
-      renderApprovedReviews().catch(() => {});
     });
   }
 
