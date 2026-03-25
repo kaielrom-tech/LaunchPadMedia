@@ -1,6 +1,6 @@
 /**
- * Writes js/lpm-config.js from environment variables.
- * On Netlify: set SUPABASE_URL + SUPABASE_ANON_KEY (anon public key, not service_role).
+ * Writes js/lpm-config.js from environment variables (CI / Cloudflare Pages build).
+ * Set SUPABASE_URL + SUPABASE_ANON_KEY (anon key, not service_role).
  * Run locally: SUPABASE_URL=https://xxx.supabase.co SUPABASE_ANON_KEY=eyJ... npm run build
  */
 import fs from "fs";
@@ -11,9 +11,22 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.join(__dirname, "..");
 const outPath = path.join(root, "js", "lpm-config.js");
 
-const supabaseUrl = (process.env.SUPABASE_URL || "").trim();
-const supabaseAnonKey = (process.env.SUPABASE_ANON_KEY || "").trim();
-const adminFunctionUrl = (process.env.LPM_ADMIN_FUNCTION_URL || "/.netlify/functions/lpm-admin").trim();
+function firstEnv(keys) {
+  for (const k of keys) {
+    const v = String(process.env[k] || "").trim();
+    if (v) return v;
+  }
+  return "";
+}
+
+const supabaseUrl = firstEnv(["SUPABASE_URL", "PUBLIC_SUPABASE_URL", "VITE_SUPABASE_URL"]);
+const supabaseAnonKey = firstEnv([
+  "SUPABASE_ANON_KEY",
+  "PUBLIC_SUPABASE_ANON_KEY",
+  "VITE_SUPABASE_ANON_KEY",
+  "NEXT_PUBLIC_SUPABASE_ANON_KEY"
+]);
+const adminFunctionUrl = (process.env.LPM_ADMIN_FUNCTION_URL || "/api/lpm-admin").trim();
 const adminGmailAccountHint = (process.env.LPM_GMAIL_HINT || "contact.launch.pad.media@gmail.com").trim();
 
 if ((supabaseUrl && !supabaseAnonKey) || (!supabaseUrl && supabaseAnonKey)) {
@@ -23,7 +36,7 @@ if ((supabaseUrl && !supabaseAnonKey) || (!supabaseUrl && supabaseAnonKey)) {
 }
 
 const file = `/**
- * Cloud config — overwritten by \`npm run build\` / Netlify (see scripts/inject-lpm-config.mjs).
+ * Cloud config — overwritten by \`npm run build\` (see scripts/inject-lpm-config.mjs).
  * Empty URL/key = localStorage only on this browser.
  */
 window.LPM_CONFIG = {

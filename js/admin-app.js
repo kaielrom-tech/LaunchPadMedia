@@ -1,4 +1,6 @@
-(function () {
+(async function () {
+  await (window.__lpmRemoteReady || Promise.resolve());
+
   const LOCAL_ADMIN_PASSWORD = "launchpad2026";
   const REVIEWS_KEY = "lpm_reviews";
   const MESSAGES_KEY = "lpm_messages";
@@ -15,12 +17,12 @@
 
   if (loginLead) {
     loginLead.innerHTML = remote
-      ? "Moderate reviews and contact messages. Data is stored in <strong>Supabase</strong> — visible here from any device once Netlify env vars are set."
+      ? "Moderate reviews and contact messages. Data is stored in <strong>Supabase</strong> — visible here from any device once your host env vars are set."
       : 'Moderate reviews and read contact submissions. Data lives in this browser’s <code>localStorage</code> (same site origin as the public pages).';
   }
   if (panelLead) {
     panelLead.innerHTML = remote
-      ? "<strong>Cloud mode:</strong> reviews and messages sync for everyone. Admin password is checked on Netlify (<code>LPM_ADMIN_PASSWORD</code>), not in this file."
+      ? "<strong>Cloud mode:</strong> reviews and messages sync for everyone. Admin password is checked on the server (<code>LPM_ADMIN_PASSWORD</code> env var), not in this file."
       : "<strong>Reviews</strong> use <code>lpm_reviews</code>. <strong>Contact</strong> uses <code>lpm_messages</code>. Submissions only appear here in this browser.";
   }
 
@@ -86,7 +88,7 @@
   }
 
   async function adminApi(op, data) {
-    const url = (window.LPM_CONFIG && window.LPM_CONFIG.adminFunctionUrl) || "/.netlify/functions/lpm-admin";
+    const url = (window.LPM_CONFIG && window.LPM_CONFIG.adminFunctionUrl) || "/api/lpm-admin";
     const password = sessionStorage.getItem(SESSION_REMOTE_PW);
     const res = await fetch(url, {
       method: "POST",
@@ -144,7 +146,7 @@
           .sort((a, b) => new Date(b.submitted) - new Date(a.submitted));
       } catch (e) {
         pendingEl.innerHTML =
-          `<p class="admin-empty">Could not load data: ${escapeHtml(e.message)}. Check Netlify function logs and env vars.</p>`;
+          `<p class="admin-empty">Could not load data: ${escapeHtml(e.message)}. Check Pages Function logs and env vars (<code>/api/lpm-admin</code>).</p>`;
         publishedEl.innerHTML = "";
         rejectedEl.innerHTML = "";
         msgEl.innerHTML = "";
@@ -346,7 +348,7 @@
       } catch {
         sessionStorage.removeItem(SESSION_REMOTE_PW);
         sessionStorage.removeItem(SESSION_LOCAL);
-        loginMsg.textContent = "Incorrect password or server error (check Netlify env LPM_ADMIN_PASSWORD).";
+        loginMsg.textContent = "Incorrect password or server error (check LPM_ADMIN_PASSWORD in Cloudflare env).";
       }
       return;
     }

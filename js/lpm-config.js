@@ -1,12 +1,12 @@
 /**
- * Cloud config — overwritten by `npm run build` on Netlify (see scripts/inject-lpm-config.mjs).
- * For local testing with Supabase, run: npm run build with SUPABASE_URL + SUPABASE_ANON_KEY set.
- * Empty values = localStorage only (same device).
+ * Cloud config — overwritten by `npm run build` (see scripts/inject-lpm-config.mjs).
+ * On Cloudflare Pages, `/api/lpm-public-config` can also hydrate empty values at runtime.
+ * Empty URL/key = localStorage only (same device).
  */
 window.LPM_CONFIG = {
   supabaseUrl: "",
   supabaseAnonKey: "",
-  adminFunctionUrl: "/.netlify/functions/lpm-admin",
+  adminFunctionUrl: "/api/lpm-admin",
   adminGmailAccountHint: "contact.launch.pad.media@gmail.com"
 };
 

@@ -1,46 +1,44 @@
 import { createClient } from "@supabase/supabase-js";
 
-const json = (statusCode, body, extra = {}) => ({
-  statusCode,
-  headers: {
-    "Content-Type": "application/json",
-    ...extra
-  },
-  body: JSON.stringify(body)
-});
+function json(status, body) {
+  return new Response(JSON.stringify(body), {
+    status,
+    headers: { "Content-Type": "application/json" }
+  });
+}
 
-export async function handler(event) {
-  if (event.httpMethod === "OPTIONS") {
-    return {
-      statusCode: 204,
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Headers": "Content-Type",
-        "Access-Control-Allow-Methods": "POST, OPTIONS"
-      },
-      body: ""
-    };
+const cors = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers": "Content-Type",
+  "Access-Control-Allow-Methods": "POST, OPTIONS"
+};
+
+export async function onRequest(context) {
+  const { request, env } = context;
+
+  if (request.method === "OPTIONS") {
+    return new Response(null, { status: 204, headers: cors });
   }
 
-  if (event.httpMethod !== "POST") {
+  if (request.method !== "POST") {
     return json(405, { error: "Method not allowed" });
   }
 
   let body;
   try {
-    body = JSON.parse(event.body || "{}");
+    body = await request.json();
   } catch {
     return json(400, { error: "Invalid JSON" });
   }
 
   const { password, op, data = {} } = body;
-  const adminPass = process.env.LPM_ADMIN_PASSWORD;
+  const adminPass = env.LPM_ADMIN_PASSWORD;
   if (!adminPass || password !== adminPass) {
     return json(401, { error: "Unauthorized" });
   }
 
-  const url = process.env.SUPABASE_URL;
-  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  const url = env.SUPABASE_URL;
+  const key = env.SUPABASE_SERVICE_ROLE_KEY;
   if (!url || !key) {
     return json(500, { error: "Server missing SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY" });
   }

@@ -1,0 +1,6 @@
+# Cloudflare Pages — enables nodejs_compat for @supabase/supabase-js in Functions.
+# Dashboard: Build command e.g. `npm install && npm run build`, output directory `.`
+name = "launchpad-media"
+compatibility_date = "2025-03-01"
+compatibility_flags = ["nodejs_compat"]
+pages_build_output_dir = "."

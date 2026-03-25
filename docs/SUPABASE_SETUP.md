@@ -1,6 +1,6 @@
-# Supabase + Netlify (reviews & contact from any device)
+# Supabase + Cloudflare Pages (reviews & contact from any device)
 
-Follow these steps once. After that, contact messages and reviews are stored in **Supabase** and show in **Admin** from any browser.
+Follow these steps once. After that, reviews and contact messages are stored in **Supabase** and Admin works from any browser.
 
 ## 1. Create a Supabase project
 
@@ -33,17 +33,14 @@ create table reviews (
 alter table contact_messages enable row level security;
 alter table reviews enable row level security;
 
--- Public: submit contact (no read access)
 create policy "public insert contact_messages"
   on contact_messages for insert to anon, authenticated
   with check (true);
 
--- Public: submit review as pending only
 create policy "public insert reviews pending"
   on reviews for insert to anon, authenticated
   with check (status = 'pending');
 
--- Public: read approved reviews only (home page)
 create policy "public read approved reviews"
   on reviews for select to anon, authenticated
   using (status = 'approved');
@@ -51,31 +48,48 @@ create policy "public read approved reviews"
 
 3. **Project Settings → API**: copy **Project URL** and **anon public** key.
 
-## 2. Netlify environment variables (required for “any device”)
+## 2. Cloudflare Pages project
 
-In **Netlify → Site → Environment variables**, add:
+- Connect this repo and set **Build command**: `npm install && npm run build`
+- **Build output directory**: `.` (repo root)
+- Commit includes **`functions/api/`** (Pages Functions) and **`wrangler.toml`** (`nodejs_compat` for `@supabase/supabase-js`).
 
-| Variable | Value |
+If the dashboard offers **Compatibility flags**, enable **Node.js compatibility** (matches `wrangler.toml`).
+
+### Environment variables (Production + Preview)
+
+**Workers & Pages → your project → Settings → Variables and secrets** (or Environment variables):
+
+| Variable | Notes |
 |----------|--------|
-| `SUPABASE_URL` | Project URL (same as in Supabase **Settings → API**) |
-| `SUPABASE_ANON_KEY` | **anon public** key (safe for the browser with RLS above — **not** the service_role key) |
-| `SUPABASE_SERVICE_ROLE_KEY` | **service_role** key (server only; used by `lpm-admin` — never expose in the client) |
+| `SUPABASE_URL` | Project URL |
+| `SUPABASE_ANON_KEY` | **anon public** key (browser-safe with RLS above) |
+| `SUPABASE_SERVICE_ROLE_KEY` | **service_role** — server only, never in client JS |
 | `LPM_ADMIN_PASSWORD` | Strong secret for Admin login |
-
-On each deploy, **`npm run build`** runs **`scripts/inject-lpm-config.mjs`**, which writes **`js/lpm-config.js`** with `SUPABASE_URL` and `SUPABASE_ANON_KEY` baked in. You do **not** need to commit real keys to git.
 
 Optional:
 
-| Variable | Value |
-|----------|--------|
-| `LPM_ADMIN_FUNCTION_URL` | Default `/.netlify/functions/lpm-admin` — override if you change the function path |
-| `LPM_GMAIL_HINT` | Email string shown in Admin next to Gmail compose |
+| Variable | Default |
+|----------|---------|
+| `LPM_ADMIN_FUNCTION_URL` | `/api/lpm-admin` |
+| `LPM_GMAIL_HINT` | Shown in Admin next to Gmail compose |
 
-Redeploy after saving variables.
+Save and **redeploy**.
 
-### Local development with Supabase
+### How the browser gets Supabase settings
 
-From the repo root (PowerShell example):
+1. **Build**: `npm run build` runs `scripts/inject-lpm-config.mjs` and can bake URL + anon key into **`js/lpm-config.js`** if those vars exist at **build time**.
+2. **Runtime**: **`js/lpm-runtime-config.js`** calls **`GET /api/lpm-public-config`**, which reads the same vars in the **Function** environment. Use this if you only set secrets for Workers (not the build).
+
+Admin API: **`POST /api/lpm-admin`** (same password + ops as before).
+
+### Smoke test
+
+After deploy, open:
+
+- `https://YOUR_DOMAIN/api/lpm-public-config` — should return JSON with `supabaseUrl` and `supabaseAnonKey` set.
+
+## 3. Local development
 
 ```powershell
 $env:SUPABASE_URL="https://YOUR_PROJECT.supabase.co"
@@ -83,33 +97,22 @@ $env:SUPABASE_ANON_KEY="eyJ..."
 npm run build
 ```
 
-Then open the site over **http(s)** (e.g. a static server), not `file://`.
-
-### Local-only (no Supabase)
-
-Do not set those env vars; keep the committed empty `js/lpm-config.js` or run `npm run build` with no env — Admin stays on **localStorage** for that browser only.
-
-## 3. Manual config (without Netlify inject)
-
-You can instead edit **`js/lpm-config.js`** by hand and set `supabaseUrl` + `supabaseAnonKey` (still use the **anon** key only). Prefer env injection on Netlify so keys are not committed.
-
-## 4. Install dependencies (for functions)
-
-From the repo root:
+Serve the folder over **http(s)** (not `file://`). For Functions locally:
 
 ```bash
-npm install
+npx wrangler pages dev . --compatibility-flags=nodejs_compat
 ```
 
-Netlify runs **`npm install && npm run build`** (see `netlify.toml`).
+## 4. Manual `lpm-config.js` (no CI inject)
+
+You may set `supabaseUrl` and `supabaseAnonKey` by hand in **`js/lpm-config.js`** (anon key only). Prefer env + inject or `/api/lpm-public-config` so keys are not committed.
 
 ## 5. Admin login
 
-- With **remote** configured: password is checked against **`LPM_ADMIN_PASSWORD`** on the server (set in Netlify).
-- With **empty** `supabaseUrl`: the site still uses **localStorage** and the password in `js/admin-app.js` (`LOCAL_ADMIN_PASSWORD`).
+- **Cloud mode**: password is **`LPM_ADMIN_PASSWORD`** (Cloudflare env).
+- **Local-only** (empty Supabase URL in config): password is **`LOCAL_ADMIN_PASSWORD`** in `js/admin-app.js` (default `launchpad2026`).
 
-## Security notes
+## Security
 
-- The **anon** key is public; RLS blocks reading private messages from the internet.
-- Only the **Netlify function** uses the **service role** key, and it requires your admin password on every request.
-- Change **`LPM_ADMIN_PASSWORD`** to a strong secret and remove any old password from git history if you committed it.
+- The **anon** key is public; RLS must block reading private messages.
+- Only **`/api/lpm-admin`** uses the **service role**, and it requires **LPM_ADMIN_PASSWORD** on every request.

@@ -1,4 +1,6 @@
-(() => {
+(async () => {
+  await (window.__lpmRemoteReady || Promise.resolve());
+
   const revealEls = document.querySelectorAll(".reveal");
   const REVIEWS_KEY = "lpm_reviews";
   const MESSAGES_KEY = "lpm_messages";
