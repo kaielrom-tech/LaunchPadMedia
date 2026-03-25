@@ -51,24 +51,47 @@ create policy "public read approved reviews"
 
 3. **Project Settings → API**: copy **Project URL** and **anon public** key.
 
-## 2. Configure the site
-
-Edit **`js/lpm-config.js`**:
-
-- Set `supabaseUrl` to your Project URL.
-- Set `supabaseAnonKey` to the **anon** key (safe in the browser with the policies above).
-
-## 3. Netlify environment variables
+## 2. Netlify environment variables (required for “any device”)
 
 In **Netlify → Site → Environment variables**, add:
 
 | Variable | Value |
 |----------|--------|
-| `SUPABASE_URL` | Same as Project URL |
-| `SUPABASE_SERVICE_ROLE_KEY` | **service_role** key (Settings → API — keep secret, never put in `lpm-config.js`) |
-| `LPM_ADMIN_PASSWORD` | Your admin password (replace the old hardcoded one) |
+| `SUPABASE_URL` | Project URL (same as in Supabase **Settings → API**) |
+| `SUPABASE_ANON_KEY` | **anon public** key (safe for the browser with RLS above — **not** the service_role key) |
+| `SUPABASE_SERVICE_ROLE_KEY` | **service_role** key (server only; used by `lpm-admin` — never expose in the client) |
+| `LPM_ADMIN_PASSWORD` | Strong secret for Admin login |
+
+On each deploy, **`npm run build`** runs **`scripts/inject-lpm-config.mjs`**, which writes **`js/lpm-config.js`** with `SUPABASE_URL` and `SUPABASE_ANON_KEY` baked in. You do **not** need to commit real keys to git.
+
+Optional:
+
+| Variable | Value |
+|----------|--------|
+| `LPM_ADMIN_FUNCTION_URL` | Default `/.netlify/functions/lpm-admin` — override if you change the function path |
+| `LPM_GMAIL_HINT` | Email string shown in Admin next to Gmail compose |
 
 Redeploy after saving variables.
+
+### Local development with Supabase
+
+From the repo root (PowerShell example):
+
+```powershell
+$env:SUPABASE_URL="https://YOUR_PROJECT.supabase.co"
+$env:SUPABASE_ANON_KEY="eyJ..."
+npm run build
+```
+
+Then open the site over **http(s)** (e.g. a static server), not `file://`.
+
+### Local-only (no Supabase)
+
+Do not set those env vars; keep the committed empty `js/lpm-config.js` or run `npm run build` with no env — Admin stays on **localStorage** for that browser only.
+
+## 3. Manual config (without Netlify inject)
+
+You can instead edit **`js/lpm-config.js`** by hand and set `supabaseUrl` + `supabaseAnonKey` (still use the **anon** key only). Prefer env injection on Netlify so keys are not committed.
 
 ## 4. Install dependencies (for functions)
 
@@ -78,7 +101,7 @@ From the repo root:
 npm install
 ```
 
-Netlify will run `npm install` on build if `package.json` exists.
+Netlify runs **`npm install && npm run build`** (see `netlify.toml`).
 
 ## 5. Admin login
 

@@ -1,6 +1,9 @@
 {
   "name": "launchpad-media",
   "private": true,
+  "scripts": {
+    "build": "node scripts/inject-lpm-config.mjs"
+  },
   "dependencies": {
     "@supabase/supabase-js": "^2.49.1"
   }
