@@ -37,13 +37,24 @@ create policy "public insert contact_messages"
   on contact_messages for insert to anon, authenticated
   with check (true);
 
-create policy "public insert reviews pending"
+-- New reviews are submitted as approved and show on the site immediately (you remove bad ones in Admin).
+create policy "public insert reviews approved"
   on reviews for insert to anon, authenticated
-  with check (status = 'pending');
+  with check (status = 'approved');
 
 create policy "public read approved reviews"
   on reviews for select to anon, authenticated
   using (status = 'approved');
+```
+
+**Existing project** (you already ran the old `pending`-only policy): in **SQL Editor** run:
+
+```sql
+drop policy if exists "public insert reviews pending" on reviews;
+
+create policy "public insert reviews approved"
+  on reviews for insert to anon, authenticated
+  with check (status = 'approved');
 ```
 
 3. **Project Settings → API**: copy **Project URL** and **anon public** key.
@@ -116,3 +127,4 @@ You may set `supabaseUrl` and `supabaseAnonKey` by hand in **`js/lpm-config.js`*
 
 - The **anon** key is public; RLS must block reading private messages.
 - Only **`/api/lpm-admin`** uses the **service role**, and it requires **LPM_ADMIN_PASSWORD** on every request.
+- **Reviews** publish as soon as they’re submitted (`approved`). Treat the form as semi-public: remove abuse or spam from **Admin → Reviews on site**.
