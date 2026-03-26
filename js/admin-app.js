@@ -2,7 +2,6 @@
   await (window.__lpmRemoteReady || Promise.resolve());
 
   const LOCAL_ADMIN_PASSWORD = "launchpad2026";
-  const REVIEWS_KEY = "lpm_reviews";
   const MESSAGES_KEY = "lpm_messages";
   const SESSION_LOCAL = "lpm_admin";
   const SESSION_REMOTE_PW = "lpm_admin_secret";
@@ -23,7 +22,7 @@
   if (panelLead) {
     panelLead.innerHTML = remote
       ? "<strong>Cloud mode:</strong> reviews and messages sync for everyone. Admin password is checked on the server (<code>LPM_ADMIN_PASSWORD</code> env var), not in this file."
-      : "<strong>Reviews</strong> use <code>lpm_reviews</code>. <strong>Contact</strong> uses <code>lpm_messages</code>. Submissions only appear here in this browser.";
+      : "<strong>Reviews</strong> live in <strong>Supabase</strong> (<code>reviews</code> table). <strong>Contact</strong> uses <code>lpm_messages</code> in this browser only.";
   }
 
   function escapeHtml(s) {
@@ -32,18 +31,6 @@
       .replace(/</g, "&lt;")
       .replace(/>/g, "&gt;")
       .replace(/"/g, "&quot;");
-  }
-
-  function getReviews() {
-    try {
-      return JSON.parse(localStorage.getItem(REVIEWS_KEY)) || [];
-    } catch {
-      return [];
-    }
-  }
-
-  function saveReviews(v) {
-    localStorage.setItem(REVIEWS_KEY, JSON.stringify(v));
   }
 
   function getMessages() {
@@ -80,10 +67,10 @@
     return {
       id: row.id,
       name: row.name,
-      stars: row.stars,
-      body: row.body,
-      status: row.status,
-      submitted: row.submitted
+      stars: row.rating ?? row.stars,
+      body: row.message ?? row.body,
+      status: row.status ?? "approved",
+      submitted: row.created_at ?? row.submitted
     };
   }
 
@@ -153,7 +140,7 @@
         return;
       }
     } else {
-      all = getReviews();
+      all = [];
       messages = getMessages().sort((a, b) => new Date(b.submitted) - new Date(a.submitted));
     }
 
@@ -254,15 +241,8 @@
     if (!act || idRaw == null || idRaw === "") return;
 
     try {
-      if (act === "approve-review") {
-        if (remote) await adminApi("reviews:update", { id: idRaw, patch: { status: "approved" } });
-        else saveReviews(getReviews().map((r) => (sameId(r.id, idRaw) ? { ...r, status: "approved" } : r)));
-      } else if (act === "deny-review") {
-        if (remote) await adminApi("reviews:update", { id: idRaw, patch: { status: "rejected" } });
-        else saveReviews(getReviews().map((r) => (sameId(r.id, idRaw) ? { ...r, status: "rejected" } : r)));
-      } else if (act === "delete-review") {
+      if (act === "delete-review") {
         if (remote) await adminApi("reviews:delete", { id: idRaw });
-        else saveReviews(getReviews().filter((r) => !sameId(r.id, idRaw)));
       } else if (act === "delete-message") {
         if (remote) await adminApi("messages:delete", { id: idRaw });
         else saveMessages(getMessages().filter((m) => !sameId(m.id, idRaw)));

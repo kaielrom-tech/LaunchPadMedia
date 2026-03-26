@@ -19,15 +19,26 @@ function firstEnv(keys) {
   return "";
 }
 
-const supabaseUrl = firstEnv(["SUPABASE_URL", "PUBLIC_SUPABASE_URL", "VITE_SUPABASE_URL"]);
-const supabaseAnonKey = firstEnv([
-  "SUPABASE_ANON_KEY",
-  "PUBLIC_SUPABASE_ANON_KEY",
-  "VITE_SUPABASE_ANON_KEY",
-  "NEXT_PUBLIC_SUPABASE_ANON_KEY"
-]);
+const DEFAULT_SUPABASE_URL = "https://fcxfnieqtrpvrzuvgrgl.supabase.co";
+const DEFAULT_SUPABASE_ANON_KEY =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZjeGZuaWVxdHJwdnJ6dXZncmdsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ1NjA0MTQsImV4cCI6MjA5MDEzNjQxNH0.ORPch9os_ZsS-5TCOApDIjkrNFqk1VMHrloJhChqhNk";
+
+const supabaseUrl =
+  firstEnv(["SUPABASE_URL", "PUBLIC_SUPABASE_URL", "VITE_SUPABASE_URL"]) || DEFAULT_SUPABASE_URL;
+const supabaseAnonKey =
+  firstEnv([
+    "SUPABASE_ANON_KEY",
+    "PUBLIC_SUPABASE_ANON_KEY",
+    "VITE_SUPABASE_ANON_KEY",
+    "NEXT_PUBLIC_SUPABASE_ANON_KEY"
+  ]) || DEFAULT_SUPABASE_ANON_KEY;
 const adminFunctionUrl = (process.env.LPM_ADMIN_FUNCTION_URL || "/api/lpm-admin").trim();
 const adminGmailAccountHint = (process.env.LPM_GMAIL_HINT || "contact.launch.pad.media@gmail.com").trim();
+const web3formsAccessKey = firstEnv([
+  "WEB3FORMS_ACCESS_KEY",
+  "PUBLIC_WEB3FORMS_ACCESS_KEY",
+  "VITE_WEB3FORMS_ACCESS_KEY"
+]);
 
 if ((supabaseUrl && !supabaseAnonKey) || (!supabaseUrl && supabaseAnonKey)) {
   console.warn(
@@ -43,7 +54,8 @@ window.LPM_CONFIG = {
   supabaseUrl: ${JSON.stringify(supabaseUrl)},
   supabaseAnonKey: ${JSON.stringify(supabaseAnonKey)},
   adminFunctionUrl: ${JSON.stringify(adminFunctionUrl)},
-  adminGmailAccountHint: ${JSON.stringify(adminGmailAccountHint)}
+  adminGmailAccountHint: ${JSON.stringify(adminGmailAccountHint)},
+  web3formsAccessKey: ${JSON.stringify(web3formsAccessKey)}
 };
 
 window.LPM_USE_REMOTE = function () {

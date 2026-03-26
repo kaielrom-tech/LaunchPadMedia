@@ -22,6 +22,9 @@ window.__lpmRemoteReady = (async function hydrateRuntimeConfig() {
     if (data.adminFunctionUrl) {
       window.LPM_CONFIG.adminFunctionUrl = data.adminFunctionUrl;
     }
+    if (data.web3formsAccessKey) {
+      window.LPM_CONFIG.web3formsAccessKey = data.web3formsAccessKey;
+    }
   } catch (_) {
     /* Offline, wrong host, or Functions not deployed */
   }

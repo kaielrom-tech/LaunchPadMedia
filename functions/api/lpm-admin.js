@@ -52,7 +52,7 @@ export async function onRequest(context) {
 
       case "bootstrap": {
         const [rev, msg] = await Promise.all([
-          supabase.from("reviews").select("*").order("submitted", { ascending: false }),
+          supabase.from("reviews").select("*").order("created_at", { ascending: false }),
           supabase.from("contact_messages").select("*").order("submitted", { ascending: false })
         ]);
         if (rev.error) throw rev.error;

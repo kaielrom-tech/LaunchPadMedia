@@ -31,12 +31,18 @@ export async function onRequest(context) {
     "NEXT_PUBLIC_SUPABASE_ANON_KEY"
   ]);
   const adminFunctionUrl = String(env.LPM_ADMIN_FUNCTION_URL || "/api/lpm-admin").trim();
+  const web3formsAccessKey = firstEnv(env, [
+    "WEB3FORMS_ACCESS_KEY",
+    "PUBLIC_WEB3FORMS_ACCESS_KEY",
+    "VITE_WEB3FORMS_ACCESS_KEY"
+  ]);
 
   return new Response(
     JSON.stringify({
       supabaseUrl,
       supabaseAnonKey,
-      adminFunctionUrl
+      adminFunctionUrl,
+      web3formsAccessKey
     }),
     {
       status: 200,

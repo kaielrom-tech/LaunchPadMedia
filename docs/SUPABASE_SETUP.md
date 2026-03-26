@@ -23,11 +23,9 @@ create table contact_messages (
 create table reviews (
   id uuid primary key default gen_random_uuid(),
   name text not null,
-  stars int not null check (stars >= 1 and stars <= 5),
-  body text not null,
-  status text not null default 'pending'
-    check (status in ('pending', 'approved', 'rejected')),
-  submitted timestamptz default now()
+  rating int not null check (rating >= 1 and rating <= 5),
+  message text not null,
+  created_at timestamptz default now()
 );
 
 alter table contact_messages enable row level security;
@@ -37,26 +35,18 @@ create policy "public insert contact_messages"
   on contact_messages for insert to anon, authenticated
   with check (true);
 
-create policy "public insert reviews pending"
+create policy "public insert reviews"
   on reviews for insert to anon, authenticated
-  with check (status = 'pending');
+  with check (true);
 
-create policy "public read approved reviews"
+create policy "public read reviews"
   on reviews for select to anon, authenticated
-  using (status = 'approved');
-```
-
-If you previously enabled **auto-publish** (`public insert reviews approved`), switch back with:
-
-```sql
-drop policy if exists "public insert reviews approved" on reviews;
-
-create policy "public insert reviews pending"
-  on reviews for insert to anon, authenticated
-  with check (status = 'pending');
+  using (true);
 ```
 
 3. **Project Settings → API**: copy **Project URL** and **anon public** key.
+
+**Note:** The site expects the `reviews` columns `name`, `rating`, `message`, `created_at`. If you still have an older `stars` / `body` / `status` schema, migrate or recreate the table to match.
 
 ## 2. Cloudflare Pages project
 
@@ -83,8 +73,13 @@ Optional:
 |----------|---------|
 | `LPM_ADMIN_FUNCTION_URL` | `/api/lpm-admin` |
 | `LPM_GMAIL_HINT` | Shown in Admin next to Gmail compose |
+| `WEB3FORMS_ACCESS_KEY` | [Web3Forms](https://web3forms.com) access key — **contact** submits here and emails you; **skips** Supabase/localStorage for messages when set |
 
 Save and **redeploy**.
+
+### Contact form email (Web3Forms)
+
+If **`WEB3FORMS_ACCESS_KEY`** is set (Cloudflare env or **`web3formsAccessKey`** in `js/lpm-config.js`), the **Contact** page POSTs to Web3Forms and forwards to the inbox tied to that key. **Admin → Contact inbox** will not receive those submissions (reviews unchanged). Leave the key empty to use **Supabase** or **localStorage** for contact again.
 
 ### How the browser gets Supabase settings
 
