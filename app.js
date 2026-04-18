@@ -2,7 +2,7 @@
   await (window.__lpmRemoteReady || Promise.resolve());
 
   const revealEls = document.querySelectorAll(".reveal");
-  const MESSAGES_KEY = "lpm_messages";
+  const FORMSPREE_CONTACT_URL = "https://formspree.io/f/xeevgvdd";
 
   let reviewsSupabasePromise = null;
   function getReviewsSupabase() {
@@ -19,15 +19,6 @@
     return typeof window.LPM_USE_REMOTE === "function" && window.LPM_USE_REMOTE();
   }
 
-  function web3formsKey() {
-    const c = window.LPM_CONFIG || {};
-    return String(c.web3formsAccessKey || "").trim();
-  }
-
-  function useWeb3Contact() {
-    return Boolean(web3formsKey());
-  }
-
   function sbBase() {
     const c = window.LPM_CONFIG || {};
     return String(c.supabaseUrl || "").replace(/\/$/, "");
@@ -42,15 +33,6 @@
       Prefer: "return=minimal",
       ...extra
     };
-  }
-
-  async function sbInsertContact(row) {
-    const res = await fetch(`${sbBase()}/rest/v1/contact_messages`, {
-      method: "POST",
-      headers: sbHeaders(),
-      body: JSON.stringify(row)
-    });
-    if (!res.ok) throw new Error(await res.text());
   }
 
   function reviewRowRating(r) {
@@ -344,6 +326,7 @@
 
   const contactForm = document.getElementById("contact-form");
   if (contactForm) {
+    const formspreeUrl = String(contactForm.getAttribute("action") || FORMSPREE_CONTACT_URL).trim();
     contactForm.addEventListener("submit", async (e) => {
       e.preventDefault();
       const name = document.getElementById("c-name")?.value.trim();
@@ -361,81 +344,42 @@
         return;
       }
 
-      const service = document.getElementById("c-service")?.value || "";
+      const interest = document.getElementById("c-service")?.value || "";
 
-      if (useWeb3Contact()) {
-        try {
-          const res = await fetch("https://api.web3forms.com/submit", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Accept: "application/json"
-            },
-            body: JSON.stringify({
-              access_key: web3formsKey(),
-              name,
-              email,
-              subject: `LaunchPad Media — ${service || "Contact"}`,
-              message: (service ? `Interest: ${service}\n\n` : "") + message
-            })
-          });
-          const data = await res.json().catch(() => ({}));
-          if (!res.ok || data.success === false) {
-            throw new Error(data.message || "Web3Forms rejected the request");
-          }
-          contactForm.reset();
-          if (status) {
-            status.textContent =
-              "Thanks — we received your message and will reply within one business day.";
-          }
-        } catch {
-          if (status) {
-            status.textContent =
-              "Could not send. Check your Web3Forms key and network, then try again.";
-          }
-        }
-        return;
-      }
-
-      if (useRemote()) {
-        try {
-          await sbInsertContact({
+      try {
+        const res = await fetch(formspreeUrl, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json"
+          },
+          body: JSON.stringify({
             name,
             email,
-            service,
-            msg: message,
-            read: false,
-            replied: false,
-            reply_draft: ""
-          });
-          contactForm.reset();
-          if (status) {
-            status.textContent =
-              "Thanks — we received your message and will reply within one business day.";
-          }
-        } catch {
-          if (status) status.textContent = "Could not send. Check connection and Supabase setup.";
+            interest: interest || "Not sure",
+            message
+          })
+        });
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok) {
+          const errMsg =
+            (typeof data.error === "string" && data.error) ||
+            (Array.isArray(data.errors) && data.errors[0]?.message) ||
+            "Could not send your message.";
+          throw new Error(errMsg);
         }
-        return;
-      }
-
-      const payload = JSON.parse(localStorage.getItem(MESSAGES_KEY) || "[]");
-      payload.push({
-        id: String(Date.now()),
-        name,
-        email,
-        service,
-        msg: message,
-        submitted: new Date().toISOString(),
-        read: false,
-        replied: false,
-        replyDraft: ""
-      });
-      localStorage.setItem(MESSAGES_KEY, JSON.stringify(payload));
-
-      contactForm.reset();
-      if (status) {
-        status.textContent = "Thanks — we received your message and will reply within one business day.";
+        contactForm.reset();
+        if (status) {
+          status.textContent =
+            "Thanks — we received your message and will reply within one business day.";
+        }
+      } catch (err) {
+        if (status) {
+          status.textContent =
+            err instanceof Error && err.message
+              ? err.message
+              : "Could not send. Check your connection and try again.";
+        }
       }
     });
   }
