@@ -1,3 +1,50 @@
+(function initContactForm() {
+  const FORMSPREE_CONTACT_URL = "https://formspree.io/f/mdaygbng";
+  const contactForm = document.getElementById("contact-form");
+  if (!contactForm) return;
+  const formspreeUrl = String(contactForm.getAttribute("action") || FORMSPREE_CONTACT_URL).trim();
+  const status = document.getElementById("contact-status");
+
+  contactForm.addEventListener("submit", async function (e) {
+    e.preventDefault();
+    const name = document.getElementById("c-name")?.value.trim();
+    const email = document.getElementById("c-email")?.value.trim();
+    const message = document.getElementById("c-message")?.value.trim();
+    const interest = document.getElementById("c-service")?.value || "";
+
+    if (!name || !email || !message) {
+      if (status) status.textContent = "Please fill out all required fields.";
+      return;
+    }
+    if (!email.includes("@")) {
+      if (status) status.textContent = "Please enter a valid email address.";
+      return;
+    }
+
+    if (status) status.textContent = "Sending…";
+
+    try {
+      const res = await fetch(formspreeUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({ name, email, interest: interest || "Not sure", message })
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        const errMsg =
+          (typeof data.error === "string" && data.error) ||
+          (Array.isArray(data.errors) && data.errors[0]?.message) ||
+          "Could not send your message.";
+        throw new Error(errMsg);
+      }
+      contactForm.reset();
+      if (status) status.textContent = "Thanks — we received your message and will reply within one business day.";
+    } catch (err) {
+      if (status) status.textContent = err instanceof Error && err.message ? err.message : "Could not send. Check your connection and try again.";
+    }
+  });
+})();
+
 (async () => {
   await (window.__lpmRemoteReady || Promise.resolve());
 
@@ -324,63 +371,4 @@
 
   initReviewForm();
 
-  const contactForm = document.getElementById("contact-form");
-  if (contactForm) {
-    const formspreeUrl = String(contactForm.getAttribute("action") || FORMSPREE_CONTACT_URL).trim();
-    contactForm.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      const name = document.getElementById("c-name")?.value.trim();
-      const email = document.getElementById("c-email")?.value.trim();
-      const message = document.getElementById("c-message")?.value.trim();
-      const status = document.getElementById("contact-status");
-
-      if (!name || !email || !message) {
-        if (status) status.textContent = "Please fill out all required fields.";
-        return;
-      }
-
-      if (!email.includes("@")) {
-        if (status) status.textContent = "Please enter a valid email address.";
-        return;
-      }
-
-      const interest = document.getElementById("c-service")?.value || "";
-
-      try {
-        const res = await fetch(formspreeUrl, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json"
-          },
-          body: JSON.stringify({
-            name,
-            email,
-            interest: interest || "Not sure",
-            message
-          })
-        });
-        const data = await res.json().catch(() => ({}));
-        if (!res.ok) {
-          const errMsg =
-            (typeof data.error === "string" && data.error) ||
-            (Array.isArray(data.errors) && data.errors[0]?.message) ||
-            "Could not send your message.";
-          throw new Error(errMsg);
-        }
-        contactForm.reset();
-        if (status) {
-          status.textContent =
-            "Thanks — we received your message and will reply within one business day.";
-        }
-      } catch (err) {
-        if (status) {
-          status.textContent =
-            err instanceof Error && err.message
-              ? err.message
-              : "Could not send. Check your connection and try again.";
-        }
-      }
-    });
-  }
 })();
