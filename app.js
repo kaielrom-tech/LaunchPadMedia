@@ -2,7 +2,7 @@
   await (window.__lpmRemoteReady || Promise.resolve());
 
   const revealEls = document.querySelectorAll(".reveal");
-  const FORMSPREE_CONTACT_URL = "https://formspree.io/f/xeevgvdd";
+  const FORMSPREE_CONTACT_URL = "https://formspree.io/f/mdaygbng";
 
   let reviewsSupabasePromise = null;
   function getReviewsSupabase() {
