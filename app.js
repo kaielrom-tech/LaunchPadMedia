@@ -10,7 +10,6 @@
     const name = document.getElementById("c-name")?.value.trim();
     const email = document.getElementById("c-email")?.value.trim();
     const message = document.getElementById("c-message")?.value.trim();
-    const interest = document.getElementById("c-service")?.value || "";
 
     if (!name || !email || !message) {
       if (status) status.textContent = "Please fill out all required fields.";
@@ -26,8 +25,8 @@
     try {
       const res = await fetch(formspreeUrl, {
         method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify({ name, email, interest: interest || "Not sure", message })
+        headers: { Accept: "application/json" },
+        body: new FormData(contactForm)
       });
       const data = await res.json().catch(() => ({}));
       if (!res.ok) {
