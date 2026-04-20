@@ -696,6 +696,11 @@ textarea { min-height: 128px; resize: vertical; }
   margin-inline: auto;
 }
 
+.reviews-cta {
+  margin-top: 32px;
+  text-align: center;
+}
+
 .review-submit-card h3 {
   margin-bottom: 8px;
 }
