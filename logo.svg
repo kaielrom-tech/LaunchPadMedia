@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <!-- Rocket body -->
+  <path d="M100 25 C120 25 145 50 145 90 L145 135 L100 155 L55 135 L55 90 C55 50 80 25 100 25Z"
+        fill="none" stroke="#22c55e" stroke-width="6" stroke-linejoin="round"/>
+  <!-- Window -->
+  <circle cx="100" cy="90" r="16" fill="none" stroke="#22c55e" stroke-width="6"/>
+  <!-- Left fin -->
+  <path d="M55 115 L30 155 L55 140" fill="none" stroke="#22c55e" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Right fin -->
+  <path d="M145 115 L170 155 L145 140" fill="none" stroke="#22c55e" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Flame -->
+  <path d="M82 155 Q100 185 118 155" fill="none" stroke="#22c55e" stroke-width="6" stroke-linecap="round"/>
+</svg>
